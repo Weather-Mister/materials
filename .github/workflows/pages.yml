@@ -27,6 +27,37 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Rebuild verified lecture visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/assets
+          cat .source-assets/slide-08/*.b64 | base64 --decode > public/assets/slide-08.webp
+          cat .source-assets/slide-18/*.b64 | base64 --decode > public/assets/slide-18.webp
+          cat .source-assets/slide-26/*.b64 | base64 --decode > public/assets/slide-26.webp
+          cat .source-assets/slide-29/*.b64 | base64 --decode > public/assets/slide-29.webp
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          expected = {
+              "slide-08.webp": ("0593289d77c4f9247590dc4a9f337655f993de90c9ee98747261f19ce4530b8d", 18102),
+              "slide-18.webp": ("5aa8db73f04c46e0f7e38cf49f0375d9e16b7ed5589003a3b5369cf16d5e3b86", 9788),
+              "slide-26.webp": ("d0b16f3cf97de16b026effb8853a9326201e0101cc9ef7dbb096e48962ec22c2", 9768),
+              "slide-29.webp": ("b74ca085c93100096b39c15a27b41a011dc2cd6d4381248fc7275fd2a2ee4498", 10276),
+          }
+
+          for name, (wanted_sha, wanted_size) in expected.items():
+              data = (Path("public/assets") / name).read_bytes()
+              got_sha = hashlib.sha256(data).hexdigest()
+              if len(data) != wanted_size:
+                  raise SystemExit(f"{name}: wrong size {len(data)} != {wanted_size}")
+              if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+                  raise SystemExit(f"{name}: invalid WebP header")
+              if got_sha != wanted_sha:
+                  raise SystemExit(f"{name}: SHA-256 mismatch {got_sha}")
+              print(f"{name}: verified ({len(data)} bytes, {got_sha})")
+          PY
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
