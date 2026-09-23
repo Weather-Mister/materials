@@ -51,7 +51,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "ENVIRONMENT",
           title: "Temperature can change which material is suitable",
-          html: "<p>The lecture's temperature-strength figure shows a major design lesson: <strong>increasing temperature normally reduces material strength</strong>. Polymers lose useful strength at comparatively low temperature, while some carbon-carbon composites, special alloys, and ceramics retain useful properties much farther into the high-temperature range.</p><p>This is why material selection always depends on the service environment, not only the room-temperature property table.</p><figure class='sourceFigure'><img src='./assets/slide-11-strength-temperature.webp' alt='Lecture slide 11 chart showing how strength changes with temperature for several engineering material systems'><figcaption>Lecture slide 11 · Increasing temperature normally reduces material strength; the useful temperature range depends strongly on the material.</figcaption></figure>",
+          html: "<p>The lecture's temperature-strength figure shows a major design lesson: <strong>increasing temperature normally reduces material strength</strong>. Polymers lose useful strength at comparatively low temperature, while some carbon-carbon composites, special alloys, and ceramics retain useful properties much farther into the high-temperature range.</p><p>This is why material selection always depends on the service environment, not only the room-temperature property table.</p>",
           callout: "A material can be strong at room temperature and still be a poor choice at the actual operating temperature."
         },
         {
@@ -191,7 +191,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "ENERGY LEVELS",
           title: "From discrete atomic levels to bands in solids",
-          html: "<p>The lecture states that electrons occupy <strong>discrete energy levels</strong> in an atom. As the number of bonded atoms increases, the energy levels of valence electrons split into many closely spaced levels; in a solid these form energy bands.</p><figure class='sourceFigure'><img src='./assets/slide-18-band-structure.webp' alt='Lecture slide 18 diagram showing electron energy levels splitting and broadening into bands as more atoms are bonded'><figcaption>Lecture slide 18 · Energy levels broaden into bands as the number of bonded atoms increases.</figcaption></figure>",
+          html: "<p>The lecture states that electrons occupy <strong>discrete energy levels</strong> in an atom. As the number of bonded atoms increases, the energy levels of valence electrons split into many closely spaced levels; in a solid these form energy bands.</p>",
           callout: "Do not jump ahead to semiconductor calculations here. The slide's point is the transition from individual atomic levels to bands in a solid."
         },
         {
@@ -209,13 +209,13 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "METALLIC BONDING",
           title: "Why metallic bonding gives characteristic metal behavior",
-          html: "<p>According to the lecture, metallic bonding leads to:</p><ul class='lessonList'><li><strong>Good conductivity:</strong> electrons are not fixed in place.</li><li><strong>Good ductility:</strong> metallic bonds are non-directional.</li><li><strong>High melting points</strong> and electropositive behavior, with susceptibility to corrosion or oxidation noted in the lecture.</li></ul><figure class='sourceFigure'><img src='./assets/slide-23-metallic-bond.webp' alt='Lecture slide 23 metallic bonding diagram showing positively charged atom cores and mobile valence electrons'><figcaption>Lecture slide 23 · Metallic bond model from the course textbook.</figcaption></figure>",
+          html: "<p>According to the lecture, metallic bonding leads to:</p><ul class='lessonList'><li><strong>Good conductivity:</strong> electrons are not fixed in place.</li><li><strong>Good ductility:</strong> metallic bonds are non-directional.</li><li><strong>High melting points</strong> and electropositive behavior, with susceptibility to corrosion or oxidation noted in the lecture.</li></ul>",
           callout: "Non-directional bonding is the key phrase connecting metallic bonding to ductility."
         },
         {
           eyebrow: "COVALENT + IONIC",
           title: "Shared electrons versus transferred electrons",
-          html: "<p><strong>Covalent bonding:</strong> the lecture characterizes covalently bonded materials by low electrical conductivity because valence electrons are locked into bonds, low ductility because the bonds are directional, and very high strength and melting points.</p><figure class='sourceFigure'><img src='./assets/slide-24-covalent-bond.webp' alt='Lecture slide 24 covalent bonding diagram showing shared valence electrons and directional bonds'><figcaption>Lecture slide 24 · Covalent bonding visual from the course textbook.</figcaption></figure><p><strong>Ionic bonding:</strong> forms between atoms with different electronegativities. Electron transfer creates positive <strong>cations</strong> and negative <strong>anions</strong>, which are attracted to one another.</p><figure class='sourceFigure'><img src='./assets/slide-25-ionic-bond.webp' alt='Lecture slide 25 ionic bonding diagram showing electron transfer, cations, anions, and the sodium chloride arrangement'><figcaption>Lecture slide 25 · Ionic bonding visual from the course textbook.</figcaption></figure>",
+          html: "<p><strong>Covalent bonding:</strong> the lecture characterizes covalently bonded materials by low electrical conductivity because valence electrons are locked into bonds, low ductility because the bonds are directional, and very high strength and melting points.</p><p><strong>Ionic bonding:</strong> forms between atoms with different electronegativities. Electron transfer creates positive <strong>cations</strong> and negative <strong>anions</strong>, which are attracted to one another.</p>",
           callout: "Covalent: sharing and directionality. Ionic: electron transfer and attraction between opposite ions."
         },
         {
