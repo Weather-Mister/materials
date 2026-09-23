@@ -233,13 +233,13 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "DIAMOND",
           title: "Four covalent bonds and a rigid 3D structure",
-          html: "<p>The lecture states that diamond has four covalent bonds per carbon atom. It combines very high strength, hardness, stiffness, and melting point with poor electrical conductivity. The slide also highlights high thermal conductivity, giving approximately <strong>2000 W/(m·K)</strong> compared with about <strong>238 W/(m·K)</strong> for aluminum.</p><figure class='sourceFigure'><img src='./assets/slide-29-diamond-structure.webp' alt='Lecture slide 29 diamond crystal structure shown in two orientations'><figcaption>Lecture slide 29 · Repeating diamond crystal structure.</figcaption></figure>",
+          html: "<p>The lecture states that diamond has four covalent bonds per carbon atom. It combines very high strength, hardness, stiffness, and melting point with poor electrical conductivity. The slide also highlights high thermal conductivity, giving approximately <strong>2000 W/(m·K)</strong> compared with about <strong>238 W/(m·K)</strong> for aluminum.</p><div class='sourceStrip'><span>Source visual in professor deck.</span><b>Slide 29 · diamond crystal structure</b></div>",
           callout: "High thermal conductivity and electrical insulation can coexist; do not assume the two conductivities must track together."
         },
         {
           eyebrow: "GRAPHITE",
           title: "Strong in-plane covalent bonding, weak interlayer bonding",
-          html: "<p>In graphite, each carbon atom has three covalent bonds within a layer. The fourth interaction between layers is much weaker, and the lecture states that layer spacing is about <strong>2.5 times</strong> the spacing between carbon atoms in the plane.</p><p>The available fourth electron also explains the electrical conductivity identified in the lecture. The final slide pairs a structural drawing with an atomic-scale image to emphasize the layered arrangement.</p><figure class='sourceFigure'><img src='./assets/slide-31-graphite-structure.webp' alt='Lecture slide 31 graphite layered structure and atomic-scale image'><figcaption>Lecture slide 31 · Graphite structure and atomic-scale image.</figcaption></figure>",
+          html: "<p>In graphite, each carbon atom has three covalent bonds within a layer. The fourth interaction between layers is much weaker, and the lecture states that layer spacing is about <strong>2.5 times</strong> the spacing between carbon atoms in the plane.</p><p>The available fourth electron also explains the electrical conductivity identified in the lecture. The final slide pairs a structural drawing with an atomic-scale image to emphasize the layered arrangement.</p><div class='sourceStrip'><span>Source visual in professor deck.</span><b>Slide 31 · graphite structure and atomic-scale image</b></div>",
           callout: "Diamond versus graphite is a direct demonstration that atomic arrangement controls engineering properties."
         }
       ],
