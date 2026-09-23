@@ -115,9 +115,11 @@
 
         <nav class="modeTabs" aria-label="Study modes">
           <button class="modeTab active" data-tab="learn" type="button"><span>01</span><b>LEARN</b><small>Concept teaching</small></button>
-          <button class="modeTab" data-tab="drill" type="button"><span>02</span><b>DRILL</b><small>Guided practice</small></button>
-          <button class="modeTab" data-tab="test" type="button"><span>03</span><b>TEST</b><small>Assessment mode</small></button>
-          <button class="modeTab" data-tab="reference" type="button"><span>04</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
+          <button class="modeTab" data-tab="flashcards" type="button"><span>02</span><b>FLASHCARDS</b><small>Recall deck</small></button>
+          <button class="modeTab" data-tab="matching" type="button"><span>03</span><b>MATCH</b><small>Terms · concepts</small></button>
+          <button class="modeTab" data-tab="drill" type="button"><span>04</span><b>DRILL</b><small>Guided practice</small></button>
+          <button class="modeTab" data-tab="test" type="button"><span>05</span><b>TEST</b><small>Assessment mode</small></button>
+          <button class="modeTab" data-tab="reference" type="button"><span>06</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
         </nav>
 
         <section id="learnView" class="view active">
@@ -130,6 +132,33 @@
             <div class="sheetActions">
               <button id="completeBtn" class="primaryAction" type="button" disabled>Mark module complete</button>
               <button id="nextLoadedBtn" class="lineAction" type="button" disabled>Next loaded module →</button>
+            </div>
+          </article>
+        </section>
+
+        <section id="flashcardsView" class="view">
+          <article class="studyDeckPanel">
+            <div class="deckPanelHead">
+              <div><span>RECALL DECK</span><h2>Flashcards</h2><p>Definitions, relationships, structures, properties, and process cues will become flippable cards here.</p></div>
+              <div class="deckGlyph" aria-hidden="true"><i></i><i></i><i></i></div>
+            </div>
+            <div id="flashcardsHost" class="deckStage">
+              <div class="cardPreviewStack" aria-hidden="true"><div></div><div></div><div><span>?</span></div></div>
+              <div><strong>Flashcard engine ready.</strong><p>Cards stay empty until source-backed course content is added.</p></div>
+            </div>
+          </article>
+        </section>
+
+        <section id="matchingView" class="view">
+          <article class="matchPanel">
+            <div class="matchPanelHead"><span>CONNECTION GRID</span><h2>Matching</h2><p>Pair terms with definitions, structures with properties, and processes with outcomes.</p></div>
+            <div id="matchingHost" class="matchStage">
+              <div class="matchDemo" aria-hidden="true">
+                <span>A</span><i></i><span>1</span>
+                <span>B</span><i></i><span>2</span>
+                <span>C</span><i></i><span>3</span>
+              </div>
+              <div><strong>Matching mode ready.</strong><p>Sets will be generated from the same source-locked module content.</p></div>
             </div>
           </article>
         </section>
