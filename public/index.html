@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#151719" />
+  <title>Engineering Materials Lab</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./styles.css?v=1" />
+</head>
+<body>
+  <div class="grain grain-a" aria-hidden="true"></div>
+  <div class="grain grain-b" aria-hidden="true"></div>
+
+  <div class="appFrame">
+    <header class="topbar">
+      <button class="mobileMenu" id="mobileMenu" type="button" aria-label="Open course navigation">☰</button>
+      <div class="brand">
+        <div class="crystalMark" aria-hidden="true">
+          <span class="atom a1"></span><span class="atom a2"></span><span class="atom a3"></span><span class="atom a4"></span>
+          <span class="bond b1"></span><span class="bond b2"></span><span class="bond b3"></span><span class="bond b4"></span><span class="bond b5"></span>
+        </div>
+        <div>
+          <div class="brandKicker">ENGINEERING MATERIALS</div>
+          <div class="brandTitle">MAT<span>//</span>LAB</div>
+        </div>
+      </div>
+
+      <div class="topbarRight">
+        <div class="progressReadout">
+          <div class="progressMeta"><span>COURSE MASTERY</span><strong id="progressPct">0%</strong></div>
+          <div class="progressTrack"><div class="progressFill" id="progressFill"></div></div>
+        </div>
+        <button class="profileButton" id="profileButton" type="button">
+          <span class="profileTop">CLOUD PROFILE</span>
+          <span class="profileMain"><i class="cloudDot" id="cloudDot"></i><b id="cloudProfileText">Local only</b></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="workbench">
+      <aside class="rail" id="rail">
+        <div class="railMobileHead">
+          <span>COURSE RACK</span>
+          <button id="railClose" type="button">×</button>
+        </div>
+
+        <section class="specimenCard">
+          <div class="specimenLabel">
+            <span>ACTIVE SPECIMEN</span>
+            <b id="activeModuleCode">M01</b>
+          </div>
+          <h2 id="activeModuleTitle">Awaiting source material</h2>
+          <p id="activeModuleSubtitle">The shell is ready. Course content comes next.</p>
+          <div class="specimenMeta">
+            <span><i></i> STATUS</span>
+            <strong id="activeModuleStatus">EMPTY</strong>
+          </div>
+        </section>
+
+        <section class="rackSection">
+          <div class="railSectionHead">
+            <span>COURSE RACK</span>
+            <b id="moduleCount">0 loaded</b>
+          </div>
+          <div id="moduleList" class="moduleList"></div>
+        </section>
+
+        <section class="logbook">
+          <button class="logbookToggle" id="logbookToggle" type="button">
+            <span class="logIndex">N</span>
+            <span><strong>Lab Log</strong><small id="noteCount">0 notes</small></span>
+            <b id="noteChevron">⌄</b>
+          </button>
+          <div class="logbookBody" id="logbookBody">
+            <div class="noteToolbar">
+              <button id="addNoteBtn" type="button">+ NOTE</button>
+              <button id="deleteNoteBtn" type="button">DELETE</button>
+            </div>
+            <div id="noteTabs" class="noteTabs"></div>
+            <input id="noteTitle" class="noteTitle" maxlength="80" placeholder="Note title" />
+            <textarea id="noteBody" class="noteBody" placeholder="Keep observations, definitions, worked steps, or questions here."></textarea>
+          </div>
+        </section>
+
+        <section class="railFooter">
+          <div class="syncLine"><span>DATA LINK</span><strong id="syncStatus">LOCAL</strong></div>
+          <button id="syncBtn" type="button">SYNC NOW</button>
+          <button id="resetBtn" class="dangerText" type="button">RESET PROGRESS</button>
+          <p id="saveFooter">Saved locally on this device.</p>
+        </section>
+      </aside>
+
+      <main class="desk">
+        <section class="heroPanel">
+          <div class="heroTexture" aria-hidden="true"></div>
+          <div class="heroEyebrow">
+            <span id="heroModule">MODULE 01</span>
+            <i></i>
+            <span id="heroState">SOURCE SLOT EMPTY</span>
+          </div>
+          <div class="heroGrid">
+            <div>
+              <h1 id="heroTitle">Engineering Materials</h1>
+              <p id="heroDescription">A source-driven learning and testing workspace. The interface is built; curriculum content will be loaded separately.</p>
+            </div>
+            <div class="materialStamp" aria-hidden="true">
+              <span>STRUCTURE</span>
+              <span>PROCESS</span>
+              <span>PROPERTY</span>
+              <span>PERFORMANCE</span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="modeTabs" aria-label="Study modes">
+          <button class="modeTab active" data-tab="learn" type="button"><span>01</span><b>LEARN</b><small>Concept teaching</small></button>
+          <button class="modeTab" data-tab="drill" type="button"><span>02</span><b>DRILL</b><small>Guided practice</small></button>
+          <button class="modeTab" data-tab="test" type="button"><span>03</span><b>TEST</b><small>Assessment mode</small></button>
+          <button class="modeTab" data-tab="reference" type="button"><span>04</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
+        </nav>
+
+        <section id="learnView" class="view active">
+          <article class="sheet">
+            <div class="sheetHeader">
+              <div><span>LEARNING SHEET</span><small id="learnSourceLabel">SOURCE-LOCKED CONTENT</small></div>
+              <div class="sheetBadge">L</div>
+            </div>
+            <div id="learnHost" class="sheetBody"></div>
+            <div class="sheetActions">
+              <button id="completeBtn" class="primaryAction" type="button" disabled>Mark module complete</button>
+              <button id="nextLoadedBtn" class="lineAction" type="button" disabled>Next loaded module →</button>
+            </div>
+          </article>
+        </section>
+
+        <section id="drillView" class="view">
+          <article class="sheet">
+            <div class="sheetHeader">
+              <div><span>DRILL BENCH</span><small>IMMEDIATE FEEDBACK · HINTS · RETRY</small></div>
+              <div class="sheetBadge">D</div>
+            </div>
+            <div id="drillHost" class="sheetBody"></div>
+          </article>
+        </section>
+
+        <section id="testView" class="view">
+          <article class="testChamber">
+            <div class="testHead">
+              <div>
+                <span>TEST CHAMBER</span>
+                <h2>Closed-feedback assessment</h2>
+                <p>Question banks, timing, scoring, review, and test history are already wired for future course content.</p>
+              </div>
+              <div class="testGauge"><b id="testQuestionCount">0</b><span>QUESTIONS READY</span></div>
+            </div>
+            <div id="testHost"></div>
+          </article>
+        </section>
+
+        <section id="referenceView" class="view">
+          <article class="referencePanel">
+            <div class="referenceHead">
+              <div>
+                <span>MATERIALS REFERENCE</span>
+                <h2>Searchable course reference</h2>
+                <p>Definitions, equations, property tables, symbols, units, and process notes will live here when sources are loaded.</p>
+              </div>
+              <label class="referenceSearch">
+                <span>SEARCH</span>
+                <input id="referenceSearch" type="search" placeholder="Search reference…" />
+              </label>
+            </div>
+            <div id="referenceHost"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="cloudModal" class="modal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalBar"><span>PROFILE / CLOUD SAVE</span><button id="modalClose" type="button">×</button></div>
+      <div class="modalBody">
+        <div class="modalCode">MATERIALS DATA LINK</div>
+        <h2>Cloud workspace</h2>
+        <p>Progress, answers, test history, and Lab Log notes use an isolated Engineering Materials profile with revision-aware conflict handling.</p>
+
+        <div id="cloudLoginSection">
+          <label class="fieldLabel">USERNAME
+            <input id="cloudUsernameInput" maxlength="32" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="e.g. eren" />
+          </label>
+          <p class="hint">2–32 lowercase letters, numbers, or underscores. This is the same simple username-style course sync model used by the other labs.</p>
+          <button id="cloudConnectBtn" class="primaryAction" type="button">Connect / create profile</button>
+        </div>
+
+        <div id="cloudSignedInSection" hidden>
+          <div class="connectedCard">
+            <span>CONNECTED PROFILE</span>
+            <strong id="connectedUsername"></strong>
+            <small id="connectedMeta">Revision 0</small>
+          </div>
+          <div class="modalActions">
+            <button id="cloudSyncNowBtn" class="lineAction" type="button">Sync now</button>
+            <button id="cloudSwitchBtn" class="lineAction" type="button">Switch username</button>
+            <button id="cloudSignOutBtn" class="lineAction" type="button">Sign out</button>
+          </div>
+        </div>
+        <div id="cloudMessage" class="cloudMessage" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./course.js?v=1"></script>
+  <script src="./app.js?v=1"></script>
+</body>
+</html>
