@@ -37,7 +37,7 @@
     const base = defaultState();
     const s = input && typeof input === "object" ? { ...base, ...input } : base;
     if (!course.modules.some((m) => m.id === s.currentModule)) s.currentModule = course.modules?.[0]?.id || null;
-    if (!["learn","drill","test","reference"].includes(s.tab)) s.tab = "learn";
+    if (!["learn","flashcards","matching","drill","test","reference"].includes(s.tab)) s.tab = "learn";
     if (!s.completed || typeof s.completed !== "object") s.completed = {};
     if (!s.drillAnswers || typeof s.drillAnswers !== "object") s.drillAnswers = {};
     if (!Array.isArray(s.testHistory)) s.testHistory = [];
