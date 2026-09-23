@@ -1,0 +1,15 @@
+.sourceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.sourceGrid>div{padding:12px 13px;border:1px solid #d7e2ec;background:#fff;border-radius:12px}
+.sourceGrid b{display:block;color:#24354b;margin-bottom:4px}
+.sourceGrid span{font-size:11px;color:#6f7f93;line-height:1.5}
+.lessonList{padding-left:22px;margin:12px 0}.lessonList li{margin:7px 0}.lessonList.numbered{padding-left:24px}
+.sourceFigure{margin:18px 0 4px;border:1px solid #cedbe7;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(47,76,109,.06)}
+.sourceFigure img{display:block;width:100%;height:auto}
+.sourceFigure figcaption{padding:10px 12px;font-size:10px;color:#728095;background:#f7faff;border-top:1px solid #dce6ef}
+.sourceNote{font-size:10px!important;color:#718096!important}
+.sourceStrip{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:14px 0;padding:12px 13px;border:1px solid #d4e0ea;background:#f4f8fc;border-radius:12px}
+.sourceStrip span{font-size:10px;color:#7b899a}.sourceStrip b{font-size:11px;color:#364a64;text-align:right}
+.compareTable{display:grid;grid-template-columns:1fr 1fr;margin:14px 0;border:1px solid #d5e0ea;border-radius:14px;overflow:hidden}
+.compareTable>div{display:contents}.compareTable span{padding:11px 12px;border-bottom:1px solid #e0e8f0;background:#fff}.compareTable span:nth-child(odd){border-right:1px solid #e0e8f0}
+.compareHead span{font-weight:900;color:#2b3c52;background:#eef5ff}
+@media(max-width:700px){.sourceGrid{grid-template-columns:1fr}.sourceStrip{align-items:flex-start;flex-direction:column}.sourceStrip b{text-align:left}.compareTable{grid-template-columns:1fr}.compareTable span:nth-child(odd){border-right:0}}
