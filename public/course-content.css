@@ -4,7 +4,7 @@
 .sourceGrid span{font-size:11px;color:#6f7f93;line-height:1.5}
 .lessonList{padding-left:22px;margin:12px 0}.lessonList li{margin:7px 0}.lessonList.numbered{padding-left:24px}
 .sourceFigure{margin:18px 0 4px;border:1px solid #cedbe7;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(47,76,109,.06)}
-.sourceFigure img{display:block;width:100%;height:auto}
+.sourceFigure img{display:block;width:auto;max-width:100%;height:auto;margin:0 auto}
 .sourceFigure figcaption{padding:10px 12px;font-size:10px;color:#728095;background:#f7faff;border-top:1px solid #dce6ef}
 .sourceNote{font-size:10px!important;color:#718096!important}
 .sourceStrip{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:14px 0;padding:12px 13px;border:1px solid #d4e0ea;background:#f4f8fc;border-radius:12px}
