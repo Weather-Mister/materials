@@ -45,7 +45,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "PROPERTY MAP",
           title: "Strength differs across material classes",
-          html: "<p>Lecture slide 10 compares representative strengths. The important reading is the <strong>range</strong>: polymers occupy the lower end, ceramics and composites can reach much higher strengths, and metals and alloys cover a broad range that includes very high-strength alloys.</p><figure class='sourceFigure'><img src='./assets/slide-10-strength-map.webp' alt='Lecture slide 10 chart comparing representative strengths of polymers, ceramics, composites, and metals and alloys'><figcaption>Lecture slide 10 · Representative strengths of material categories.</figcaption></figure>",
+          html: "<p>Lecture slide 10 compares representative strengths. The important reading is the <strong>range</strong>: polymers occupy the lower end, ceramics and composites can reach much higher strengths, and metals and alloys cover a broad range that includes very high-strength alloys.</p><div class='sourceStrip'><span>Professor source figure retained as the reference for this comparison.</span><b>Lecture slide 10 · representative strength ranges</b></div>",
           callout: "Treat the chart as a comparison tool, not a rule that every member of a class has the same strength."
         },
         {
@@ -191,7 +191,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "ENERGY LEVELS",
           title: "From discrete atomic levels to bands in solids",
-          html: "<p>The lecture states that electrons occupy <strong>discrete energy levels</strong> in an atom. As the number of bonded atoms increases, the energy levels of valence electrons split into many closely spaced levels; in a solid these form energy bands.</p>",
+          html: "<p>The lecture states that electrons occupy <strong>discrete energy levels</strong> in an atom. As the number of bonded atoms increases, the energy levels of valence electrons split into many closely spaced levels; in a solid these form energy bands.</p><figure class='sourceFigure'><img src='./assets/slide-18.webp' alt='Lecture slide 18 showing electron energy levels splitting and broadening into bands as the number of bonded atoms increases'><figcaption>Source visual · Lecture slide 18. Discrete electron energy levels split and broaden into bands as atoms are grouped into a solid.</figcaption></figure>",
           callout: "Do not jump ahead to semiconductor calculations here. The slide's point is the transition from individual atomic levels to bands in a solid."
         },
         {
@@ -221,7 +221,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "BINDING ENERGY",
           title: "Interatomic spacing links bonding to measurable properties",
-          html: "<p><strong>Binding energy</strong> is the energy associated with creating or destroying bonds. The lecture states that materials with high binding energy tend to have <strong>high strength and high melting point</strong>.</p><p>The interatomic energy/force diagram shows an equilibrium spacing where attraction and repulsion balance. The lecture also connects bonding to <strong>modulus of elasticity</strong> and <strong>coefficient of thermal expansion (CTE)</strong>.</p><figure class='sourceFigure'><img src='./assets/slide-26-binding-energy.webp' alt='Lecture slide 26 interatomic energy and force versus distance diagram showing equilibrium spacing and binding energy'><figcaption>Lecture slide 26 · Interatomic energy and force versus distance.</figcaption></figure>",
+          html: "<p><strong>Binding energy</strong> is the energy associated with creating or destroying bonds. The lecture states that materials with high binding energy tend to have <strong>high strength and high melting point</strong>.</p><p>The interatomic energy/force diagram shows an equilibrium spacing where attraction and repulsion balance. The lecture also connects bonding to <strong>modulus of elasticity</strong> and <strong>coefficient of thermal expansion (CTE)</strong>.</p><figure class='sourceFigure'><img src='./assets/slide-26.webp' alt='Lecture slide 26 interatomic energy and force versus distance diagram showing equilibrium spacing and binding energy'><figcaption>Lecture slide 26 · Interatomic energy and force versus distance.</figcaption></figure>",
           callout: "A deeper energy well corresponds to stronger bonding; the lecture uses this relationship to motivate strength and melting behavior."
         },
         {
@@ -233,7 +233,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "DIAMOND",
           title: "Four covalent bonds and a rigid 3D structure",
-          html: "<p>The lecture states that diamond has four covalent bonds per carbon atom. It combines very high strength, hardness, stiffness, and melting point with poor electrical conductivity. The slide also highlights high thermal conductivity, giving approximately <strong>2000 W/(m·K)</strong> compared with about <strong>238 W/(m·K)</strong> for aluminum.</p><div class='sourceStrip'><span>Source visual in professor deck.</span><b>Slide 29 · diamond crystal structure</b></div>",
+          html: "<p>The lecture states that diamond has four covalent bonds per carbon atom. It combines very high strength, hardness, stiffness, and melting point with poor electrical conductivity. The slide also highlights high thermal conductivity, giving approximately <strong>2000 W/(m·K)</strong> compared with about <strong>238 W/(m·K)</strong> for aluminum.</p><figure class='sourceFigure'><img src='./assets/slide-29.webp' alt='Lecture slide 29 showing the repeating diamond crystal structure'><figcaption>Source visual · Lecture slide 29. Repeating diamond crystal structure from the professor's deck.</figcaption></figure>",
           callout: "High thermal conductivity and electrical insulation can coexist; do not assume the two conductivities must track together."
         },
         {
