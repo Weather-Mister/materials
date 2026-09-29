@@ -411,32 +411,77 @@
     persist({ rerender: true });
   }
 
+  function moduleTestQuestions(m = currentModule()) {
+    if (!m?.available) return [];
+    return (m.testQuestions || []).map((q) => ({ ...q, moduleId: m.id }));
+  }
+
   function allTestQuestions() {
     return course.modules.filter((m) => m.available).flatMap((m) => (m.testQuestions || []).map((q) => ({ ...q, moduleId: m.id })));
   }
 
+  function activeTestBank() {
+    return testScope === "all" ? allTestQuestions() : moduleTestQuestions();
+  }
+
   function renderTest() {
-    const bank = allTestQuestions();
-    $("testQuestionCount").textContent = bank.length;
-    if (!bank.length) {
-      $("testHost").innerHTML = `<div class="testEmpty"><div><strong>Assessment engine ready; question bank empty.</strong><p>Future tests can pull from one module or mix the loaded course. Feedback stays hidden until submission, then a scored review is stored in test history.</p></div></div>`;
+    const moduleBank = moduleTestQuestions();
+    const mixedBank = allTestQuestions();
+    $("testQuestionCount").textContent = currentTest ? currentTest.questions.length : moduleBank.length;
+
+    if (!mixedBank.length) {
+      $("testHost").innerHTML = `<div class="testEmpty"><div><strong>Assessment engine ready; question bank empty.</strong><p>Tests appear once source-backed question banks are loaded.</p></div></div>`;
       return;
     }
+
     if (!currentTest) {
       const latest = state.testHistory[0];
-      $("testHost").innerHTML = `<div class="testSetup"><div><strong>${bank.length} questions available</strong><p>Start a mixed test from all loaded source-backed questions.${latest ? " Latest score: " + latest.score + "%." : ""}</p></div><button id="startTestBtn" class="primaryAction" type="button">Start test</button></div>`;
-      $("startTestBtn").addEventListener("click", startTest);
+      const m = currentModule();
+      $("testHost").innerHTML = `<div class="testSetup testSetupAudit">
+        <div class="testSetupCopy">
+          <strong>Choose assessment scope</strong>
+          <p>${moduleBank.length ? `${escapeHtml(m?.title || "Active module")} has ${moduleBank.length} questions.` : "The active module has no test bank."} The mixed test contains ${mixedBank.length} questions from all loaded modules.${latest ? " Latest score: " + latest.score + "%." : ""}</p>
+        </div>
+        <div class="testSetupActions">
+          <button id="startModuleTestBtn" class="primaryAction" type="button" ${moduleBank.length ? "" : "disabled"}>Test this module · ${moduleBank.length}</button>
+          <button id="startMixedTestBtn" class="lineAction" type="button">Mixed loaded course · ${mixedBank.length}</button>
+        </div>
+      </div>`;
+      $("startModuleTestBtn").addEventListener("click", () => startTest("module"));
+      $("startMixedTestBtn").addEventListener("click", () => startTest("all"));
       return;
     }
+
+    $("testQuestionCount").textContent = currentTest.questions.length;
+
     if (currentTest.submitted) {
-      $("testHost").innerHTML = `<div class="scoreCard"><b>${currentTest.score}%</b><span>${currentTest.correct} / ${currentTest.questions.length} correct</span><div class="modalActions" style="justify-content:center;margin-top:16px"><button id="newTestBtn" class="lineAction" type="button">New test</button></div></div>` + currentTest.questions.map((q, index) => {
+      $("testHost").innerHTML = `<div class="scoreCard"><b>${currentTest.score}%</b><span>${currentTest.correct} / ${currentTest.questions.length} correct · ${currentTest.scope === "all" ? "mixed loaded course" : "active module"}</span><div class="modalActions" style="justify-content:center;margin-top:16px"><button id="newTestBtn" class="lineAction" type="button">New test</button></div></div>` + currentTest.questions.map((q, index) => {
         const picked = currentTest.answers[q.id];
-        return `<div class="testQuestion"><span class="drillCode">QUESTION ${index+1}</span><h3>${escapeHtml(q.prompt)}</h3><div class="feedback">${picked === q.answer ? "Correct." : "Incorrect."} ${escapeHtml(q.explanation || "")}</div></div>`;
+        const answered = Number.isInteger(picked);
+        const correct = picked === q.answer;
+        const moduleTitle = course.modules.find((m) => m.id === q.moduleId)?.title || q.moduleId || "";
+        return `<div class="testQuestion reviewQuestion ${correct ? "reviewCorrect" : "reviewWrong"}">
+          <span class="drillCode">QUESTION ${String(index+1).padStart(2,"0")} · ${escapeHtml(moduleTitle)}</span>
+          <h3>${escapeHtml(q.prompt)}</h3>
+          <div class="answerReview">
+            <div><span>YOUR ANSWER</span><strong>${answered ? escapeHtml(q.choices?.[picked] || "") : "Unanswered"}</strong></div>
+            <div><span>CORRECT ANSWER</span><strong>${escapeHtml(q.choices?.[q.answer] || "")}</strong></div>
+          </div>
+          <div class="feedback"><b>${correct ? "Correct." : "Incorrect."}</b> ${escapeHtml(q.explanation || "")}</div>
+        </div>`;
       }).join("");
-      $("newTestBtn").addEventListener("click", () => { currentTest = null; renderTest(); });
+      $("newTestBtn").addEventListener("click", () => { currentTest = null; testScope = "module"; renderTest(); });
       return;
     }
-    $("testHost").innerHTML = currentTest.questions.map((q, index) => `<div class="testQuestion"><span class="drillCode">QUESTION ${String(index+1).padStart(2,"0")}</span><h3>${escapeHtml(q.prompt)}</h3><div class="choiceGrid">${(q.choices || []).map((c,i) => `<button class="choiceBtn ${currentTest.answers[q.id] === i ? "selected" : ""}" data-test-choice data-question="${escapeHtml(q.id)}" data-choice="${i}" type="button">${String.fromCharCode(65+i)} · ${escapeHtml(c)}</button>`).join("")}</div></div>`).join("") + `<div class="testFooter"><span>${Object.keys(currentTest.answers).length} / ${currentTest.questions.length} answered</span><button id="submitTestBtn" class="primaryAction" type="button">Submit test</button></div>`;
+
+    $("testHost").innerHTML = currentTest.questions.map((q, index) => {
+      const choices = orderedChoiceEntries(q).map((entry, displayIndex) =>
+        `<button class="choiceBtn ${currentTest.answers[q.id] === entry.index ? "selected" : ""}" data-test-choice data-question="${escapeHtml(q.id)}" data-choice="${entry.index}" type="button">${String.fromCharCode(65+displayIndex)} · ${escapeHtml(entry.choice)}</button>`
+      ).join("");
+      const moduleTitle = course.modules.find((m) => m.id === q.moduleId)?.title || "";
+      return `<div class="testQuestion"><span class="drillCode">QUESTION ${String(index+1).padStart(2,"0")}${currentTest.scope === "all" ? " · " + escapeHtml(moduleTitle) : ""}</span><h3>${escapeHtml(q.prompt)}</h3><div class="choiceGrid">${choices}</div></div>`;
+    }).join("") + `<div class="testFooter"><span>${Object.keys(currentTest.answers).length} / ${currentTest.questions.length} answered</span><button id="submitTestBtn" class="primaryAction" type="button">Submit test</button></div>`;
+
     qa("[data-test-choice]", $("testHost")).forEach((btn) => btn.addEventListener("click", () => {
       currentTest.answers[btn.dataset.question] = Number(btn.dataset.choice);
       renderTest();
@@ -444,19 +489,39 @@
     $("submitTestBtn").addEventListener("click", submitTest);
   }
 
-  function startTest() {
-    const bank = allTestQuestions();
-    currentTest = { id: uid(), startedAt: now(), questions: bank.slice().sort(() => Math.random() - .5), answers: {}, submitted: false };
+  function startTest(scope = "module") {
+    testScope = scope === "all" ? "all" : "module";
+    const bank = activeTestBank();
+    if (!bank.length) return;
+    currentTest = {
+      id: uid(),
+      startedAt: now(),
+      scope: testScope,
+      moduleId: testScope === "module" ? currentModule()?.id || null : null,
+      questions: shuffledCopy(bank),
+      answers: {},
+      submitted: false
+    };
     renderTest();
   }
 
   function submitTest() {
     if (!currentTest) return;
+    const unanswered = currentTest.questions.filter((q) => !Number.isInteger(currentTest.answers[q.id])).length;
+    if (unanswered && !confirm(`${unanswered} question${unanswered === 1 ? " is" : "s are"} unanswered. Submit anyway?`)) return;
     const correct = currentTest.questions.reduce((n,q) => n + (currentTest.answers[q.id] === q.answer ? 1 : 0), 0);
     currentTest.correct = correct;
     currentTest.score = Math.round((correct / currentTest.questions.length) * 100);
     currentTest.submitted = true;
-    state.testHistory.unshift({ id: currentTest.id, at: now(), score: currentTest.score, correct, total: currentTest.questions.length });
+    state.testHistory.unshift({
+      id: currentTest.id,
+      at: now(),
+      score: currentTest.score,
+      correct,
+      total: currentTest.questions.length,
+      scope: currentTest.scope,
+      moduleId: currentTest.moduleId
+    });
     state.testHistory = state.testHistory.slice(0,50);
     persist();
     renderTest();
