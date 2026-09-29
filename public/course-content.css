@@ -13,3 +13,45 @@
 .compareTable>div{display:contents}.compareTable span{padding:11px 12px;border-bottom:1px solid #e0e8f0;background:#fff}.compareTable span:nth-child(odd){border-right:1px solid #e0e8f0}
 .compareHead span{font-weight:900;color:#2b3c52;background:#eef5ff}
 @media(max-width:700px){.sourceGrid{grid-template-columns:1fr}.sourceStrip{align-items:flex-start;flex-direction:column}.sourceStrip b{text-align:left}.compareTable{grid-template-columns:1fr}.compareTable span:nth-child(odd){border-right:0}}
+
+.formulaCard,.workedBlock{display:grid;gap:8px;margin:15px 0;padding:14px 15px;border:1px solid #d6c7b5;background:linear-gradient(135deg,#fffaf2,#eee4d6);border-radius:13px}
+.formulaCard b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#713f2c;line-height:1.5}
+.formulaCard span,.workedBlock span{font-size:11px;line-height:1.55;color:#65707a}
+.workedBlock{border-left:4px solid #a9602f}
+.workedBlock b{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8e4e3f}
+.workedBlock strong{display:block;padding:9px 11px;background:#e4d3bc;border:1px solid #cbb89e;border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;color:#513527}
+
+.deckStage.studyReady{display:block!important;padding:24px}
+.flashcardShell{max-width:760px;margin:0 auto}
+.flashcardMeta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:.11em;color:#879096}
+.flashcard{min-height:310px;border:1px solid #525a5f;background:linear-gradient(145deg,#202428,#141719);padding:34px;display:grid;place-items:center;text-align:center;cursor:pointer;box-shadow:0 18px 36px rgba(0,0,0,.2);position:relative}
+.flashcard:before{content:"CLICK TO FLIP";position:absolute;top:15px;right:17px;font:700 8px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:#6f797f}
+.flashcardFace{max-width:620px}
+.flashcardFace small{display:block;margin-bottom:16px;font:800 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;color:#d78b47}
+.flashcardFace h3{font-size:clamp(26px,4vw,42px);line-height:1.08;margin:0;color:#f3eee5}
+.flashcardFace p{font-size:15px;line-height:1.7;color:#d6d0c6;margin:0}
+.flashcardDetail{margin-top:16px!important;font-size:11px!important;color:#8f999f!important}
+.flashcardControls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;margin-top:12px}
+.flashcardControls button,.matchReset{border:1px solid #4b5358;background:#171a1d;color:#e8e3da;padding:11px 13px;cursor:pointer;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:.07em}
+.flashcardControls button:hover,.matchReset:hover{border-color:#8d6748;background:#202326}
+.flashcardControls .flip{background:#2b2521;border-color:#80593d;color:#f6d3a3}
+
+.matchStage.studyReady{display:block!important;padding:24px}
+.matchIntro{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:13px}
+.matchIntro p{margin:0;color:#8d969b;font-size:11px}
+.matchGridLive{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.matchColumn{display:grid;gap:8px}
+.matchChoice{min-height:68px;border:1px solid #42494e;background:#171a1d;color:#ddd8cf;padding:12px;text-align:left;cursor:pointer;line-height:1.45}
+.matchChoice.term{font-weight:800;color:#f0ebe3}
+.matchChoice.definition{font-size:11px;color:#adb5ba}
+.matchChoice:hover:not(:disabled){border-color:#7b5b42;background:#202326}
+.matchChoice.selected{border-color:#f2bd68;box-shadow:inset 0 0 0 1px #f2bd68;background:#29241f}
+.matchChoice.matched{border-color:#648d70;background:#19251d;color:#83b992;opacity:.78}
+.matchStatus{min-height:28px;margin-top:12px;padding:7px 10px;border-left:3px solid #6e543f;color:#9fa7ab;font-size:10px}
+.matchStatus.good{border-color:#6c9b78;color:#91c39c}
+.matchStatus.bad{border-color:#a45f58;color:#d48b84}
+
+@media(max-width:700px){
+  .flashcard{min-height:260px;padding:25px 18px}.flashcardControls{grid-template-columns:1fr}
+  .matchGridLive{grid-template-columns:1fr}.matchIntro{align-items:flex-start;flex-direction:column}
+}
