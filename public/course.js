@@ -11,7 +11,15 @@ window.MATERIALS_COURSE = {
       { label: "Course interaction", value: "3%" }
     ],
     midtermDate: "2026-10-27",
-    finalDate: "2026-12-22"
+    finalDate: "2026-12-22",
+    room: "Mechanical Engineering Building 103",
+    officeHours: "By appointment only · Mechanical Engineering / Tsung Cho Chang Hall 502-1",
+    tas: [
+      { name: "薛睿彥", email: "R15522746@ntu.edu.tw" },
+      { name: "張証傑", email: "R15522738@ntu.edu.tw" },
+      { name: "彭誠傑", email: "R15522712@ntu.edu.tw" }
+    ],
+    sourceNote: "The grading slide lists 45% Midterm + 45% Final + 10% Homework + 3% Course interaction (103% as printed in the source)."
   },
   modules: [
     {
@@ -45,13 +53,13 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "PROPERTY MAP",
           title: "Strength differs across material classes",
-          html: "<p>Lecture slide 10 compares representative strengths. The important reading is the <strong>range</strong>: polymers occupy the lower end, ceramics and composites can reach much higher strengths, and metals and alloys cover a broad range that includes very high-strength alloys.</p><div class='sourceStrip'><span>Professor source figure retained as the reference for this comparison.</span><b>Lecture slide 10 · representative strength ranges</b></div>",
+          html: "<p>Lecture slide 10 compares representative strength ranges across material classes. The important reading is the <strong>range</strong>: polymers occupy the lower end; ceramics, composites, and metals/alloys extend to substantially higher strengths, with broad overlap inside and across classes.</p><figure class='sourceFigure'><img src='./assets/strength-ranges.svg?v=5' alt='Source-grounded schematic of representative strength ranges for polymers ceramics composites and metals and alloys'><figcaption>Source-grounded reconstruction of lecture slide 10. The chart is a comparison of ranges, not a single strength assigned to each class.</figcaption></figure>",
           callout: "Treat the chart as a comparison tool, not a rule that every member of a class has the same strength."
         },
         {
           eyebrow: "ENVIRONMENT",
           title: "Temperature can change which material is suitable",
-          html: "<p>The lecture's temperature-strength figure shows a major design lesson: <strong>increasing temperature normally reduces material strength</strong>. Polymers lose useful strength at comparatively low temperature, while some carbon-carbon composites, special alloys, and ceramics retain useful properties much farther into the high-temperature range.</p><p>This is why material selection always depends on the service environment, not only the room-temperature property table.</p>",
+          html: "<p>The lecture's temperature-strength figure states that <strong>increasing temperature normally reduces material strength</strong>. Polymers are suitable only at comparatively low temperatures, while carbon-carbon composites, some special alloys, and ceramics retain useful properties much farther into the high-temperature range.</p><figure class='sourceFigure'><img src='./assets/temperature-strength.svg?v=5' alt='Source-grounded schematic showing relative strength retention of several material systems as temperature increases'><figcaption>Source-grounded reconstruction of lecture slide 11. It preserves the source's qualitative comparison of service-temperature ranges.</figcaption></figure><p>This is why material selection depends on the service environment, not only room-temperature properties.</p>",
           callout: "A material can be strong at room temperature and still be a poor choice at the actual operating temperature."
         },
         {
@@ -197,7 +205,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "ELECTRONIC STRUCTURE",
           title: "Pauli, Aufbau, and valence",
-          html: "<p><strong>Pauli's Exclusion Principle:</strong> no two electrons in an atom can have the same set of four quantum numbers.</p><p>The lecture also emphasizes that quantum-shell energy levels do not fill in strict numerical order. The <strong>Aufbau Principle</strong> is used to predict the filling order, while the professor notes that not all elements follow the simple expected pattern exactly; copper is given as an example.</p><p><strong>Valence</strong> is the number of electrons in an atom that participate in bonding or chemical reactions. Usually this corresponds to electrons in the outer <em>s</em> and <em>p</em> orbitals, but the lecture warns that valence also depends on the atom's surrounding environment.</p>",
+          html: "<p><strong>Pauli's Exclusion Principle:</strong> no two electrons in an atom can have the same set of four quantum numbers.</p><p>The lecture states that quantum-shell energy levels do not fill in strict numerical order and presents the <strong>Aufbau Principle</strong> as the rule used to predict the order in which quantum levels are filled. It also notes that not all elements follow the simple expected ordering, giving copper as an example.</p><p><strong>Valence</strong> is the number of electrons in an atom that participate in bonding or chemical reactions. Usually this corresponds to electrons in the outer <em>s</em> and <em>p</em> orbitals, but the lecture warns that valence also depends on the atom's surrounding environment.</p>",
           callout: "Valence is the electronic information this course immediately uses to explain bonding."
         },
         {
@@ -239,7 +247,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "GRAPHITE",
           title: "Strong in-plane covalent bonding, weak interlayer bonding",
-          html: "<p>In graphite, each carbon atom has three covalent bonds within a layer. The fourth interaction between layers is much weaker, and the lecture states that layer spacing is about <strong>2.5 times</strong> the spacing between carbon atoms in the plane.</p><p>The available fourth electron also explains the electrical conductivity identified in the lecture. The final slide pairs a structural drawing with an atomic-scale image to emphasize the layered arrangement.</p><div class='sourceStrip'><span>Source visual in professor deck.</span><b>Slide 31 · graphite structure and atomic-scale image</b></div>",
+          html: "<p>In graphite, each carbon atom has three covalent bonds within a layer. The fourth interaction between layers is much weaker, and the lecture states that layer spacing is about <strong>2.5 times</strong> the spacing between carbon atoms in the plane.</p><p>The available fourth electron also explains the electrical conductivity identified in the lecture. The final source slide pairs a structural drawing with an atomic-scale image to emphasize the layered arrangement.</p><figure class='sourceFigure'><img src='./assets/graphite-layers.svg?v=5' alt='Source-grounded schematic of graphite layers weak interlayer interaction and available conduction electron'><figcaption>Source-grounded schematic of the bonding picture described on lecture slides 30–31.</figcaption></figure>",
           callout: "Diamond versus graphite is a direct demonstration that atomic arrangement controls engineering properties."
         }
       ],
