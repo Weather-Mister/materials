@@ -32,7 +32,7 @@
           <div class="progressMeta"><span>COURSE MASTERY</span><strong id="progressPct">0%</strong></div>
           <div class="progressTrack"><div class="progressFill" id="progressFill"></div></div>
         </div>
-        <button class="profileButton" id="profileButton" type="button">
+        <button class="profileButton" id="profileButton" type="button" aria-haspopup="dialog" aria-controls="cloudModal">
           <span class="profileTop">CLOUD PROFILE</span>
           <span class="profileMain"><i class="cloudDot" id="cloudDot"></i><b id="cloudProfileText">Local only</b></span>
         </button>
@@ -43,7 +43,7 @@
       <aside class="rail" id="rail">
         <div class="railMobileHead">
           <span>COURSE RACK</span>
-          <button id="railClose" type="button">×</button>
+          <button id="railClose" type="button" aria-label="Close course navigation">×</button>
         </div>
 
         <section class="specimenCard">
@@ -68,7 +68,7 @@
         </section>
 
         <section class="logbook">
-          <button class="logbookToggle" id="logbookToggle" type="button">
+          <button class="logbookToggle" id="logbookToggle" type="button" aria-expanded="false" aria-controls="logbookBody">
             <span class="logIndex">N</span>
             <span><strong>Lab Log</strong><small id="noteCount">0 notes</small></span>
             <b id="noteChevron">⌄</b>
@@ -208,12 +208,12 @@
     </div>
   </div>
 
-  <div id="cloudModal" class="modal" aria-hidden="true">
+  <div id="cloudModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cloudModalTitle">
     <div class="modalCard">
-      <div class="modalBar"><span>PROFILE / CLOUD SAVE</span><button id="modalClose" type="button">×</button></div>
+      <div class="modalBar"><span>PROFILE / CLOUD SAVE</span><button id="modalClose" type="button" aria-label="Close cloud workspace">×</button></div>
       <div class="modalBody">
         <div class="modalCode">MATERIALS DATA LINK</div>
-        <h2>Cloud workspace</h2>
+        <h2 id="cloudModalTitle">Cloud workspace</h2>
         <p>Progress, answers, test history, and Lab Log notes use an isolated Engineering Materials profile with revision-aware conflict handling.</p>
 
         <div id="cloudLoginSection">
