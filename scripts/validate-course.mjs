@@ -84,7 +84,7 @@ const meta = course.courseMeta || {};
 assert(meta.instructor && meta.email, "Course instructor metadata missing");
 assert(meta.midtermDate === "2026-10-27", "Midterm date drift");
 assert(meta.finalDate === "2026-12-22", "Final date drift");
-const gradingTotal = (meta.grading || []).reduce((n, g) => n + Number(g.value || 0), 0);
+const gradingTotal = (meta.grading || []).reduce((n, g) => n + (Number.parseFloat(String(g.value || "0")) || 0), 0);
 assert(gradingTotal === 103, "Source grading total should remain 103 as printed; found " + gradingTotal);
 assert(String(meta.sourceNote || "").includes("103"), "103% source note missing");
 
