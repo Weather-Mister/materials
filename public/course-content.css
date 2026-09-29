@@ -111,3 +111,8 @@
   .testHistoryAudit>div{grid-template-columns:1fr auto}
   .testHistoryAudit>div>span{display:none}
 }
+
+
+.textbookAudit{border-top:1px solid #d8e4ed;padding:12px 16px 14px;background:#fff}
+.textbookAudit>span{display:block;margin-bottom:7px;font:900 8px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:#6d7f94}
+.textbookAudit ul{margin:0;padding-left:18px;display:grid;gap:5px;color:#56697f;font-size:9px;line-height:1.5}
