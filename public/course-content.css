@@ -127,3 +127,35 @@
   .compareTable.cols4{grid-template-columns:repeat(4,minmax(140px,1fr))}
   .compareTable.cols5{grid-template-columns:repeat(5,minmax(120px,1fr))}
 }
+
+
+/* Harmonize active study tools with the current light materials theme */
+.flashcard{
+  border-color:#cbd9e6;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(79,124,255,.09),transparent 26%),
+    linear-gradient(145deg,#ffffff,#eef5fb);
+  box-shadow:0 16px 34px rgba(47,76,109,.09);
+}
+.flashcard:before{color:#8a98aa}
+.flashcardFace small{color:#4f7cff}
+.flashcardFace h3{color:#233247}
+.flashcardFace p{color:#40536a}
+.flashcardDetail{color:#718096!important}
+.flashcardControls button,.matchReset{
+  border-color:#cfdeea;
+  background:#f8fbff;
+  color:#42536a;
+}
+.flashcardControls button:hover,.matchReset:hover{border-color:#94afd0;background:#fff}
+.flashcardControls .flip{background:#4f7cff;border-color:#4f7cff;color:#fff}
+.flashcardControls .flip:hover{background:#3f6fe8;border-color:#3f6fe8}
+.matchChoice{border-color:#d4e0ea;background:#fff;color:#34465d;box-shadow:0 4px 12px rgba(47,76,109,.035)}
+.matchChoice.term{color:#26384c}
+.matchChoice.definition{color:#65778d}
+.matchChoice:hover:not(:disabled){border-color:#96b3d2;background:#f7fbff}
+.matchChoice.selected{border-color:#4f7cff;box-shadow:inset 0 0 0 1px #4f7cff;background:#eef4ff}
+.matchChoice.matched{border-color:#83b598;background:#eff8f2;color:#4f815f;opacity:.86}
+.matchStatus{border-left-color:#7697c4;color:#697b91;background:#f8fbfe}
+.matchStatus.good{border-color:#65a17a;color:#4f815f}
+.matchStatus.bad{border-color:#c66c63;color:#a4514b}
