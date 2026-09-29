@@ -82,6 +82,7 @@
   let matchedPairs = new Set();
   let matchMessage = "";
   let matchMessageKind = "";
+  let choiceOrders = new Map();
 
 
   function currentModule() {
@@ -118,14 +119,18 @@
   }
 
   function orderedChoiceEntries(q) {
-    const entries = (q.choices || []).map((choice, index) => ({ choice, index }));
-    let seed = hashString(q.id || q.prompt || "materials");
-    for (let i = entries.length - 1; i > 0; i--) {
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      const j = seed % (i + 1);
-      [entries[i], entries[j]] = [entries[j], entries[i]];
+    const key = String(q.id || q.prompt || "materials");
+    const choices = q.choices || [];
+    let order = choiceOrders.get(key);
+    if (!order || order.length !== choices.length) {
+      order = choices.map((_, index) => index);
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      choiceOrders.set(key, order);
     }
-    return entries;
+    return order.map((index) => ({ choice: choices[index], index }));
   }
 
   function shuffledCopy(items) {
