@@ -4,6 +4,7 @@ window.MATERIALS_COURSE = {
   subtitle: "NTU · Prof. I-Chung Cheng · source-grounded study lab",
   courseMeta: {
     instructor: "Prof. I-Chung Cheng",
+    email: "ichungch@ntu.edu.tw",
     grading: [
       { label: "Midterm", value: "45%" },
       { label: "Final Exam", value: "45%" },
