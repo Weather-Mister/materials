@@ -238,7 +238,11 @@
   }
 
   function renderTabs() {
-    qa(".modeTab").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
+    qa(".modeTab").forEach((b) => {
+      const active = b.dataset.tab === state.tab;
+      b.classList.toggle("active", active);
+      b.setAttribute("aria-pressed", active ? "true" : "false");
+    });
     qa(".view").forEach((v) => v.classList.remove("active"));
     const view = $(state.tab + "View");
     if (view) view.classList.add("active");
@@ -587,6 +591,7 @@
   function renderNotes() {
     const open = localStorage.getItem(NOTES_OPEN_KEY) === "1";
     document.querySelector(".logbook").classList.toggle("open", open);
+    $("logbookToggle").setAttribute("aria-expanded", open ? "true" : "false");
     $("noteChevron").textContent = open ? "⌃" : "⌄";
     $("noteCount").textContent = state.notes.length + (state.notes.length === 1 ? " note" : " notes");
     $("noteTabs").innerHTML = state.notes.map((n) => `<button class="noteTab ${n.id === state.activeNoteId ? "active" : ""}" data-note="${escapeHtml(n.id)}" type="button">${escapeHtml(n.title || "Untitled")}</button>`).join("");
@@ -837,12 +842,13 @@
     $("cloudModal").setAttribute("aria-hidden","false");
     $("cloudMessage").textContent = "";
     renderCloudUi();
-    if (!cloudUsername) setTimeout(() => $("cloudUsernameInput").focus(), 20);
+    setTimeout(() => (cloudUsername ? $("modalClose") : $("cloudUsernameInput")).focus(), 20);
   }
 
   function closeCloudModal() {
     $("cloudModal").classList.remove("open");
     $("cloudModal").setAttribute("aria-hidden","true");
+    $("profileButton").focus();
   }
 
   function openRail() { $("rail").classList.add("open"); }
