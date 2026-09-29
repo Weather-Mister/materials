@@ -69,7 +69,7 @@ const requiredCoverage = {
   m01: ["microstructure","amorphous","crystalline","material classes","temperature"],
   m02: ["pauli","aufbau","metallic","covalent","ionic","binding energy","diamond","graphite"],
   m03: ["lattice","basis","seven crystal systems","cscl","packing factor","theoretical density","miller","interplanar","interstitial","x-ray diffraction","tem"],
-  m04: ["vacancy","frenkel","schottky","dislocation","peierls","slip system","schmid","crss","hall","strain hardening","annealing","solid-solution","grain-size"]
+  m04: ["vacancy","frenkel","schottky","dislocation","burgers vector","peierls","slip system","schmid","crss","hall","surface-imperfection","strain hardening","annealing","solid-solution","grain-size"]
 };
 
 for (const entry of Object.entries(requiredCoverage)) {
@@ -87,12 +87,18 @@ assert(meta.finalDate === "2026-12-22", "Final date drift");
 const gradingTotal = (meta.grading || []).reduce((n, g) => n + (Number.parseFloat(String(g.value || "0")) || 0), 0);
 assert(gradingTotal === 103, "Source grading total should remain 103 as printed; found " + gradingTotal);
 assert(String(meta.sourceNote || "").includes("103"), "103% source note missing");
+assert(Array.isArray(meta.textbooks) && meta.textbooks.length >= 2, "Course textbook metadata missing");
 
 const index = read("public/index.html");
 const coursePos = index.indexOf("./course.js");
 const patchPos = index.indexOf("./course-weeks-3-4.js");
 const appPos = index.indexOf("./app.js");
 assert(coursePos >= 0 && patchPos > coursePos && appPos > patchPos, "Course scripts are not loaded in the required order");
+
+const htmlIds = Array.from(index.matchAll(/id="([^"]+)"/g)).map((m) => m[1]);
+assert(new Set(htmlIds).size === htmlIds.length, "Duplicate static HTML ids detected");
+assert(index.includes('role="dialog"') && index.includes('aria-modal="true"'), "Cloud dialog accessibility semantics missing");
+assert(index.includes("Shared-key sync:"), "Cloud privacy warning missing");
 
 const app = read("public/app.js");
 for (const marker of [
@@ -102,6 +108,25 @@ for (const marker of [
   "function renderMatching",
   "function mergeStates"
 ]) assert(app.includes(marker), "App audit marker missing: " + marker);
+
+assert(app.includes("matchRound"), "Matching-set rotation missing");
+assert(app.includes("testHistoryAudit"), "Test-history rendering missing");
+
+const publicB64 = fs.readdirSync(root + "/public/assets").filter((name) => name.endsWith(".b64"));
+assert(publicB64.length === 0, "Redundant .b64 files leaked into public assets: " + publicB64.join(", "));
+
+for (const module of loaded) {
+  for (const section of module.sections) {
+    const tables = Array.from(section.html.matchAll(/<div class='compareTable([^']*)'><div class='compareHead'>(.*?)<\/div>/g));
+    for (const match of tables) {
+      const classSuffix = match[1] || "";
+      const headerCells = (match[2].match(/<span>/g) || []).length;
+      if (headerCells > 2) {
+        assert(classSuffix.includes("cols" + headerCells), module.id + ": " + headerCells + "-column table missing responsive cols" + headerCells + " class");
+      }
+    }
+  }
+}
 
 console.log(JSON.stringify({
   status: "PASS",
