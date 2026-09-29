@@ -89,6 +89,7 @@
   }
 
   function resetStudyInteractions() {
+    testScope = "module";
     flashcardIndex = 0;
     flashcardFlipped = false;
     matchLeft = null;
@@ -339,7 +340,7 @@
       host.innerHTML = `<div class="matchDemo" aria-hidden="true"><span>A</span><i></i><span>1</span><span>B</span><i></i><span>2</span><span>C</span><i></i><span>3</span></div><div><strong>No matching set for this module yet.</strong><p>Matching sets are generated from source-backed terms and definitions.</p></div>`;
       return;
     }
-    const rightItems = items.slice().reverse();
+    const rightItems = items.slice().sort((a, b) => hashString((m?.id || "") + ":" + a.id + ":right") - hashString((m?.id || "") + ":" + b.id + ":right"));
     const complete = matchedPairs.size === items.length;
     if (complete) {
       matchMessage = "Set complete — all pairs matched.";
