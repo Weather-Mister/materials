@@ -20,6 +20,10 @@ window.MATERIALS_COURSE = {
       { name: "張証傑", email: "R15522738@ntu.edu.tw" },
       { name: "彭誠傑", email: "R15522712@ntu.edu.tw" }
     ],
+    textbooks: [
+      "The Science and Engineering of Materials · SI Edition · Seventh Edition · Donald R. Askeland & Wendelin J. Wright",
+      "Manufacturing Engineering and Technology · SI Edition · Seventh Edition · Serope Kalpakjian & Steven R. Schmid"
+    ],
     sourceNote: "The grading slide lists 45% Midterm + 45% Final + 10% Homework + 3% Course interaction (103% as printed in the source)."
   },
   modules: [
