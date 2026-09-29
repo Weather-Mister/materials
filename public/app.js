@@ -528,6 +528,26 @@
     renderTest();
   }
 
+  function renderCourseInfoCard() {
+    const meta = course.courseMeta || {};
+    if (!meta.instructor) return "";
+    const grading = (meta.grading || []).map((g) => `<span><b>${escapeHtml(g.label)}</b>${escapeHtml(g.value)}</span>`).join("");
+    const tas = (meta.tas || []).map((ta) => `<li><strong>${escapeHtml(ta.name)}</strong><span>${escapeHtml(ta.email)}</span></li>`).join("");
+    return `<section class="courseInfoAudit">
+      <div class="courseInfoAuditHead"><span>COURSE SOURCE CARD</span><h3>${escapeHtml(course.title || "Engineering Materials")}</h3><p>${escapeHtml(meta.sourceNote || "")}</p></div>
+      <div class="courseInfoAuditGrid">
+        <div><span>INSTRUCTOR</span><strong>${escapeHtml(meta.instructor)}</strong><small>${escapeHtml(meta.email || "")}</small></div>
+        <div><span>ROOM</span><strong>${escapeHtml(meta.room || "—")}</strong><small>${escapeHtml(meta.officeHours || "")}</small></div>
+        <div><span>MIDTERM</span><strong>${escapeHtml(meta.midtermDate || "—")}</strong><small>Week 8</small></div>
+        <div><span>FINAL</span><strong>${escapeHtml(meta.finalDate || "—")}</strong><small>Week 16</small></div>
+      </div>
+      <div class="courseInfoAuditFoot">
+        <div class="gradingAudit">${grading}</div>
+        ${tas ? `<ul class="taAudit">${tas}</ul>` : ""}
+      </div>
+    </section>`;
+  }
+
   function renderReference() {
     const query = String($("referenceSearch").value || "").trim().toLowerCase();
     const items = (course.reference || []).filter((r) => !query || [r.term,r.definition,r.detail,...(r.tags || [])].join(" ").toLowerCase().includes(query));
@@ -539,7 +559,8 @@
       $("referenceHost").innerHTML = `<div class="testEmpty" style="color:#6c6d68;border-color:#c3baab"><div><strong style="color:#252a2d">No matching reference items.</strong><p>Try a different term.</p></div></div>`;
       return;
     }
-    $("referenceHost").innerHTML = `<div class="referenceGrid">${items.map((r) => `<article class="referenceItem"><h3>${escapeHtml(r.term)}</h3><p>${escapeHtml(r.definition || "")}</p>${r.detail ? `<p style="margin-top:8px">${escapeHtml(r.detail)}</p>` : ""}<div class="refTags">${(r.tags || []).map((t) => `<span>${escapeHtml(t)}</span>`).join("")}</div></article>`).join("")}</div>`;
+    const courseCard = query ? "" : renderCourseInfoCard();
+    $("referenceHost").innerHTML = courseCard + `<div class="referenceGrid">${items.map((r) => `<article class="referenceItem"><h3>${escapeHtml(r.term)}</h3><p>${escapeHtml(r.definition || "")}</p>${r.detail ? `<p style="margin-top:8px">${escapeHtml(r.detail)}</p>` : ""}<div class="refTags">${(r.tags || []).map((t) => `<span>${escapeHtml(t)}</span>`).join("")}</div></article>`).join("")}</div>`;
   }
 
   function renderNotes() {
