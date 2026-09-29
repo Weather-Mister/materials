@@ -82,6 +82,7 @@
   let matchedPairs = new Set();
   let matchMessage = "";
   let matchMessageKind = "";
+  let matchRound = 0;
   let choiceOrders = new Map();
 
 
@@ -96,6 +97,7 @@
     matchLeft = null;
     matchRight = null;
     matchedPairs = new Set();
+    matchRound = 0;
     matchMessage = "";
     matchMessageKind = "";
   }
@@ -339,7 +341,10 @@
   function renderMatching() {
     const host = $("matchingHost");
     const m = currentModule();
-    const items = moduleReferenceItems(m).slice(0, 6);
+    const allItems = moduleReferenceItems(m);
+    const count = Math.min(6, allItems.length);
+    const start = allItems.length ? (matchRound * count) % allItems.length : 0;
+    const items = Array.from({ length: count }, (_, i) => allItems[(start + i) % allItems.length]);
     if (!m?.available || items.length < 2) {
       host.className = "matchStage";
       host.innerHTML = `<div class="matchDemo" aria-hidden="true"><span>A</span><i></i><span>1</span><span>B</span><i></i><span>2</span><span>C</span><i></i><span>3</span></div><div><strong>No matching set for this module yet.</strong><p>Matching sets are generated from source-backed terms and definitions.</p></div>`;
@@ -354,7 +359,7 @@
     host.className = "matchStage studyReady";
     host.innerHTML = `<div class="matchIntro">
       <p>Match each source term to its definition. ${matchedPairs.size} / ${items.length} complete.</p>
-      <button id="matchReset" class="matchReset" type="button">RESET SET</button>
+      <button id="matchReset" class="matchReset" type="button">${matchedPairs.size ? "NEXT SET" : "NEW SET"}</button>
     </div>
     <div class="matchGridLive">
       <div class="matchColumn">
@@ -370,6 +375,7 @@
       matchLeft = null;
       matchRight = null;
       matchedPairs = new Set();
+      matchRound += 1;
       matchMessage = "";
       matchMessageKind = "";
       renderMatching();
