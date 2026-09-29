@@ -74,9 +74,35 @@
   let cloudSavePromise = null;
   let toastTimer = null;
   let currentTest = null;
+  let flashcardIndex = 0;
+  let flashcardFlipped = false;
+  let matchLeft = null;
+  let matchRight = null;
+  let matchedPairs = new Set();
+  let matchMessage = "";
+  let matchMessageKind = "";
+
 
   function currentModule() {
     return course.modules.find((m) => m.id === state.currentModule) || course.modules[0] || null;
+  }
+
+  function resetStudyInteractions() {
+    flashcardIndex = 0;
+    flashcardFlipped = false;
+    matchLeft = null;
+    matchRight = null;
+    matchedPairs = new Set();
+    matchMessage = "";
+    matchMessageKind = "";
+  }
+
+  function moduleReferenceItems(m = currentModule()) {
+    if (!m) return [];
+    const tag = "week " + m.number;
+    return (course.reference || []).filter((item) =>
+      (item.tags || []).some((t) => String(t).trim().toLowerCase() === tag)
+    );
   }
 
   function persistentSnapshot(value = state) {
@@ -122,6 +148,8 @@
     renderActiveModule();
     renderTabs();
     renderLearn();
+    renderFlashcards();
+    renderMatching();
     renderDrill();
     renderTest();
     renderReference();
@@ -148,6 +176,7 @@
     qa("[data-module]", $("moduleList")).forEach((btn) => btn.addEventListener("click", () => {
       state.currentModule = btn.dataset.module;
       currentTest = null;
+      resetStudyInteractions();
       persist({ rerender: true });
       closeRail();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -205,6 +234,109 @@
     const index = course.modules.findIndex((m) => m.id === id);
     for (let i = index + 1; i < course.modules.length; i++) if (course.modules[i].available) return course.modules[i];
     return null;
+  }
+
+
+  function renderFlashcards() {
+    const host = $("flashcardsHost");
+    const m = currentModule();
+    const items = moduleReferenceItems(m);
+    if (!m?.available || !items.length) {
+      host.className = "deckStage";
+      host.innerHTML = `<div class="cardPreviewStack" aria-hidden="true"><div></div><div></div><div><span>?</span></div></div><div><strong>No recall deck for this module yet.</strong><p>Flashcards are generated from source-backed reference items when the module is loaded.</p></div>`;
+      return;
+    }
+    flashcardIndex = ((flashcardIndex % items.length) + items.length) % items.length;
+    const item = items[flashcardIndex];
+    host.className = "deckStage studyReady";
+    host.innerHTML = `<div class="flashcardShell">
+      <div class="flashcardMeta"><span>${escapeHtml(m.title)}</span><strong>${flashcardIndex + 1} / ${items.length}</strong></div>
+      <button id="flashcardCard" class="flashcard" type="button" aria-label="Flip flashcard">
+        <div class="flashcardFace">
+          <small>${flashcardFlipped ? "ANSWER" : "TERM / CONCEPT"}</small>
+          ${flashcardFlipped
+            ? `<p>${escapeHtml(item.definition || "")}</p>${item.detail ? `<p class="flashcardDetail">${escapeHtml(item.detail)}</p>` : ""}`
+            : `<h3>${escapeHtml(item.term || "")}</h3>`}
+        </div>
+      </button>
+      <div class="flashcardControls">
+        <button id="flashcardPrev" type="button">← PREVIOUS</button>
+        <button id="flashcardFlip" class="flip" type="button">${flashcardFlipped ? "SHOW TERM" : "REVEAL ANSWER"}</button>
+        <button id="flashcardNext" type="button">NEXT →</button>
+      </div>
+    </div>`;
+    const flip = () => { flashcardFlipped = !flashcardFlipped; renderFlashcards(); };
+    $("flashcardCard").addEventListener("click", flip);
+    $("flashcardFlip").addEventListener("click", flip);
+    $("flashcardPrev").addEventListener("click", () => {
+      flashcardIndex = (flashcardIndex - 1 + items.length) % items.length;
+      flashcardFlipped = false;
+      renderFlashcards();
+    });
+    $("flashcardNext").addEventListener("click", () => {
+      flashcardIndex = (flashcardIndex + 1) % items.length;
+      flashcardFlipped = false;
+      renderFlashcards();
+    });
+  }
+
+  function selectMatch(side, id) {
+    if (matchedPairs.has(id)) return;
+    if (side === "left") matchLeft = id;
+    else matchRight = id;
+    if (matchLeft && matchRight) {
+      if (matchLeft === matchRight) {
+        matchedPairs.add(matchLeft);
+        matchMessage = "Matched.";
+        matchMessageKind = "good";
+      } else {
+        matchMessage = "Not a pair. Try those again.";
+        matchMessageKind = "bad";
+      }
+      matchLeft = null;
+      matchRight = null;
+    }
+    renderMatching();
+  }
+
+  function renderMatching() {
+    const host = $("matchingHost");
+    const m = currentModule();
+    const items = moduleReferenceItems(m).slice(0, 6);
+    if (!m?.available || items.length < 2) {
+      host.className = "matchStage";
+      host.innerHTML = `<div class="matchDemo" aria-hidden="true"><span>A</span><i></i><span>1</span><span>B</span><i></i><span>2</span><span>C</span><i></i><span>3</span></div><div><strong>No matching set for this module yet.</strong><p>Matching sets are generated from source-backed terms and definitions.</p></div>`;
+      return;
+    }
+    const rightItems = items.slice().reverse();
+    const complete = matchedPairs.size === items.length;
+    if (complete) {
+      matchMessage = "Set complete — all pairs matched.";
+      matchMessageKind = "good";
+    }
+    host.className = "matchStage studyReady";
+    host.innerHTML = `<div class="matchIntro">
+      <p>Match each source term to its definition. ${matchedPairs.size} / ${items.length} complete.</p>
+      <button id="matchReset" class="matchReset" type="button">RESET SET</button>
+    </div>
+    <div class="matchGridLive">
+      <div class="matchColumn">
+        ${items.map((item) => `<button class="matchChoice term ${matchedPairs.has(item.id) ? "matched" : ""} ${matchLeft === item.id ? "selected" : ""}" data-match-side="left" data-match-id="${escapeHtml(item.id)}" type="button" ${matchedPairs.has(item.id) ? "disabled" : ""}>${escapeHtml(item.term)}</button>`).join("")}
+      </div>
+      <div class="matchColumn">
+        ${rightItems.map((item) => `<button class="matchChoice definition ${matchedPairs.has(item.id) ? "matched" : ""} ${matchRight === item.id ? "selected" : ""}" data-match-side="right" data-match-id="${escapeHtml(item.id)}" type="button" ${matchedPairs.has(item.id) ? "disabled" : ""}>${escapeHtml(item.definition)}</button>`).join("")}
+      </div>
+    </div>
+    <div class="matchStatus ${matchMessageKind}">${escapeHtml(matchMessage || "Choose one term and one definition.")}</div>`;
+    qa("[data-match-side]", host).forEach((btn) => btn.addEventListener("click", () => selectMatch(btn.dataset.matchSide, btn.dataset.matchId)));
+    $("matchReset").addEventListener("click", () => {
+      matchLeft = null;
+      matchRight = null;
+      matchedPairs = new Set();
+      matchMessage = "";
+      matchMessageKind = "";
+      renderMatching();
+    });
   }
 
   function renderDrill() {
@@ -580,6 +712,8 @@
     state.tab = btn.dataset.tab;
     persist();
     renderTabs();
+    if (state.tab === "flashcards") renderFlashcards();
+    if (state.tab === "matching") renderMatching();
     if (state.tab === "reference") renderReference();
     if (state.tab === "test") renderTest();
   }));
@@ -593,6 +727,8 @@
     const next = nextLoadedModule(currentModule()?.id);
     if (!next) return;
     state.currentModule = next.id;
+    currentTest = null;
+    resetStudyInteractions();
     persist({ rerender: true });
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
