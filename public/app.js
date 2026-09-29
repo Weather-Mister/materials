@@ -208,7 +208,7 @@
       const classes = ["moduleItem", m.available ? "loaded" : "empty", m.id === state.currentModule ? "active" : "", state.completed[m.id] ? "done" : ""].filter(Boolean).join(" ");
       return `<button class="${classes}" data-module="${escapeHtml(m.id)}" type="button">
         <span class="moduleNo">${String(m.number).padStart(2,"0")}</span>
-        <span class="moduleText"><b>${escapeHtml(m.title)}</b><small>${m.available ? escapeHtml(m.subtitle || "Loaded") : "Reserved curriculum slot"}</small></span>
+        <span class="moduleText"><b>${escapeHtml(m.title)}</b><small>${m.available ? escapeHtml(m.subtitle || "Loaded") : escapeHtml(m.subtitle || "Reserved curriculum slot")}</small></span>
         <i class="moduleState"></i>
       </button>`;
     }).join("");
