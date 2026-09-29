@@ -617,7 +617,8 @@
     const b = normalizeState(remoteState);
     const newer = a._savedAt >= b._savedAt ? a : b;
     const out = normalizeState(clone(newer));
-    out.completed = { ...b.completed, ...a.completed };
+    const olderCompleted = newer === a ? b.completed : a.completed;
+    out.completed = { ...olderCompleted, ...newer.completed };
     const answers = { ...b.drillAnswers };
     Object.entries(a.drillAnswers || {}).forEach(([id, answer]) => {
       const previous = answers[id];
