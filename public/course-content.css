@@ -116,3 +116,14 @@
 .textbookAudit{border-top:1px solid #d8e4ed;padding:12px 16px 14px;background:#fff}
 .textbookAudit>span{display:block;margin-bottom:7px;font:900 8px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:#6d7f94}
 .textbookAudit ul{margin:0;padding-left:18px;display:grid;gap:5px;color:#56697f;font-size:9px;line-height:1.5}
+
+
+/* Responsive multi-column source tables */
+.compareTable.cols4{grid-template-columns:repeat(4,minmax(125px,1fr));overflow-x:auto}
+.compareTable.cols5{grid-template-columns:repeat(5,minmax(105px,1fr));overflow-x:auto}
+.compareTable.cols4 span,.compareTable.cols5 span{border-right:1px solid #e0e8f0}
+.compareTable.cols4 span:nth-child(4n),.compareTable.cols5 span:nth-child(5n){border-right:0}
+@media(max-width:700px){
+  .compareTable.cols4{grid-template-columns:repeat(4,minmax(140px,1fr))}
+  .compareTable.cols5{grid-template-columns:repeat(5,minmax(120px,1fr))}
+}
