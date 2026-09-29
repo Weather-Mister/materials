@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520">
+<defs><style>
+.bg{fill:#fbf7ef}.frame{fill:none;stroke:#9aa7b2;stroke-width:4}.bond{stroke:#677580;stroke-width:4}.atom{fill:#d78b47;stroke:#8e4e3f;stroke-width:3}.atom2{fill:#8db4b8;stroke:#3f6f75;stroke-width:3}.lab{font:700 28px system-ui;fill:#25313a}.sub{font:500 21px system-ui;fill:#68747c}.metric{font:700 20px ui-monospace,monospace;fill:#8e4e3f}
+</style></defs><rect class="bg" width="1200" height="520" rx="28"/>
+<g transform="translate(55 55)"><text class="lab" x="90" y="0">SC</text><rect class="frame" x="20" y="40" width="210" height="210"/><g>
+<circle class="atom" cx="20" cy="40" r="16"/><circle class="atom" cx="230" cy="40" r="16"/><circle class="atom" cx="20" cy="250" r="16"/><circle class="atom" cx="230" cy="250" r="16"/>
+</g><text class="metric" x="20" y="305">1 atom/cell · CN 6 · APF 0.52</text><text class="sub" x="20" y="340">a₀ = 2r</text></g>
+<g transform="translate(345 55)"><text class="lab" x="80" y="0">BCC</text><rect class="frame" x="20" y="40" width="210" height="210"/><line class="bond" x1="20" y1="250" x2="230" y2="40"/><g>
+<circle class="atom" cx="20" cy="40" r="16"/><circle class="atom" cx="230" cy="40" r="16"/><circle class="atom" cx="20" cy="250" r="16"/><circle class="atom" cx="230" cy="250" r="16"/><circle class="atom2" cx="125" cy="145" r="19"/>
+</g><text class="metric" x="20" y="305">2 atoms/cell · CN 8 · APF 0.68</text><text class="sub" x="20" y="340">a₀ = 4r/√3</text></g>
+<g transform="translate(635 55)"><text class="lab" x="80" y="0">FCC</text><rect class="frame" x="20" y="40" width="210" height="210"/><line class="bond" x1="20" y1="250" x2="230" y2="40"/><g>
+<circle class="atom" cx="20" cy="40" r="16"/><circle class="atom" cx="230" cy="40" r="16"/><circle class="atom" cx="20" cy="250" r="16"/><circle class="atom" cx="230" cy="250" r="16"/><circle class="atom2" cx="125" cy="40" r="18"/><circle class="atom2" cx="125" cy="250" r="18"/><circle class="atom2" cx="20" cy="145" r="18"/><circle class="atom2" cx="230" cy="145" r="18"/>
+</g><text class="metric" x="20" y="305">4 atoms/cell · CN 12 · APF 0.74</text><text class="sub" x="20" y="340">a₀ = 4r/√2</text></g>
+<g transform="translate(925 55)"><text class="lab" x="70" y="0">HCP</text><polygon class="frame" points="40,90 120,45 200,90 200,205 120,250 40,205"/><polygon class="frame" points="40,145 120,100 200,145"/><g>
+<circle class="atom" cx="40" cy="90" r="14"/><circle class="atom" cx="120" cy="45" r="14"/><circle class="atom" cx="200" cy="90" r="14"/><circle class="atom" cx="40" cy="205" r="14"/><circle class="atom" cx="120" cy="250" r="14"/><circle class="atom" cx="200" cy="205" r="14"/><circle class="atom2" cx="80" cy="145" r="15"/><circle class="atom2" cx="160" cy="145" r="15"/>
+</g><text class="metric" x="0" y="305">CN 12 · APF 0.74</text><text class="sub" x="0" y="340">c₀ ≈ 1.633a₀</text></g>
+</svg>
