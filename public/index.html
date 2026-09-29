@@ -220,7 +220,7 @@
           <label class="fieldLabel">USERNAME
             <input id="cloudUsernameInput" maxlength="32" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="e.g. eren" />
           </label>
-          <p class="hint">2–32 lowercase letters, numbers, or underscores. This is the same simple username-style course sync model used by the other labs.</p>
+          <p class="hint"><strong>Shared-key sync:</strong> this username is a profile identifier, not a password or private login. Anyone who knows it can connect to that profile, so do not store sensitive notes here.</p>
           <button id="cloudConnectBtn" class="primaryAction" type="button">Connect / create profile</button>
         </div>
 
@@ -233,7 +233,7 @@
           <div class="modalActions">
             <button id="cloudSyncNowBtn" class="lineAction" type="button">Sync now</button>
             <button id="cloudSwitchBtn" class="lineAction" type="button">Switch username</button>
-            <button id="cloudSignOutBtn" class="lineAction" type="button">Sign out</button>
+            <button id="cloudSignOutBtn" class="lineAction" type="button">Disconnect</button>
           </div>
         </div>
         <div id="cloudMessage" class="cloudMessage" aria-live="polite"></div>
