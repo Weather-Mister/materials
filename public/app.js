@@ -558,6 +558,7 @@
     if (!meta.instructor) return "";
     const grading = (meta.grading || []).map((g) => `<span><b>${escapeHtml(g.label)}</b>${escapeHtml(g.value)}</span>`).join("");
     const tas = (meta.tas || []).map((ta) => `<li><strong>${escapeHtml(ta.name)}</strong><span>${escapeHtml(ta.email)}</span></li>`).join("");
+    const textbooks = (meta.textbooks || []).map((book) => `<li>${escapeHtml(book)}</li>`).join("");
     return `<section class="courseInfoAudit">
       <div class="courseInfoAuditHead"><span>COURSE SOURCE CARD</span><h3>${escapeHtml(course.title || "Engineering Materials")}</h3><p>${escapeHtml(meta.sourceNote || "")}</p></div>
       <div class="courseInfoAuditGrid">
@@ -570,6 +571,7 @@
         <div class="gradingAudit">${grading}</div>
         ${tas ? `<ul class="taAudit">${tas}</ul>` : ""}
       </div>
+      ${textbooks ? `<div class="textbookAudit"><span>TEXTBOOKS LISTED IN THE COURSE SOURCE</span><ul>${textbooks}</ul></div>` : ""}
     </section>`;
   }
 
