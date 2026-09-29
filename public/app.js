@@ -449,6 +449,16 @@
     if (!currentTest) {
       const latest = state.testHistory[0];
       const m = currentModule();
+      const recent = state.testHistory.slice(0, 5);
+      const historyHtml = recent.length ? `<div class="testHistoryAudit">
+        <span>RECENT TESTS</span>
+        ${recent.map((run) => {
+          const moduleTitle = run.moduleId ? course.modules.find((x) => x.id === run.moduleId)?.title : "";
+          const scopeLabel = run.scope === "all" ? "Mixed course" : (moduleTitle || "Module test");
+          const dateLabel = run.at ? new Date(run.at).toLocaleDateString() : "";
+          return `<div><b>${escapeHtml(scopeLabel)}</b><span>${escapeHtml(dateLabel)}</span><strong>${Number(run.score) || 0}% · ${Number(run.correct) || 0}/${Number(run.total) || 0}</strong></div>`;
+        }).join("")}
+      </div>` : "";
       $("testHost").innerHTML = `<div class="testSetup testSetupAudit">
         <div class="testSetupCopy">
           <strong>Choose assessment scope</strong>
@@ -458,7 +468,7 @@
           <button id="startModuleTestBtn" class="primaryAction" type="button" ${moduleBank.length ? "" : "disabled"}>Test this module · ${moduleBank.length}</button>
           <button id="startMixedTestBtn" class="lineAction" type="button">Mixed loaded course · ${mixedBank.length}</button>
         </div>
-      </div>`;
+      </div>${historyHtml}`;
       $("startModuleTestBtn").addEventListener("click", () => startTest("module"));
       $("startMixedTestBtn").addEventListener("click", () => startTest("all"));
       return;
