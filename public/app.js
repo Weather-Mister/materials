@@ -74,6 +74,7 @@
   let cloudSavePromise = null;
   let toastTimer = null;
   let currentTest = null;
+  let testScope = "module";
   let flashcardIndex = 0;
   let flashcardFlipped = false;
   let matchLeft = null;
@@ -103,6 +104,36 @@
     return (course.reference || []).filter((item) =>
       (item.tags || []).some((t) => String(t).trim().toLowerCase() === tag)
     );
+  }
+
+  function hashString(value) {
+    let h = 2166136261;
+    const s = String(value || "");
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  function orderedChoiceEntries(q) {
+    const entries = (q.choices || []).map((choice, index) => ({ choice, index }));
+    let seed = hashString(q.id || q.prompt || "materials");
+    for (let i = entries.length - 1; i > 0; i--) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const j = seed % (i + 1);
+      [entries[i], entries[j]] = [entries[j], entries[i]];
+    }
+    return entries;
+  }
+
+  function shuffledCopy(items) {
+    const out = items.slice();
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
   }
 
   function persistentSnapshot(value = state) {
@@ -356,13 +387,13 @@
   function renderDrillQuestion(q, index) {
     const saved = state.drillAnswers[q.id];
     if (q.type === "mcq") {
-      const choices = (q.choices || []).map((choice, i) => {
+      const choices = orderedChoiceEntries(q).map((entry, displayIndex) => {
         let cls = "choiceBtn";
         if (saved) {
-          if (i === q.answer) cls += " correct";
-          else if (i === saved.answer) cls += " wrong";
+          if (entry.index === q.answer) cls += " correct";
+          else if (entry.index === saved.answer) cls += " wrong";
         }
-        return `<button class="${cls}" data-drill-choice data-question="${escapeHtml(q.id)}" data-choice="${i}" type="button">${String.fromCharCode(65+i)} · ${escapeHtml(choice)}</button>`;
+        return `<button class="${cls}" data-drill-choice data-question="${escapeHtml(q.id)}" data-choice="${entry.index}" type="button">${String.fromCharCode(65+displayIndex)} · ${escapeHtml(entry.choice)}</button>`;
       }).join("");
       return `<div class="drillCard"><span class="drillCode">DRILL ${String(index+1).padStart(2,"0")}</span><div class="drillPrompt">${escapeHtml(q.prompt)}</div><div class="choiceGrid">${choices}</div>
         ${q.hint ? `<button class="hintBtn" data-hint="${escapeHtml(q.id)}" type="button">Show hint</button><div id="hint-${escapeHtml(q.id)}" class="feedback" hidden>${escapeHtml(q.hint)}</div>` : ""}
