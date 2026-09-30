@@ -157,10 +157,11 @@
     { id: "ref-078", term: "Bravais lattice", definition: "One of the fourteen distinct translational lattice types grouped into the seven crystal systems.", detail: "The lecture figure shows 3 cubic, 2 tetragonal, 4 orthorhombic, 1 hexagonal, 1 rhombohedral, 2 monoclinic, and 1 triclinic Bravais lattices.", tags: ["week 3", "crystal", "lattice"] },
     { id: "ref-079", term: "Atomic order levels", definition: "No regular order, short-range order (SRO), and long-range order (LRO) are distinct levels of atomic arrangement.", detail: "The source uses an inert monatomic gas for no regular order, molecular/glass examples for SRO, and crystalline solids for LRO.", tags: ["week 3", "order", "structure"] },
     { id: "ref-080", term: "Crystal-system unit-cell volume", definition: "The unit-cell volume follows from the axial lengths and interaxial angles of the crystal system.", detail: "Examples from the lecture table: cubic a³, tetragonal a²c, orthorhombic abc, hexagonal 0.866a²c, monoclinic abc sinβ.", tags: ["week 3", "crystal", "formula"] },
-    { id: "ref-081", term: "Interplanar-spacing derivation", definition: "Using plane intercepts and direction cosines gives d²(h²/a²+k²/b²+l²/c²)=1.", detail: "For cubic a=b=c=a₀, this reduces to dₕₖₗ=a₀/√(h²+k²+l²).", tags: ["week 3", "plane", "formula"] }
+    { id: "ref-081", term: "Interplanar-spacing derivation", definition: "Using plane intercepts and direction cosines gives d²(h²/a²+k²/b²+l²/c²)=1.", detail: "For cubic a=b=c=a₀, this reduces to dₕₖₗ=a₀/√(h²+k²+l²).", tags: ["week 3", "plane", "formula"] },
+    { id: "ref-082", term: "Ionic structure coordination examples", definition: "The course source anchors CN 4, 6, and 8 with ZnS, NaCl, and CsCl respectively.", detail: "ZnS is tetrahedral (CN 4), NaCl octahedral (CN 6), and CsCl cubic coordination (CN 8) in the Assignment 1/source treatment.", tags: ["week 3", "ionic", "coordination"] }
   ];
   const seenRefs = new Set((course.reference || []).map((r) => r.id));
   for (const ref of extraRefs) if (!seenRefs.has(ref.id)) course.reference.push(ref);
 
-  course.version = Math.max(Number(course.version) || 0, 7);
+  course.version = Math.max(Number(course.version) || 0, 8);
 })();
