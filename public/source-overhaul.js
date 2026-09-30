@@ -151,10 +151,12 @@
     { id: "ref-072", term: "Zinc blende (ZnS)", definition: "Ionic/covalent crystal structure with tetrahedral coordination number 4 in the course radius-ratio treatment.", detail: "Associated with the 0.225–0.414 radius-ratio range in the source table.", tags: ["week 3", "ionic", "exam"] },
     { id: "ref-073", term: "Sodium chloride (NaCl) structure", definition: "Coordination number 6 with octahedral coordination.", detail: "Associated with the 0.414–0.732 radius-ratio range.", tags: ["week 3", "ionic", "exam"] },
     { id: "ref-074", term: "Planar packing fraction (PPF)", definition: "Fraction of a crystallographic plane covered by atom cross-sections centered on that plane.", detail: "FCC (111): π/(2√3) ≈ 0.907.", tags: ["week 3", "plane", "formula", "exam"] },
-    { id: "ref-075", term: "Miller plane reduction rule", definition: "In the professor's plane-index procedure, take reciprocals, clear fractions, and do not reduce the resulting integers to lowest terms.", detail: "Plane multiples are not identical; their spacing/density can differ. If the plane passes through the origin, shift the origin first.", tags: ["week 3", "miller", "plane", "exam"] }
+    { id: "ref-075", term: "Miller plane reduction rule", definition: "In the professor's plane-index procedure, take reciprocals, clear fractions, and do not reduce the resulting integers to lowest terms.", detail: "Plane multiples are not identical; their spacing/density can differ. If the plane passes through the origin, shift the origin first.", tags: ["week 3", "miller", "plane", "exam"] },
+    { id: "ref-076", term: "Miller–Bravais notation", definition: "Special crystallographic indexing notation used for hexagonal unit cells.", detail: "The lecture notes that HCP cells may be represented with either a 3-axis or a 4-axis system; the four-axis Miller–Bravais form makes the basal-plane symmetry explicit.", tags: ["week 3", "miller", "hcp", "hexagonal"] },
+    { id: "ref-077", term: "External surface defect", definition: "A surface where the crystal terminates and surface atoms no longer have the complete bonding environment of atoms in the bulk.", detail: "The lecture notes that incomplete surface bonding can make the exterior surface rough and comparatively reactive.", tags: ["week 4", "surface defect", "bonding"] }
   ];
   const seenRefs = new Set((course.reference || []).map((r) => r.id));
   for (const ref of extraRefs) if (!seenRefs.has(ref.id)) course.reference.push(ref);
 
-  course.version = Math.max(Number(course.version) || 0, 5);
+  course.version = Math.max(Number(course.version) || 0, 6);
 })();
