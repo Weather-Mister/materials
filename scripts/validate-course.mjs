@@ -101,6 +101,11 @@ const htmlIds = Array.from(index.matchAll(/id="([^"]+)"/g)).map((m) => m[1]);
 assert(new Set(htmlIds).size === htmlIds.length, "Duplicate static HTML ids detected");
 assert(index.includes('role="dialog"') && index.includes('aria-modal="true"'), "Cloud dialog accessibility semantics missing");
 assert(index.includes("Shared-key sync:"), "Cloud privacy warning missing");
+assert(index.includes('data-tab="problem"'), "Problem Lab tab missing");
+assert(index.includes('id="problemView"') && index.includes('id="problemLabHost"'), "Problem Lab view missing");
+assert(index.includes("./problem-lab.js?v=1"), "Problem Lab script missing");
+const problemLab = read("public/problem-lab.js");
+assert(problemLab.includes("millerFromIntercepts") && problemLab.includes("ρ → a₀"), "Problem Lab calculation engine incomplete");
 
 const app = read("public/app.js");
 for (const marker of [
@@ -118,17 +123,32 @@ assert(app.includes("testHistoryAudit"), "Test-history rendering missing");
 const m3Exam = loaded.find((m) => m.id === "m03")?.examPractice;
 assert(m3Exam && Array.isArray(m3Exam.parts) && m3Exam.parts.length === 4, "Week 3 four-part exam practice missing");
 assert(m3Exam.parts.some((p) => /calculation/i.test(p.title || "") && (p.questions || []).length >= 6), "Week 3 calculation practice is too shallow");
-assert(m3Exam.parts.reduce((n,p) => n + (p.questions || []).length, 0) >= 20, "Week 3 exam bank is too small");
+assert(m3Exam.parts.reduce((n,p) => n + (p.questions || []).length, 0) >= 21, "Week 3 exam bank is too small");
+const sourceOverhaul = read("public/source-overhaul.js");
+assert(sourceOverhaul.includes("do not reduce to lowest integers afterward"), "Professor Miller-plane rule drifted");
+assert(!/replacementPairs\s*=\s*\[[\s\S]{0,4000}https?:\/\//.test(sourceOverhaul), "Course visuals must not hotlink third-party images");
 
-const removedGeneratedGraphics = [
+const NA = 6.022e23;
+const kAcm = Math.cbrt((2 * 39.09) / (0.855 * NA));
+const kAnm = kAcm * 1e7;
+const kRnm = Math.sqrt(3) * kAnm / 4;
+assert(Math.abs(kAnm - 0.5334940745) < 1e-9, "Inverse-density lattice calculation drift");
+assert(Math.abs(kRnm - 0.2310097106) < 1e-9, "BCC radius calculation drift");
+const niPd = 2 / (0.35167 ** 2);
+assert(Math.abs(niPd - 16.167398) < 1e-5, "FCC (100) planar-density calculation drift");
+const al111 = 0.4049 / Math.sqrt(3);
+const al220 = 0.4049 / Math.sqrt(8);
+assert(Math.abs(al111 - 0.233769764) < 1e-8 && Math.abs(al220 - 0.143153768) < 1e-8, "Cubic interplanar-spacing calculation drift");
+
+const requiredCourseGraphics = [
   "crystal-cells.svg","dislocation-slip.svg","grain-boundaries.svg","graphite-layers.svg",
   "ionic-defect-pairs.svg","miller-indices.svg","point-defects.svg","schmid-law.svg",
   "strength-ranges.svg","temperature-strength.svg"
 ];
 const renderedCourse = JSON.stringify(loaded);
-for (const name of removedGeneratedGraphics) {
-  assert(!renderedCourse.includes(name), "Generated course graphic still referenced: " + name);
-  assert(!fs.existsSync(root + "/public/assets/" + name), "Generated course graphic still present: " + name);
+for (const name of requiredCourseGraphics) {
+  assert(renderedCourse.includes(name), "Local course graphic not referenced: " + name);
+  assert(fs.existsSync(root + "/public/assets/" + name), "Local course graphic missing: " + name);
 }
 
 const publicB64 = fs.readdirSync(root + "/public/assets").filter((name) => name.endsWith(".b64"));
