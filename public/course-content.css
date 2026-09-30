@@ -395,3 +395,13 @@
   .examPartHead>b{width:100%;margin-left:0}
   .examQuestionPrompt{font-size:13px}
 }
+
+
+/* v8 content contract — one active skin after legacy layers */
+.sourceGrid>div,.lessonSection,.drillCard,.examPractice,.examQuestion,.formulaCard,.workedBlock,.compareTable{border-color:#d8e2ec;background:#fff;color:#34465a}
+.sourceFigure{margin:18px 0 8px;border:1px solid #d8e2ec;border-radius:16px;background:#f8fbfe;overflow:hidden;box-shadow:0 8px 20px rgba(36,57,80,.05)}
+.sourceFigure img{display:block;box-sizing:border-box;width:auto;max-width:100%;height:auto;max-height:700px;margin:0 auto;padding:12px;object-fit:contain;background:#f8fbfe}
+.sourceFigure figcaption{padding:10px 12px;border-top:1px solid #e1e9f0;background:#fff;color:#68798e;font-size:10px;line-height:1.5}
+.lessonSectionHead,.examQuestionMeta{background:#f4f8fc;border-color:#dfe7ef}.lessonSectionHead span,.examPracticeHead>span{color:#4f7cff}.lessonSectionHead h2,.examPartHead h3,.formulaCard b,.workedBlock strong{color:#243b5a}
+.conceptCallout{border:1px solid #d9e6f5;border-left:4px solid #4f7cff;background:#f1f6fd;color:#334a66}.formulaCard,.workedBlock{background:#f8fbfe;border-radius:12px}.workedBlock{border-left:4px solid #4f7cff}.workedBlock span,.formulaCard span{color:#607389}.compareHead span{background:#f3f7fb;color:#273c57}.examPracticeHead{background:linear-gradient(135deg,#edf4ff 0%,#fff7ed 100%)}.examAnswer{background:#f7fbf7;color:#31473a}
+.flashcard{border-color:#cbd9e6;background:radial-gradient(circle at 90% 10%,rgba(79,124,255,.08),transparent 26%),linear-gradient(145deg,#fff,#eef5fb)}.flashcardFace small{color:#4f7cff}.flashcardFace h3{color:#233247}.flashcardFace p{color:#40536a}.flashcardControls button,.matchReset,.matchChoice{border-color:#cfdeea;background:#fff;color:#42536a}.flashcardControls .flip{background:#4f7cff;border-color:#4f7cff;color:#fff}.matchChoice.selected{border-color:#4f7cff;background:#eef4ff}.matchChoice.matched{border-color:#83b598;background:#eff8f2;color:#4f815f}
