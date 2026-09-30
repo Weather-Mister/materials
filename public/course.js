@@ -70,7 +70,7 @@ window.MATERIALS_COURSE = {
         {
           eyebrow: "COURSE PREVIEW",
           title: "Why the opening slides jump across electrical, magnetic, and optical behavior",
-          html: "<p>The first lecture briefly previews later-course property areas before the formal introduction: charge carriers and conductivity, magnetic dipoles and data storage, the electromagnetic spectrum, and refraction/reflection/absorption/transmission.</p><p>These slides are best read as a preview of the course's later electronic, magnetic, and photonic topics rather than as a complete treatment in Week 1.</p>",
+          html: "<p>The first lecture briefly previews later-course property areas before the formal introduction.</p><ul class='lessonList'><li><strong>Electrical:</strong> the source figure contrasts charge transport mechanisms: electrons move readily in metals; in covalent semiconductors/insulators, bonds must be broken for electrons to become mobile; in ionically bonded materials, ions can carry charge.</li><li><strong>Magnetic:</strong> electron spin and orbital motion produce magnetic dipoles. The magnetic-disk figure shows an electromagnetic head magnetizing domains during storage and an induced current during retrieval.</li><li><strong>Optical:</strong> the electromagnetic-spectrum slide leads into refraction, reflection, absorption, and transmission. The source also plots index of refraction versus wavelength for dielectric, metal, and semiconductor behavior.</li></ul><p>These slides are still a preview rather than the course's full treatment of electronic, magnetic, and photonic materials.</p>",
           callout: "For now, recognize the scope. Detailed mechanisms belong to the later syllabus weeks."
         },
         {
@@ -134,6 +134,24 @@ window.MATERIALS_COURSE = {
           answer: 1,
           hint: "Think of classification as a first map, not a final answer.",
           explanation: "The class categories help organize expected property ranges and applications, while later structure-processing details explain variations within each group."
+        },
+        {
+          id: "m01-d07",
+          type: "mcq",
+          prompt: "What does the lecture preview identify as a source of magnetic dipoles?",
+          choices: ["Electron spin and orbital motion", "Only atomic mass", "Only lattice vacancies", "Grain size alone"],
+          answer: 0,
+          hint: "Look at the electron-level magnetic figure.",
+          explanation: "The source figure identifies electron spin and orbital motion as origins of magnetic dipoles."
+        },
+        {
+          id: "m01-d08",
+          type: "mcq",
+          prompt: "Which set lists the four optical interactions previewed in the lecture?",
+          choices: ["Refraction, reflection, absorption, transmission", "Slip, twinning, creep, fatigue", "Ionization, diffusion, melting, casting", "Yielding, necking, fracture, hardness"],
+          answer: 0,
+          hint: "These are the labeled paths of the incident beam in the source figure.",
+          explanation: "The lecture preview labels refraction, reflection, absorption, and transmission."
         }
       ],
       testQuestions: [
@@ -176,6 +194,14 @@ window.MATERIALS_COURSE = {
           choices: ["structure/process relationships → properties/behavior → suitability", "color → cost → atomic number", "density → brand → geometry", "application → no need for structure"],
           answer: 0,
           explanation: "The opening lecture frames MSE through composition, structure, synthesis, and processing relationships that explain properties and applications."
+        },
+        {
+          id: "m01-t06",
+          type: "mcq",
+          prompt: "In the lecture's electrical preview, which statement is correct?",
+          choices: ["Electrons move easily in metals, while covalent bonds must be broken for electrons to become mobile in semiconductors/insulators", "All materials conduct by exactly the same mechanism", "Ions can never carry charge", "Metals conduct only after covalent bonds break"],
+          answer: 0,
+          explanation: "The source figure contrasts easy electronic motion in metals with bond-breaking requirements in covalent materials and ionic charge transport in ionically bonded materials."
         }
       ]
     },
