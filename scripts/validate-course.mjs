@@ -135,10 +135,10 @@ const kRnm = Math.sqrt(3) * kAnm / 4;
 assert(Math.abs(kAnm - 0.5334940745) < 1e-9, "Inverse-density lattice calculation drift");
 assert(Math.abs(kRnm - 0.2310097106) < 1e-9, "BCC radius calculation drift");
 const niPd = 2 / (0.35167 ** 2);
-assert(Math.abs(niPd - 16.167398) < 1e-5, "FCC (100) planar-density calculation drift");
+assert(Math.abs(niPd - 16.1718369063) < 1e-9, "FCC (100) planar-density calculation drift");
 const al111 = 0.4049 / Math.sqrt(3);
 const al220 = 0.4049 / Math.sqrt(8);
-assert(Math.abs(al111 - 0.233769764) < 1e-8 && Math.abs(al220 - 0.143153768) < 1e-8, "Cubic interplanar-spacing calculation drift");
+assert(Math.abs(al111 - 0.2337691240) < 1e-9 && Math.abs(al220 - 0.1431537679) < 1e-9, "Cubic interplanar-spacing calculation drift");
 
 const requiredCourseGraphics = [
   "crystal-cells.svg","dislocation-slip.svg","grain-boundaries.svg","graphite-layers.svg",
