@@ -67,9 +67,9 @@ for (const module of loaded) {
 }
 
 const requiredCoverage = {
-  m01: ["microstructure","amorphous","crystalline","material classes","temperature"],
+  m01: ["microstructure","amorphous","crystalline","material classes","temperature","electron spin","orbital motion","electromagnetic head","refraction","reflection","absorption","transmission","index of refraction"],
   m02: ["pauli","aufbau","metallic","covalent","ionic","binding energy","diamond","graphite"],
-  m03: ["lattice","basis","seven crystal systems","14 bravais","no regular order","short-range order","long-range order","0.866a²c","cos²α+cos²β+cos²γ=1","cscl","packing factor","theoretical density","miller","right-handed coordinate","family of directions","⟨uvw⟩","miller–bravais","3-axis","4-axis","interplanar","interstitial","x-ray diffraction","tem"],
+  m03: ["lattice","basis","seven crystal systems","14 bravais","no regular order","short-range order","long-range order","0.866a²c","cos²α+cos²β+cos²γ=1","cscl","nacl","zinc blende","zns","packing factor","theoretical density","miller","right-handed coordinate","family of directions","⟨uvw⟩","miller–bravais","3-axis","4-axis","interplanar","interstitial","x-ray diffraction","tem"],
   m04: ["vacancy","frenkel","schottky","dislocation","burgers vector","peierls","slip system","schmid","crss","hall","incomplete bonding","reactive","surface-imperfection","strain hardening","annealing","solid-solution","grain-size"]
 };
 
