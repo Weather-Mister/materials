@@ -159,3 +159,239 @@
 .matchStatus{border-left-color:#7697c4;color:#697b91;background:#f8fbfe}
 .matchStatus.good{border-color:#65a17a;color:#4f815f}
 .matchStatus.bad{border-color:#c66c63;color:#a4514b}
+
+
+/* SOURCE OVERHAUL CONSISTENCY PASS */
+.lessonSection,
+.examPractice,
+.drillCard,
+.testQuestion{
+  border:1px solid #d8e2ec;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(31,55,78,.055);
+}
+.lessonSection{
+  margin:0 0 16px;
+  overflow:hidden;
+}
+.lessonSectionHead{
+  padding:16px 18px;
+  background:#f6f9fc;
+  border-bottom:1px solid #dfe7ef;
+}
+.lessonSectionHead span{
+  display:block;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#5275a8;
+  font-size:9px;
+  line-height:1.35;
+  letter-spacing:.14em;
+  font-weight:900;
+}
+.lessonSectionHead h2{
+  margin:5px 0 0;
+  color:#213249;
+  font-size:22px;
+  line-height:1.22;
+}
+.lessonSectionBody{
+  padding:18px;
+  color:#34465a;
+  font-size:14px;
+  line-height:1.72;
+}
+.lessonSectionBody p:first-child{margin-top:0}
+.lessonSectionBody p:last-child{margin-bottom:0}
+.sourceFigure{
+  margin:18px 0 8px;
+  border:1px solid #d8e2ec;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 8px 20px rgba(36,57,80,.05);
+}
+.sourceFigure img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  max-height:720px;
+  object-fit:contain;
+  margin:0 auto;
+  background:#fff;
+}
+.sourceFigure figcaption{
+  padding:10px 12px;
+  border-top:1px solid #e1e9f0;
+  background:#f8fafc;
+  color:#6a7889;
+  font-size:10px;
+  line-height:1.5;
+}
+.conceptCallout{
+  margin-top:16px;
+  padding:12px 14px;
+  border:1px solid #d9e6f5;
+  border-left:4px solid #4f7cff;
+  border-radius:10px;
+  background:#f1f6fd;
+  color:#334a66;
+  font-size:12px;
+  line-height:1.6;
+}
+.formulaCard,.workedBlock{
+  margin:16px 0;
+  padding:14px 15px;
+  border:1px solid #d8e2ec;
+  border-radius:12px;
+  background:#f8fbfe;
+}
+.workedBlock{border-left:4px solid #4f7cff}
+.formulaCard b,.workedBlock strong{color:#243b5a}
+.compareTable{
+  border-color:#d8e2ec;
+  background:#fff;
+}
+.compareTable span{
+  border-color:#e2e9f0;
+  background:#fff;
+  color:#384b60;
+}
+.compareHead span{
+  background:#f3f7fb;
+  color:#273c57;
+  font-weight:800;
+}
+.examPractice{
+  margin:30px 0 12px;
+  overflow:hidden;
+}
+.examPracticeHead{
+  padding:22px;
+  background:linear-gradient(135deg,#edf4ff 0%,#fff7ed 100%);
+  border-bottom:1px solid #dce6f0;
+}
+.examPracticeHead>span{
+  display:block;
+  margin-bottom:5px;
+  color:#426da6;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.15em;
+}
+.examPracticeHead h2{
+  margin:0;
+  color:#1f3046;
+  font-size:24px;
+  line-height:1.2;
+}
+.examPracticeHead p{
+  max-width:760px;
+  margin:8px 0 0;
+  color:#607086;
+  font-size:12px;
+  line-height:1.6;
+}
+.examPart{
+  padding:18px;
+  border-bottom:1px solid #e5edf4;
+}
+.examPart:last-child{border-bottom:0}
+.examPartHead{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.examPartHead span{
+  color:#4f6e98;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.examPartHead h3{
+  margin:0;
+  color:#26384f;
+  font-size:18px;
+}
+.examPartHead>b{
+  margin-left:auto;
+  color:#7c8997;
+  font-size:10px;
+  font-weight:700;
+}
+.examQuestionList{display:grid;gap:12px}
+.examQuestion{
+  overflow:hidden;
+  border:1px solid #dbe5ee;
+  border-radius:12px;
+  background:#fbfdff;
+}
+.examQuestionMeta{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:8px 12px;
+  border-bottom:1px solid #e4ebf2;
+  background:#f4f8fc;
+  color:#718199;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.09em;
+}
+.examQuestionPrompt{
+  padding:14px;
+  color:#26384d;
+  font-size:14px;
+  line-height:1.68;
+}
+.examReveal{
+  border-top:1px solid #e4ebf2;
+  background:#fff;
+}
+.examReveal summary{
+  padding:11px 14px;
+  cursor:pointer;
+  list-style:none;
+  color:#315f9c;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  user-select:none;
+}
+.examReveal summary::-webkit-details-marker{display:none}
+.examReveal summary::after{content:"+";float:right;font-size:16px;line-height:1}
+.examReveal[open] summary::after{content:"−"}
+.examAnswer{
+  padding:14px;
+  border-top:1px solid #dfeadf;
+  background:#f7fbf7;
+  color:#31473a;
+  font-size:13px;
+  line-height:1.68;
+}
+.examAnswer small{
+  display:block;
+  margin-top:10px;
+  color:#77867b;
+  font-size:9px;
+  letter-spacing:.03em;
+}
+.examAnswer .workedBlock{
+  margin:0;
+  border-color:#cfdfd2;
+  background:#fff;
+}
+@media(max-width:700px){
+  .lessonSectionHead,.lessonSectionBody,.examPart{padding:14px}
+  .examPracticeHead{padding:18px 14px}
+  .examPracticeHead h2{font-size:21px}
+  .examPartHead>b{width:100%;margin-left:0}
+  .examQuestionPrompt{font-size:13px}
+}

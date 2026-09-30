@@ -10,6 +10,7 @@ const sandbox = { window: {} };
 vm.createContext(sandbox);
 vm.runInContext(read("public/course.js"), sandbox, { filename: "course.js" });
 vm.runInContext(read("public/course-weeks-3-4.js"), sandbox, { filename: "course-weeks-3-4.js" });
+vm.runInContext(read("public/source-overhaul.js"), sandbox, { filename: "source-overhaul.js" });
 
 const course = sandbox.window.MATERIALS_COURSE;
 assert(course && Array.isArray(course.modules), "Course did not load");
@@ -92,8 +93,9 @@ assert(Array.isArray(meta.textbooks) && meta.textbooks.length >= 2, "Course text
 const index = read("public/index.html");
 const coursePos = index.indexOf("./course.js");
 const patchPos = index.indexOf("./course-weeks-3-4.js");
+const overhaulPos = index.indexOf("./source-overhaul.js");
 const appPos = index.indexOf("./app.js");
-assert(coursePos >= 0 && patchPos > coursePos && appPos > patchPos, "Course scripts are not loaded in the required order");
+assert(coursePos >= 0 && patchPos > coursePos && overhaulPos > patchPos && appPos > overhaulPos, "Course scripts are not loaded in the required order");
 
 const htmlIds = Array.from(index.matchAll(/id="([^"]+)"/g)).map((m) => m[1]);
 assert(new Set(htmlIds).size === htmlIds.length, "Duplicate static HTML ids detected");
@@ -106,11 +108,28 @@ for (const marker of [
   "function moduleTestQuestions",
   "function renderFlashcards",
   "function renderMatching",
+  "function renderExamPractice",
   "function mergeStates"
 ]) assert(app.includes(marker), "App audit marker missing: " + marker);
 
 assert(app.includes("matchRound"), "Matching-set rotation missing");
 assert(app.includes("testHistoryAudit"), "Test-history rendering missing");
+
+const m3Exam = loaded.find((m) => m.id === "m03")?.examPractice;
+assert(m3Exam && Array.isArray(m3Exam.parts) && m3Exam.parts.length === 4, "Week 3 four-part exam practice missing");
+assert(m3Exam.parts.some((p) => /calculation/i.test(p.title || "") && (p.questions || []).length >= 6), "Week 3 calculation practice is too shallow");
+assert(m3Exam.parts.reduce((n,p) => n + (p.questions || []).length, 0) >= 20, "Week 3 exam bank is too small");
+
+const removedGeneratedGraphics = [
+  "crystal-cells.svg","dislocation-slip.svg","grain-boundaries.svg","graphite-layers.svg",
+  "ionic-defect-pairs.svg","miller-indices.svg","point-defects.svg","schmid-law.svg",
+  "strength-ranges.svg","temperature-strength.svg"
+];
+const renderedCourse = JSON.stringify(loaded);
+for (const name of removedGeneratedGraphics) {
+  assert(!renderedCourse.includes(name), "Generated course graphic still referenced: " + name);
+  assert(!fs.existsSync(root + "/public/assets/" + name), "Generated course graphic still present: " + name);
+}
 
 const publicB64 = fs.readdirSync(root + "/public/assets").filter((name) => name.endsWith(".b64"));
 assert(publicB64.length === 0, "Redundant .b64 files leaked into public assets: " + publicB64.join(", "));

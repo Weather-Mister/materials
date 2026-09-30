@@ -267,10 +267,48 @@
         <div class="lessonSectionBody">${s.html || ""}${s.callout ? `<div class="conceptCallout">${escapeHtml(s.callout)}</div>` : ""}</div>
       </section>`).join("");
     }
+    const examMarkup = renderExamPractice(m);
+    if (examMarkup) $("learnHost").insertAdjacentHTML("beforeend", examMarkup);
     $("completeBtn").disabled = !m?.available;
     $("completeBtn").textContent = m && state.completed[m.id] ? "Module completed ✓" : "Mark module complete";
     const next = nextLoadedModule(m?.id);
     $("nextLoadedBtn").disabled = !next;
+  }
+
+  function renderExamPractice(m) {
+    const practice = m?.examPractice;
+    if (!practice?.parts?.length) return "";
+    const parts = practice.parts.map((part) => {
+      const questions = (part.questions || []).map((question, index) => `
+        <article class="examQuestion">
+          <div class="examQuestionMeta">
+            <span>${escapeHtml(part.label || "PRACTICE")}</span>
+            <b>${String(index + 1).padStart(2, "0")}</b>
+          </div>
+          <div class="examQuestionPrompt">${question.prompt || ""}</div>
+          <details class="examReveal">
+            <summary>Reveal answer</summary>
+            <div class="examAnswer">${question.answerHtml || ""}${question.source ? `<small>${escapeHtml(question.source)}</small>` : ""}</div>
+          </details>
+        </article>
+      `).join("");
+      return `<section class="examPart">
+        <div class="examPartHead">
+          <span>${escapeHtml(part.label || "PART")}</span>
+          <h3>${escapeHtml(part.title || "")}</h3>
+          <b>${(part.questions || []).length} questions</b>
+        </div>
+        <div class="examQuestionList">${questions}</div>
+      </section>`;
+    }).join("");
+    return `<section class="examPractice">
+      <div class="examPracticeHead">
+        <span>EXAM PRACTICE</span>
+        <h2>${escapeHtml(practice.title || "Practice")}</h2>
+        ${practice.intro ? `<p>${escapeHtml(practice.intro)}</p>` : ""}
+      </div>
+      ${parts}
+    </section>`;
   }
 
   function nextLoadedModule(id) {
