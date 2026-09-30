@@ -2,28 +2,8 @@
   const course = window.MATERIALS_COURSE;
   if (!course) return;
 
-  const replacementPairs = [
-    ["./assets/strength-ranges.svg?v=5", "https://image.slidesharecdn.com/3-240306053832-9e3c6975/75/comparison-of-tensile-strength-for-various-engineering-materials-1-2048.jpg?cb=1709703864"],
-    ["Source-grounded reconstruction of lecture slide 10. The chart is a comparison of ranges, not a single strength assigned to each class.", "External source visual · comparison of tensile-strength ranges across engineering material classes (Slideshare-hosted lecture figure)."],
-    ["./assets/temperature-strength.svg?v=5", "https://www-materials.eng.cam.ac.uk/mpsite/interactive_charts/strength-temp/metals.jpg"],
-    ["Source-grounded reconstruction of lecture slide 11. It preserves the source's qualitative comparison of service-temperature ranges.", "University of Cambridge materials-selection chart · strength versus maximum service temperature."],
-    ["./assets/graphite-layers.svg?v=5", "https://commons.wikimedia.org/wiki/Special:Redirect/file/GraphiteABABDiagram_BallAndStick_002dSpacing.svg"],
-    ["Source-grounded schematic of the bonding picture described on lecture slides 30–31.", "Wikimedia Commons source visual · ABAB graphite layers and interlayer spacing."],
-    ["./assets/crystal-cells.svg?v=4", "https://www.wasilzafar.com/images/series/materials-science/fcc-bcc-hcp-unit-cell-comparison.webp"],
-    ["Course schematic based on the Week 3 unit-cell slides and summary table.", "External source visual · side-by-side FCC, BCC, and HCP unit-cell comparison."],
-    ["./assets/miller-indices.svg?v=4", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Miller_Indices_Cubes.svg"],
-    ["Course schematic following the direction and plane procedures in Part 2.", "Wikimedia Commons source visual · examples of Miller-indexed planes in a cubic cell."],
-    ["./assets/point-defects.svg?v=4", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Point_defects_in_crystal_structures.svg"],
-    ["Course schematic of the three point-defect geometries emphasized in Week 4.", "Wikimedia Commons source visual · vacancy, interstitial, substitutional, and Frenkel point defects."],
-    ["./assets/ionic-defect-pairs.svg?v=5", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Point_defects_in_crystal_structures.svg"],
-    ["Source-grounded schematic paired with the lecture's charge-balance rule for ionic solids.", "Wikimedia Commons source visual · point-defect geometries; course text supplies the ionic charge-balance rule."],
-    ["./assets/dislocation-slip.svg?v=4", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Edge_dislocation_mobility_on_slip_plane.png"],
-    ["Course schematic based on the Week 4 edge-dislocation and slip sequence.", "Wikimedia Commons source visual · edge-dislocation motion on a slip plane under shear stress."],
-    ["./assets/schmid-law.svg?v=4", "https://www.mdpi.com/crystals/crystals-07-00324/article_deploy/html/images/crystals-07-00324-g001-550.jpg"],
-    ["Course schematic of the resolved-shear-stress geometry.", "Published source visual · slip-plane geometry showing the angles used in resolved shear stress / Schmid's law."],
-    ["./assets/grain-boundaries.svg?v=4", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Grain_boundary_diagram.jpg"],
-    ["Course schematic of the grain-boundary mechanism.", "Wikimedia Commons source visual · neighboring grains separated by a grain boundary."],
-  ];
+  // All teaching figures are local source-grounded assets; do not hotlink third-party images.
+  const replacementPairs = [];
 
   for (const module of course.modules || []) {
     for (const section of module.sections || []) {
@@ -50,7 +30,7 @@
     m2.sections.splice(6, 0, {
       eyebrow: "EXAM FOCUS",
       title: "Bond type → property consequence",
-      html: "<div class='compareTable cols4'><div class='compareHead'><span>Bond</span><span>Electron picture</span><span>Directionality</span><span>Property consequence emphasized here</span></div><div><span>Metallic</span><span>Valence electrons are delocalized</span><span>Non-directional</span><span>Good electrical/thermal conductivity and good ductility</span></div><div><span>Covalent</span><span>Electrons are shared and localized between atoms</span><span>Directional</span><span>High strength / melting point; generally low ductility and low electrical conductivity</span></div><div><span>Ionic</span><span>Electron transfer forms cations and anions</span><span>Electrostatic attraction</span><span>Strong bonding, high melting point; brittle rather than ductile</span></div><div><span>Van der Waals</span><span>Dipole-based secondary attraction</span><span>Weak secondary interaction</span><span>Much lower binding energy than primary bonds</span></div></div><p class='sourceNote'>The assignment explicitly tests that metallic bonding is <strong>not</strong> highly directional and that covalent valence electrons are localized.</p>",
+      html: "<div class='compareTable cols4'><div class='compareHead'><span>Bond</span><span>Electron picture</span><span>Directionality</span><span>Property consequence emphasized here</span></div><div><span>Metallic</span><span>Valence electrons are delocalized</span><span>Non-directional</span><span>Good electrical/thermal conductivity and good ductility</span></div><div><span>Covalent</span><span>Electrons are shared and localized between atoms</span><span>Directional</span><span>High strength / melting point; generally low ductility and low electrical conductivity</span></div><div><span>Ionic</span><span>Electron transfer forms cations and anions</span><span>Electrostatic attraction</span><span>Strong bonding, high melting point; brittle rather than ductile</span></div><div><span>Van der Waals</span><span>Dipole-based secondary attraction</span><span>Weak secondary interaction</span><span>Much lower binding energy than primary bonds</span></div></div><p class='sourceNote'>The assignment explicitly tests that metallic bonding is <strong>not</strong> highly directional and that covalent valence electrons are localized. Assignment 1 also phrases van der Waals binding as typically <strong>&lt;10 kcal/mol</strong>; keep that number as an assignment-specific cue.</p>",
       callout: "Directionality is a frequent trap: metallic = non-directional; covalent = directional."
     });
   }
@@ -79,7 +59,7 @@
       {
         eyebrow: "EXAM FORMULA MAP",
         title: "What to recognize before you start calculating",
-        html: "<div class='formulaCard'><b>SC</b><span>a₀=2r · 1 atom/cell · APF 0.52</span><b>BCC</b><span>a₀=4r/√3 · 2 atoms/cell · APF 0.68</span><b>FCC</b><span>a₀=4r/√2=2√2r · 4 atoms/cell · APF 0.74</span><b>Theoretical density</b><span>ρ=nM/(Nₐa₀³) for a cubic unit cell</span><b>Linear density</b><span>LD = 1/(repeat distance)</span><b>Cubic interplanar spacing</b><span>d<sub>hkl</sub>=a₀/√(h²+k²+l²)</span></div><p>For Miller planes: find intercepts in lattice-parameter units → take reciprocals → clear fractions → <strong>reduce to the smallest integer set</strong>. If the plane passes through the chosen origin, shift the origin to an equivalent lattice point first.</p>",
+        html: "<div class='formulaCard'><b>SC</b><span>a₀=2r · 1 atom/cell · APF 0.52</span><b>BCC</b><span>a₀=4r/√3 · 2 atoms/cell · APF 0.68</span><b>FCC</b><span>a₀=4r/√2=2√2r · 4 atoms/cell · APF 0.74</span><b>Theoretical density</b><span>ρ=nM/(Nₐa₀³) for a cubic unit cell</span><b>Linear density</b><span>LD = 1/(repeat distance)</span><b>Cubic interplanar spacing</b><span>d<sub>hkl</sub>=a₀/√(h²+k²+l²)</span></div><p>For Miller planes: find intercepts in lattice-parameter units → take reciprocals → clear fractions → <strong>do not reduce to lowest integers afterward in this course's plane-index convention</strong>. If the plane passes through the chosen origin, shift the origin to an equivalent lattice point first.</p>",
         callout: "Write units at every step. In density problems, convert nm to cm before cubing if the requested answer is g/cm³."
       }
     );
@@ -135,7 +115,7 @@
         q("m03-ex01", "A BCC crystal has a truly close-packed plane, and that plane is {111}.", "<strong>False.</strong> BCC has a close-packed <em>direction</em> family ⟨111⟩ but no truly close-packed plane."),
         q("m03-ex02", "In a crystal, linear density along a direction is the reciprocal of the repeat distance along that direction.", "<strong>True.</strong> LD = 1/(repeat distance)."),
         q("m03-ex03", "FCC and HCP both have coordination number 12 and APF ≈ 0.74.", "<strong>True.</strong> They differ in stacking sequence, not maximum packing efficiency."),
-        q("m03-ex04", "For Miller plane indices, after taking reciprocals and clearing fractions you should leave a common integer factor unreduced if doing so preserves plane density.", "<strong>False.</strong> Reduce to the smallest integer set. Different integer multiples can represent distinct parallel planes."),
+        q("m03-ex04", "For Miller plane indices in this course, after taking reciprocals you clear fractions but do not reduce the resulting integers to lowest terms.", "<strong>True.</strong> The professor's plane-index procedure explicitly says not to reduce after clearing fractions; integer multiples can represent distinct parallel planes with different spacing/density."),
         q("m03-ex05", "If a plane passes through the chosen origin, shift the origin to an equivalent lattice point before determining its intercepts.", "<strong>True.</strong> Otherwise an intercept of zero cannot be inverted in the Miller-index procedure."),
         q("m03-ex06", "Randomly oriented grains can make a polycrystalline metal appear macroscopically isotropic even when a single crystal is anisotropic.", "<strong>True.</strong> Directional differences average out when many grain orientations are sampled."),
         q("m03-ex07", "The NaCl structure has coordination number 6, while zinc blende has coordination number 4.", "<strong>True.</strong> NaCl is octahedral coordination; zinc blende is tetrahedral coordination.")
@@ -159,7 +139,8 @@
         q("m03-ex19", "Planar packing fraction: find the PPF of an FCC (111) close-packed plane.", "<div class='workedBlock'><span>The close-packed 2D arrangement is triangular.</span><span>PPF = π/(2√3)</span><strong>PPF ≈ 0.907 (90.7%)</strong></div><p>Yes: {111} is the close-packed plane family in FCC.</p>"),
         q("m03-ex20", "Miller indices: a cubic plane intercepts x at 2a, y at a, and is parallel to z. Find (hkl).", "<div class='workedBlock'><span>Intercepts in units of a: (2, 1, ∞)</span><span>Reciprocals: (1/2, 1, 0)</span><span>Clear fractions ×2</span><strong>(120)</strong></div>"),
         q("m03-ex21", "Interplanar spacing: a cubic metal has a₀ = 0.405 nm. Find d₁₁₁ and d₂₂₀.", "<div class='workedBlock'><span>d₁₁₁ = 0.405/√3 = 0.2338 nm</span><span>d₂₂₀ = 0.405/√8 = 0.1432 nm</span><strong>d₁₁₁ ≈ 0.234 nm; d₂₂₀ ≈ 0.143 nm</strong></div>"),
-        q("m03-ex22", "Radius ratio: r<sub>cation</sub>/r<sub>anion</sub> = 0.50. What coordination number and common structure type does the source table suggest?", "<div class='workedBlock'><span>0.414 &lt; 0.50 &lt; 0.732</span><span>This range corresponds to octahedral coordination.</span><strong>CN = 6 → NaCl-type coordination</strong></div>")
+        q("m03-ex22", "Radius ratio: r<sub>cation</sub>/r<sub>anion</sub> = 0.50. What coordination number and common structure type does the source table suggest?", "<div class='workedBlock'><span>0.414 &lt; 0.50 &lt; 0.732</span><span>This range corresponds to octahedral coordination.</span><strong>CN = 6 → NaCl-type coordination</strong></div>"),
+        q("m03-ex23", "Inverse theoretical density: potassium is BCC with ρ = 0.855 g/cm³ and M = 39.09 g/mol. Find a₀, then r. Use Nₐ = 6.022×10²³ mol⁻¹.", "<div class='workedBlock'><span>a₀ = [nM/(ρNₐ)]<sup>1/3</sup>, with n=2</span><span>a₀ = [2(39.09)/(0.855·6.022×10²³)]<sup>1/3</sup> = 5.33494×10⁻⁸ cm</span><span>a₀ = 0.533494 nm</span><span>BCC: r = √3a₀/4</span><strong>r = 0.231010 nm</strong></div>", "Assignment 1 Q2 worked pattern")
       ])
     ]
   };
@@ -169,7 +150,8 @@
     { id: "ref-071", term: "Isotropic", definition: "A property has the same value in all directions.", detail: "Randomly oriented grains can make a polycrystalline material approximately isotropic macroscopically.", tags: ["week 3", "property", "exam"] },
     { id: "ref-072", term: "Zinc blende (ZnS)", definition: "Ionic/covalent crystal structure with tetrahedral coordination number 4 in the course radius-ratio treatment.", detail: "Associated with the 0.225–0.414 radius-ratio range in the source table.", tags: ["week 3", "ionic", "exam"] },
     { id: "ref-073", term: "Sodium chloride (NaCl) structure", definition: "Coordination number 6 with octahedral coordination.", detail: "Associated with the 0.414–0.732 radius-ratio range.", tags: ["week 3", "ionic", "exam"] },
-    { id: "ref-074", term: "Planar packing fraction (PPF)", definition: "Fraction of a crystallographic plane covered by atom cross-sections centered on that plane.", detail: "FCC (111): π/(2√3) ≈ 0.907.", tags: ["week 3", "plane", "formula", "exam"] }
+    { id: "ref-074", term: "Planar packing fraction (PPF)", definition: "Fraction of a crystallographic plane covered by atom cross-sections centered on that plane.", detail: "FCC (111): π/(2√3) ≈ 0.907.", tags: ["week 3", "plane", "formula", "exam"] },
+    { id: "ref-075", term: "Miller plane reduction rule", definition: "In the professor's plane-index procedure, take reciprocals, clear fractions, and do not reduce the resulting integers to lowest terms.", detail: "Plane multiples are not identical; their spacing/density can differ. If the plane passes through the origin, shift the origin first.", tags: ["week 3", "miller", "plane", "exam"] }
   ];
   const seenRefs = new Set((course.reference || []).map((r) => r.id));
   for (const ref of extraRefs) if (!seenRefs.has(ref.id)) course.reference.push(ref);
