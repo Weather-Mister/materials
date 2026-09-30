@@ -119,6 +119,40 @@ for (const marker of [
 
 assert(app.includes("matchRound"), "Matching-set rotation missing");
 assert(app.includes("testHistoryAudit"), "Test-history rendering missing");
+assert(app.includes('data-choice="${entry.index}"'), "Shuffled-choice buttons must preserve original answer indices");
+assert(app.includes("currentTest.answers[q.id] === q.answer"), "Test scoring must compare original answer indices");
+assert(app.includes('<details class="examReveal">'), "Exam-practice answers must stay hidden until reveal");
+
+assert(index.includes("./course.js?v=9"), "Course cache-bust version is stale");
+assert(index.includes("./course-weeks-3-4.js?v=9"), "Weeks 3–4 cache-bust version is stale");
+assert(index.includes("./source-overhaul.js?v=3"), "Source-overhaul cache-bust version is stale");
+
+const questionById = (id) => loaded.flatMap((m) => [...(m.drills || []), ...(m.testQuestions || [])]).find((q) => q.id === id);
+const answerText = (id) => {
+  const q = questionById(id);
+  assert(q, "Missing QA question " + id);
+  return q.choices[q.answer];
+};
+assert(answerText("m03-d16") === "0.200 nm", "m03-d16 numeric answer drift");
+assert(answerText("m03-t13") === "0.208 nm", "m03-t13 numeric answer drift");
+assert(answerText("m04-d19") === "35.4 MPa", "m04-d19 Schmid answer drift");
+assert(answerText("m04-d20") === "100 MPa", "m04-d20 Hall–Petch answer drift");
+assert(answerText("m04-t17") === "70.7 MPa", "m04-t17 Schmid answer drift");
+assert(answerText("m04-t18") === "160 MPa", "m04-t18 Hall–Petch answer drift");
+
+const expectedSchmid1 = 100 * Math.cos(Math.PI / 3) * Math.cos(Math.PI / 4);
+const expectedHall1 = 50 + 10 / Math.sqrt(0.040);
+const expectedSchmid2 = 200 * Math.cos(Math.PI / 4) * Math.cos(Math.PI / 3);
+const expectedHall2 = 40 + 12 / Math.sqrt(0.010);
+assert(Math.abs(expectedSchmid1 - 35.3553390593) < 1e-9, "Schmid drill independent calculation failed");
+assert(Math.abs(expectedHall1 - 100) < 1e-9, "Hall–Petch drill independent calculation failed");
+assert(Math.abs(expectedSchmid2 - 70.7106781187) < 1e-9, "Schmid test independent calculation failed");
+assert(Math.abs(expectedHall2 - 160) < 1e-9, "Hall–Petch test independent calculation failed");
+
+const styles = read("public/styles.css");
+const contentStyles = read("public/course-content.css");
+assert(styles.includes("@media(max-width:560px)") && styles.includes(".problemFields,.problemFields.three,.problemFields.five{grid-template-columns:1fr}"), "Problem Lab mobile collapse guard missing");
+assert(contentStyles.includes(".compareTable.cols4") && contentStyles.includes("overflow-x:auto"), "Wide source-table mobile overflow guard missing");
 
 const m3Exam = loaded.find((m) => m.id === "m03")?.examPractice;
 assert(m3Exam && Array.isArray(m3Exam.parts) && m3Exam.parts.length === 4, "Week 3 four-part exam practice missing");
