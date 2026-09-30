@@ -38,3 +38,15 @@ The deterministic validator now requires the following concepts to remain learne
 ## Result
 
 The implemented Weeks 1–4 now cover the supplied lecture-slide text and Assignment 1 content without introducing future-week curriculum. Textbook material remains supplementary and does not override the professor's terminology or sequencing.
+
+
+## Final re-check
+
+A second independent pass found one remaining Week 3 notation detail that was implicit but not stated directly enough in the learner-facing lesson:
+
+- Unit-cell points/directions use a **right-handed coordinate system**.
+- A single crystallographic direction uses **[uvw]**, while a symmetry-equivalent family of directions uses **⟨uvw⟩**.
+
+The Week 3 lesson, drill bank, test bank, reference entry, and deterministic coverage guard were updated accordingly.
+
+After this repair, no additional source-text omissions were found in the supplied Weeks 1–4 lecture decks or Assignment 1.
