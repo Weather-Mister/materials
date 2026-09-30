@@ -141,14 +141,29 @@ const al220 = 0.4049 / Math.sqrt(8);
 assert(Math.abs(al111 - 0.2337691240) < 1e-9 && Math.abs(al220 - 0.1431537679) < 1e-9, "Cubic interplanar-spacing calculation drift");
 
 const requiredCourseGraphics = [
+  "book-fig-1-3-strength-ranges.webp",
+  "book-fig-1-6-temperature-strength.webp",
+  "book-fig-2-22-graphite.webp",
+  "book-fig-3-9-crystal-cells.webp",
+  "book-fig-3-13-miller-directions.webp",
+  "book-fig-4-1-point-defects.webp",
+  "book-fig-4-4-5-dislocations.webp",
+  "book-fig-4-10-schmid-law.webp",
+  "book-fig-4-13-grain-strength.webp"
+];
+const retiredGeneratedGraphics = [
   "crystal-cells.svg","dislocation-slip.svg","grain-boundaries.svg","graphite-layers.svg",
   "ionic-defect-pairs.svg","miller-indices.svg","point-defects.svg","schmid-law.svg",
   "strength-ranges.svg","temperature-strength.svg"
 ];
 const renderedCourse = JSON.stringify(loaded);
 for (const name of requiredCourseGraphics) {
-  assert(renderedCourse.includes(name), "Local course graphic not referenced: " + name);
-  assert(fs.existsSync(root + "/public/assets/" + name), "Local course graphic missing: " + name);
+  assert(renderedCourse.includes(name), "Source course figure not referenced: " + name);
+  assert(fs.existsSync(root + "/public/assets/" + name), "Source course figure missing: " + name);
+}
+for (const name of retiredGeneratedGraphics) {
+  assert(!renderedCourse.includes(name), "Retired generated graphic still referenced: " + name);
+  assert(!fs.existsSync(root + "/public/assets/" + name), "Retired generated graphic still present: " + name);
 }
 
 const publicB64 = fs.readdirSync(root + "/public/assets").filter((name) => name.endsWith(".b64"));
