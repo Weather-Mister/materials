@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#f5f8fc" />
   <title>Engineering Materials Lab</title>
-<link rel="stylesheet" href="./styles.css?v=7" />
-  <link rel="stylesheet" href="./course-content.css?v=7" />
+<link rel="stylesheet" href="./styles.css?v=8" />
+  <link rel="stylesheet" href="./course-content.css?v=8" />
 </head>
 <body>
   <div class="grain grain-a" aria-hidden="true"></div>
@@ -118,8 +118,9 @@
           <button class="modeTab" data-tab="flashcards" type="button"><span>02</span><b>FLASHCARDS</b><small>Recall deck</small></button>
           <button class="modeTab" data-tab="matching" type="button"><span>03</span><b>MATCH</b><small>Terms · concepts</small></button>
           <button class="modeTab" data-tab="drill" type="button"><span>04</span><b>DRILL</b><small>Guided practice</small></button>
-          <button class="modeTab" data-tab="test" type="button"><span>05</span><b>TEST</b><small>Assessment mode</small></button>
-          <button class="modeTab" data-tab="reference" type="button"><span>06</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
+          <button class="modeTab" data-tab="problem" type="button"><span>05</span><b>PROBLEM LAB</b><small>Worked calculators</small></button>
+          <button class="modeTab" data-tab="test" type="button"><span>06</span><b>TEST</b><small>Assessment mode</small></button>
+          <button class="modeTab" data-tab="reference" type="button"><span>07</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
         </nav>
 
         <section id="learnView" class="view active">
@@ -170,6 +171,20 @@
               <div class="sheetBadge">D</div>
             </div>
             <div id="drillHost" class="sheetBody"></div>
+          </article>
+        </section>
+
+        <section id="problemView" class="view">
+          <article class="problemLabPanel">
+            <div class="problemLabHead">
+              <div>
+                <span>PROBLEM LAB</span>
+                <h2>Assignment-ready worked calculators</h2>
+                <p>Use the course equations with your values, then copy the displayed derivation into your own solution. Assignment 1 values are available as presets.</p>
+              </div>
+              <div class="problemLabBadge">Σ</div>
+            </div>
+            <div id="problemLabHost"></div>
           </article>
         </section>
 
@@ -244,7 +259,8 @@
 
   <script src="./course.js?v=7"></script>
   <script src="./course-weeks-3-4.js?v=7"></script>
-  <script src="./source-overhaul.js?v=1"></script>
-  <script src="./app.js?v=7"></script>
+  <script src="./source-overhaul.js?v=2"></script>
+  <script src="./app.js?v=8"></script>
+  <script src="./problem-lab.js?v=1"></script>
 </body>
 </html>
