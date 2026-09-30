@@ -35,6 +35,7 @@ jobs:
           node --check public/course-weeks-3-4.js
           node --check public/source-overhaul.js
           node --check public/app.js
+          node --check public/problem-lab.js
           node scripts/validate-course.mjs
           python3 - <<'PY'
           from pathlib import Path
@@ -43,7 +44,7 @@ jobs:
           for path in svgs:
               ET.parse(path)
               print(f"{path}: XML OK")
-          print(f"SVG teaching assets present: {len(svgs)} (zero is valid after the source-visual overhaul)")
+          print(f"SVG teaching assets present and XML-valid: {len(svgs)}")
           PY
       - name: Rebuild verified lecture visuals
         shell: bash
