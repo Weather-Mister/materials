@@ -17,6 +17,13 @@ assert(course && Array.isArray(course.modules), "Course did not load");
 assert(Array.isArray(course.reference), "Reference library missing");
 
 const loaded = course.modules.filter((m) => m.available);
+
+const explanatoryText = (html) =>
+  Array.from(String(html || "").matchAll(/<(p|li)\b[^>]*>([\s\S]*?)<\/\1>/gi))
+    .map((m) => m[2].replace(/<[^>]+>/g, " ").replace(/&[^;]+;/g, " ").replace(/\s+/g, " ").trim())
+    .join(" ")
+    .trim();
+
 assert(loaded.length === 4, "Expected 4 loaded modules, found " + loaded.length);
 assert(loaded.map((m) => m.number).join(",") === "1,2,3,4", "Loaded module sequence must be Weeks 1–4");
 
@@ -39,6 +46,20 @@ for (const module of loaded) {
 
   for (const section of module.sections) {
     assert(section.title && section.html, module.id + ": malformed section");
+
+    // Weeks 3+ use tables/formulas heavily. A source item is not considered "taught"
+    // merely because its values appear in a table or formula card: require explanatory
+    // prose around data-heavy displays. This also becomes the default guard for future
+    // loaded modules (Weeks 5+).
+    const dataHeavy = /(compareTable|formulaCard|workedBlock|sourceGrid)/.test(section.html);
+    if (module.number >= 3 && dataHeavy) {
+      const prose = explanatoryText(section.html);
+      assert(
+        prose.length >= 180,
+        module.id + " " + (section.eyebrow || section.title) + ": data/formula section is too compressed (" + prose.length + " explanatory chars); add mechanism/distinction prose"
+      );
+    }
+
     const assetMatches = Array.from(section.html.matchAll(/src=['"]\.\/assets\/([^?'"]+)/g));
     for (const match of assetMatches) {
       const asset = match[1];
@@ -79,6 +100,34 @@ for (const entry of Object.entries(requiredCoverage)) {
   const module = loaded.find((m) => m.id === id);
   const text = JSON.stringify(module).toLowerCase();
   for (const term of terms) assert(text.includes(term), id + ": source-coverage term missing: " + term);
+}
+
+const sectionByEyebrow = (moduleId, eyebrow) => {
+  const module = loaded.find((m) => m.id === moduleId);
+  const section = module?.sections?.find((x) => x.eyebrow === eyebrow);
+  assert(section, moduleId + ": missing teaching section " + eyebrow);
+  return String(section.html).toLowerCase();
+};
+
+// Regression guards for "mentioned but not actually explained" failures.
+const depthEvidence = [
+  ["m03", "SEVEN CRYSTAL SYSTEMS", ["six lattice parameters", "centering"]],
+  ["m03", "UNIT-CELL VOLUME", ["not", "occupied by atoms", "sin120"]],
+  ["m03", "COORDINATION NUMBER", ["nearest-neighbor", "not the same thing as atoms per unit cell"]],
+  ["m03", "PACKING FACTOR", ["occupied", "not mass density"]],
+  ["m03", "INTERSTITIAL SIZE RULE", ["radius ratio", "nearest-neighbor count"]],
+  ["m03", "IONIC CRYSTAL EXAMPLES", ["not equivalent bcc", "coordination number"]],
+  ["m04", "IONIC DEFECT RULES", ["three balances", "electrically neutral"]],
+  ["m04", "SOURCE SLIP TABLE", ["slip system = slip plane + slip direction", "bonding also matters"]],
+  ["m04", "SCHMID'S LAW", ["geometric projection", "slip-plane normal"]],
+  ["m04", "HALL–PETCH EXAMPLE", ["two known strength", "solve backward"]],
+  ["m04", "OTHER SURFACE DEFECTS", ["physically different", "astm grain-size number"]]
+];
+for (const [moduleId, eyebrow, evidence] of depthEvidence) {
+  const html = sectionByEyebrow(moduleId, eyebrow);
+  for (const phrase of evidence) {
+    assert(html.includes(phrase), moduleId + " " + eyebrow + ": instructional-depth evidence missing: " + phrase);
+  }
 }
 
 const meta = course.courseMeta || {};
@@ -124,8 +173,9 @@ assert(app.includes("currentTest.answers[q.id] === q.answer"), "Test scoring mus
 assert(app.includes('<details class="examReveal">'), "Exam-practice answers must stay hidden until reveal");
 
 assert(index.includes("./course.js?v=9"), "Course cache-bust version is stale");
-assert(index.includes("./course-weeks-3-4.js?v=9"), "Weeks 3–4 cache-bust version is stale");
+assert(index.includes("./course-weeks-3-4.js?v=10"), "Weeks 3–4 cache-bust version is stale");
 assert(index.includes("./source-overhaul.js?v=3"), "Source-overhaul cache-bust version is stale");
+assert(index.includes("./course-content.css?v=9"), "Course-content CSS cache-bust version is stale");
 
 const questionById = (id) => loaded.flatMap((m) => [...(m.drills || []), ...(m.testQuestions || [])]).find((q) => q.id === id);
 const answerText = (id) => {
