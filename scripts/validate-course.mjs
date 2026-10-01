@@ -106,7 +106,12 @@ const sectionByEyebrow = (moduleId, eyebrow) => {
   const module = loaded.find((m) => m.id === moduleId);
   const section = module?.sections?.find((x) => x.eyebrow === eyebrow);
   assert(section, moduleId + ": missing teaching section " + eyebrow);
-  return String(section.html).toLowerCase();
+  return String(section.html)
+    .toLowerCase()
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[^;]+;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 };
 
 // Regression guards for "mentioned but not actually explained" failures.
