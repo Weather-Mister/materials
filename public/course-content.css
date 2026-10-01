@@ -10,9 +10,12 @@
 .sourceStrip{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:14px 0;padding:12px 13px;border:1px solid #d4e0ea;background:#f4f8fc;border-radius:12px}
 .sourceStrip span{font-size:10px;color:#7b899a}.sourceStrip b{font-size:11px;color:#364a64;text-align:right}
 .compareTable{display:grid;grid-template-columns:1fr 1fr;margin:14px 0;border:1px solid #d5e0ea;border-radius:14px;overflow:hidden}
-.compareTable>div{display:contents}.compareTable span{padding:11px 12px;border-bottom:1px solid #e0e8f0;background:#fff}.compareTable span:nth-child(odd){border-right:1px solid #e0e8f0}
+.compareTable.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.compareTable.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.compareTable.cols5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.compareTable>div{display:contents}.compareTable span{padding:11px 12px;border-bottom:1px solid #e0e8f0;background:#fff;min-width:0}.compareTable>div>span:not(:last-child){border-right:1px solid #e0e8f0}.compareTable>div:last-child>span{border-bottom:0}
 .compareHead span{font-weight:900;color:#2b3c52;background:#eef5ff}
-@media(max-width:700px){.sourceGrid{grid-template-columns:1fr}.sourceStrip{align-items:flex-start;flex-direction:column}.sourceStrip b{text-align:left}.compareTable{grid-template-columns:1fr}.compareTable span:nth-child(odd){border-right:0}}
+@media(max-width:700px){.sourceGrid{grid-template-columns:1fr}.sourceStrip{align-items:flex-start;flex-direction:column}.sourceStrip b{text-align:left}.compareTable,.compareTable.cols3,.compareTable.cols4,.compareTable.cols5{grid-template-columns:1fr}.compareTable>div>span:not(:last-child){border-right:0}.compareTable>div:last-child>span{border-bottom:1px solid #e0e8f0}.compareTable>div:last-child>span:last-child{border-bottom:0}}
 
 .formulaCard,.workedBlock{display:grid;gap:8px;margin:15px 0;padding:14px 15px;border:1px solid #d6c7b5;background:linear-gradient(135deg,#fffaf2,#eee4d6);border-radius:13px}
 .formulaCard b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#713f2c;line-height:1.5}
