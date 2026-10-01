@@ -52,11 +52,15 @@ for (const module of loaded) {
     // prose around data-heavy displays. This also becomes the default guard for future
     // loaded modules (Weeks 5+).
     const dataHeavy = /(compareTable|formulaCard|workedBlock|sourceGrid)/.test(section.html);
-    if (module.number >= 3 && dataHeavy) {
+    if (module.number >= 3) {
       const prose = explanatoryText(section.html);
       assert(
         prose.length >= 180,
-        module.id + " " + (section.eyebrow || section.title) + ": data/formula section is too compressed (" + prose.length + " explanatory chars); add mechanism/distinction prose"
+        module.id + " " + (section.eyebrow || section.title) + ": teaching section is too compressed (" + prose.length + " explanatory chars); add mechanism/distinction prose" + (dataHeavy ? " around the table/formula" : "")
+      );
+      assert(
+        typeof section.callout === "string" && section.callout.trim().length >= 24,
+        module.id + " " + (section.eyebrow || section.title) + ": missing learner-facing distinction/callout"
       );
     }
 
@@ -122,6 +126,10 @@ const depthEvidence = [
   ["m03", "PACKING FACTOR", ["occupied", "not mass density"]],
   ["m03", "INTERSTITIAL SIZE RULE", ["radius ratio", "nearest-neighbor count"]],
   ["m03", "IONIC CRYSTAL EXAMPLES", ["not equivalent bcc", "coordination number"]],
+  ["m03", "PLANES + DISTANCE", ["do not reduce", "parallel but not identical"]],
+  ["m03", "DENSITY + STACKING", ["linear packing fraction", "{0001}", "abab", "abcabc"]],
+  ["m04", "VACANCY + SOLUTE DEFECTS", ["vacancy-formation energy", "equilibrium vacancy population rises"]],
+  ["m04", "GRAIN BOUNDARIES", ["average grain diameter", "dislocation motion"]],
   ["m04", "IONIC DEFECT RULES", ["three balances", "electrically neutral"]],
   ["m04", "SOURCE SLIP TABLE", ["slip system = slip plane + slip direction", "bonding also matters"]],
   ["m04", "SCHMID'S LAW", ["geometric projection", "slip-plane normal"]],
