@@ -185,10 +185,10 @@ assert(app.includes('data-choice="${entry.index}"'), "Shuffled-choice buttons mu
 assert(app.includes("currentTest.answers[q.id] === q.answer"), "Test scoring must compare original answer indices");
 assert(app.includes('<details class="examReveal">'), "Exam-practice answers must stay hidden until reveal");
 
-assert(index.includes("./course.js?v=9"), "Course cache-bust version is stale");
+assert(index.includes("./course.js?v=10"), "Course cache-bust version is stale");
 assert(index.includes("./image-fallbacks.js?v=2"), "Image-fallback cache-bust version is stale");
 assert(index.includes("./app.js?v=10"), "App cache-bust version is stale");
-assert(index.includes("./course-weeks-3-4.js?v=11"), "Weeks 3–4 cache-bust version is stale");
+assert(index.includes("./course-weeks-3-4.js?v=12"), "Weeks 3–4 cache-bust version is stale");
 assert(index.includes("./source-overhaul.js?v=3"), "Source-overhaul cache-bust version is stale");
 assert(index.includes("./course-content.css?v=9"), "Course-content CSS cache-bust version is stale");
 
