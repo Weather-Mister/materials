@@ -9,7 +9,7 @@ const sourceFiles = [
 ];
 const outputPath = path.join(ROOT, "public/image-fallbacks.js");
 const refs = new Set();
-const imageRe = /src=['"]\.\/assets\/([^?'"]+\.(?:webp|png|jpe?g|svg))(?:\?[^'"]*)?['"]/gi;
+const imageRe = /(?:src|data-source-asset)=['"]\.\/assets\/([^?'"]+\.(?:webp|png|jpe?g|svg))(?:\?[^'"]*)?['"]/gi;
 
 for (const rel of sourceFiles) {
   const text = fs.readFileSync(path.join(ROOT, rel), "utf8");
