@@ -49,6 +49,16 @@
       if (img.complete && img.naturalWidth === 0) useFallback();
     });
   }
+  function inlineCourseImageSources(html) {
+    return String(html || "").replace(
+      /src=(['"])\.\/assets\/([^?'"]+\.(?:webp|png|jpe?g|svg))(?:\?[^'"]*)?\1/gi,
+      (match, quote, name) => {
+        const fallback = imageFallbacks[name];
+        return fallback ? `src=${quote}${fallback}${quote} data-source-asset="./assets/${name}"` : match;
+      }
+    );
+  }
+
 
   function defaultState() {
     return {
@@ -295,7 +305,7 @@
     } else {
       $("learnHost").innerHTML = m.sections.map((s) => `<section class="lessonSection">
         <div class="lessonSectionHead"><span>${escapeHtml(s.eyebrow || "CONCEPT")}</span><h2>${escapeHtml(s.title || "")}</h2></div>
-        <div class="lessonSectionBody">${s.html || ""}${s.callout ? `<div class="conceptCallout">${escapeHtml(s.callout)}</div>` : ""}</div>
+        <div class="lessonSectionBody">${inlineCourseImageSources(s.html || "")}${s.callout ? `<div class="conceptCallout">${escapeHtml(s.callout)}</div>` : ""}</div>
       </section>`).join("");
     }
     const examMarkup = renderExamPractice(m);
