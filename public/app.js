@@ -18,6 +18,37 @@
   const normalizeUsername = (v) => String(v || "").trim().toLowerCase();
   const validUsername = (v) => /^[a-z0-9_]{2,32}$/.test(v);
   const escapeHtml = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c]));
+  const appScriptUrl = document.currentScript?.src || document.baseURI;
+  const appBaseUrl = new URL(".", appScriptUrl);
+  const imageFallbacks = window.MATERIALS_IMAGE_FALLBACKS || {};
+
+  function hydrateCourseImages(root = document) {
+    qa("img[src]", root).forEach((img) => {
+      const raw = String(img.getAttribute("src") || "");
+      let name = "";
+      if (raw.startsWith("./assets/")) name = raw.slice("./assets/".length).split(/[?#]/, 1)[0];
+      else if (raw.startsWith("assets/")) name = raw.slice("assets/".length).split(/[?#]/, 1)[0];
+      else {
+        try {
+          const url = new URL(raw, document.baseURI);
+          const marker = "/assets/";
+          const at = url.pathname.lastIndexOf(marker);
+          if (at >= 0) name = decodeURIComponent(url.pathname.slice(at + marker.length));
+        } catch {}
+      }
+      if (!name) return;
+
+      const fallback = imageFallbacks[name];
+      const useFallback = () => {
+        if (fallback && img.src !== fallback) img.src = fallback;
+      };
+      if (fallback) img.addEventListener("error", useFallback, { once: true });
+
+      const canonical = new URL("assets/" + encodeURI(name), appBaseUrl).href;
+      if (!img.src.startsWith("data:") && img.src !== canonical) img.src = canonical;
+      if (img.complete && img.naturalWidth === 0) useFallback();
+    });
+  }
 
   function defaultState() {
     return {
@@ -269,6 +300,7 @@
     }
     const examMarkup = renderExamPractice(m);
     if (examMarkup) $("learnHost").insertAdjacentHTML("beforeend", examMarkup);
+    hydrateCourseImages($("learnHost"));
     $("completeBtn").disabled = !m?.available;
     $("completeBtn").textContent = m && state.completed[m.id] ? "Module completed ✓" : "Mark module complete";
     const next = nextLoadedModule(m?.id);
