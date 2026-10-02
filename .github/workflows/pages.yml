@@ -77,6 +77,12 @@ jobs:
                   raise SystemExit(f"{name}: SHA-256 mismatch {got_sha}")
               print(f"{name}: verified ({len(data)} bytes, {got_sha})")
           PY
+      - name: Build self-contained image fallbacks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-image-fallbacks.mjs
+          node --check public/image-fallbacks.js
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
