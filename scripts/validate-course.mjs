@@ -11,6 +11,8 @@ vm.createContext(sandbox);
 vm.runInContext(read("public/course.js"), sandbox, { filename: "course.js" });
 vm.runInContext(read("public/course-weeks-3-4.js"), sandbox, { filename: "course-weeks-3-4.js" });
 vm.runInContext(read("public/source-overhaul.js"), sandbox, { filename: "source-overhaul.js" });
+vm.runInContext(read("public/course-mechanical.js"), sandbox, { filename: "course-mechanical.js" });
+vm.runInContext(read("public/exercise-bank.js"), sandbox, { filename: "exercise-bank.js" });
 
 const course = sandbox.window.MATERIALS_COURSE;
 assert(course && Array.isArray(course.modules), "Course did not load");
@@ -24,8 +26,8 @@ const explanatoryText = (html) =>
     .join(" ")
     .trim();
 
-assert(loaded.length === 4, "Expected 4 loaded modules, found " + loaded.length);
-assert(loaded.map((m) => m.number).join(",") === "1,2,3,4", "Loaded module sequence must be Weeks 1–4");
+assert(loaded.length === 5, "Expected 5 loaded modules, found " + loaded.length);
+assert(loaded.map((m) => m.number).join(",") === "1,2,3,4,5", "Loaded module sequence must be Weeks 1–5");
 
 const ids = new Set();
 const claimId = (id, context) => {
@@ -187,7 +189,7 @@ assert(app.includes('<details class="examReveal">'), "Exam-practice answers must
 
 assert(index.includes("./course.js?v=10"), "Course cache-bust version is stale");
 assert(index.includes("./image-fallbacks.js?v=2"), "Image-fallback cache-bust version is stale");
-assert(index.includes("./app.js?v=10"), "App cache-bust version is stale");
+assert(index.includes("./app.js?v=11"), "App cache-bust version is stale");
 assert(index.includes("./course-weeks-3-4.js?v=12"), "Weeks 3–4 cache-bust version is stale");
 assert(index.includes("./source-overhaul.js?v=3"), "Source-overhaul cache-bust version is stale");
 assert(index.includes("./course-content.css?v=9"), "Course-content CSS cache-bust version is stale");
@@ -281,6 +283,34 @@ for (const module of loaded) {
   }
 }
 
+const exercises = sandbox.window.MATERIALS_EXERCISES;
+assert(exercises?.length === 79, "All 79 supplied exercise questions must be present");
+const expectedCounts = [7, 11, 20, 26, 15];
+for (let set = 1; set <= 5; set++) {
+  const items = exercises.filter(q => q.set === set);
+  assert(items.length === expectedCounts[set - 1], "Exercise " + set + " question count drift");
+  for (const item of items) {
+    claimId(item.id, "original exercise");
+    assert(item.moduleIds.includes("m0" + set), item.id + ": wrong unit");
+    assert(item.questionHtml && item.solutionHtml.length > 400, item.id + ": question/solution incomplete");
+    assert(item.sourcePages.length && item.keyPages.length, item.id + ": source provenance missing");
+    assert(!JSON.stringify(item).includes("\ufffd"), item.id + ": replacement character");
+    const images = [...(item.questionHtml + item.solutionHtml + (item.originalQuestionImage ? `<img src="${item.originalQuestionImage}">` : "")).matchAll(/src=["']([^"']+)["']/g)];
+    for (const [, src] of images) assert(fs.existsSync(root + "/public/" + src.replace(/^\.\//, "")), item.id + ": missing image " + src);
+  }
+  assert(fs.existsSync(root + "/public/sources/exercise-" + set + "-with-key.pdf"), "Original exercise PDF missing");
+}
+assert(index.includes('data-tab="exam"') && index.includes('id="examView"'), "Dedicated original exam practice view missing");
+const examUI = read("public/exam-practice.js");
+assert(examUI.includes('details class="exerciseSolution"') && !examUI.includes('details open'), "Original solutions must be closed by default");
+const mechanical = loaded.find(m => m.id === "m05");
+const coveredPages = new Set(mechanical.sections.flatMap(s => s.sourcePages));
+assert(coveredPages.size === 49, "All 49 mechanical lecture pages must be mapped");
+assert(mechanical.sections.length >= 20, "Mechanical teaching depth regression");
+for (const term of ["0.002", "necking", "Poisson", "Brinell", "Knoop", "nanoindentation", "Charpy", "DBTT", "plane-strain", "fatigue", "creep", "four-point", "1.8544"]) {
+  assert(JSON.stringify(mechanical).includes(term), "Mechanical coverage missing: " + term);
+}
+
 console.log(JSON.stringify({
   status: "PASS",
   loadedModules: loaded.map((m) => ({
@@ -290,5 +320,8 @@ console.log(JSON.stringify({
     tests: m.testQuestions.length
   })),
   referenceItems: course.reference.length,
-  gradingTotal
+  gradingTotal,
+  originalExercises: exercises.length,
+  exerciseSets: expectedCounts,
+  mechanicalSlidesMapped: coveredPages.size
 }, null, 2));

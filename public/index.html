@@ -8,6 +8,7 @@
   <title>Engineering Materials Lab</title>
 <link rel="stylesheet" href="./styles.css?v=8" />
   <link rel="stylesheet" href="./course-content.css?v=9" />
+  <link rel="stylesheet" href="./exam-practice.css?v=1" />
 </head>
 <body>
   <div class="grain grain-a" aria-hidden="true"></div>
@@ -122,6 +123,7 @@
           <button class="modeTab" data-tab="problem" type="button"><span>05</span><b>PROBLEM LAB</b><small>Worked calculators</small></button>
           <button class="modeTab" data-tab="test" type="button"><span>06</span><b>TEST</b><small>Assessment mode</small></button>
           <button class="modeTab" data-tab="reference" type="button"><span>07</span><b>REFERENCE</b><small>Terms · formulas · data</small></button>
+          <button class="modeTab" data-tab="exam" type="button"><span>08</span><b>EXAM PRACTICE</b><small>Original exercises · solutions</small></button>
         </nav>
 
         <section id="learnView" class="view active">
@@ -203,6 +205,10 @@
           </article>
         </section>
 
+        <section id="examView" class="view">
+          <article class="examPanel" id="examPracticeHost"></article>
+        </section>
+
         <section id="referenceView" class="view">
           <article class="referencePanel">
             <div class="referenceHead">
@@ -262,7 +268,10 @@
   <script src="./course.js?v=10"></script>
   <script src="./course-weeks-3-4.js?v=12"></script>
   <script src="./source-overhaul.js?v=3"></script>
-  <script src="./app.js?v=10"></script>
+  <script src="./course-mechanical.js?v=1"></script>
+  <script src="./exercise-bank.js?v=2"></script>
+  <script src="./exam-practice.js?v=1"></script>
+  <script src="./app.js?v=11"></script>
   <script src="./problem-lab.js?v=1"></script>
 </body>
 </html>

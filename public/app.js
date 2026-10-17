@@ -78,7 +78,7 @@
     const base = defaultState();
     const s = input && typeof input === "object" ? { ...base, ...input } : base;
     if (!course.modules.some((m) => m.id === s.currentModule)) s.currentModule = course.modules?.[0]?.id || null;
-    if (!["learn","flashcards","matching","drill","problem","test","reference"].includes(s.tab)) s.tab = "learn";
+    if (!["learn","flashcards","matching","drill","problem","test","reference","exam"].includes(s.tab)) s.tab = "learn";
     if (!s.completed || typeof s.completed !== "object") s.completed = {};
     if (!s.drillAnswers || typeof s.drillAnswers !== "object") s.drillAnswers = {};
     if (!Array.isArray(s.testHistory)) s.testHistory = [];
@@ -228,6 +228,7 @@
     renderActiveModule();
     renderTabs();
     renderLearn();
+    window.MATERIALS_EXAM?.render(currentModule()?.id);
     renderFlashcards();
     renderMatching();
     renderDrill();
@@ -308,6 +309,8 @@
         <div class="lessonSectionBody">${inlineCourseImageSources(s.html || "")}${s.callout ? `<div class="conceptCallout">${escapeHtml(s.callout)}</div>` : ""}</div>
       </section>`).join("");
     }
+    const originalCount = window.MATERIALS_EXAM?.count(m?.id) || 0;
+    if (originalCount) $("learnHost").insertAdjacentHTML("afterbegin", `<div class="unitExamLink"><div><strong>${originalCount} original exam-practice questions for this unit</strong><p>Exact questions from your supplied exercises, with worked solutions you reveal after trying.</p></div><button type="button" data-open-exercises>Practice this unit →</button></div>`);
     const examMarkup = renderExamPractice(m);
     if (examMarkup) $("learnHost").insertAdjacentHTML("beforeend", examMarkup);
     hydrateCourseImages($("learnHost"));
@@ -944,7 +947,16 @@
     if (state.tab === "matching") renderMatching();
     if (state.tab === "reference") renderReference();
     if (state.tab === "test") renderTest();
+    if (state.tab === "exam") window.MATERIALS_EXAM?.render(currentModule()?.id);
   }));
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest("[data-open-exercises]")) return;
+    state.tab = "exam";
+    persist();
+    renderTabs();
+    window.MATERIALS_EXAM?.forCurrentUnit(currentModule()?.id);
+    $("examView").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   $("completeBtn").addEventListener("click", () => {
     const m = currentModule();
     if (!m?.available) return;
