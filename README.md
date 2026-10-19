@@ -26,3 +26,5 @@ Course figures are local assets. Source-grounded diagrams share one visual langu
 - `.github/workflows/pages.yml` — validation and GitHub Pages deployment
 
 Cloud progress uses a separate Engineering Materials namespace and revision-aware saves so it cannot overwrite other course sites.
+
+<!-- Pages republish trigger: restored public repository visibility, 2026-10-20. -->
