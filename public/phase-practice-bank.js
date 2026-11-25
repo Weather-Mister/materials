@@ -100,5 +100,8 @@ add('P43','Phase identification at different compositions','Phase diagrams',p('A
 add('P44','Full cooling history: mixed skills','Phase diagrams',p('A 200 kg Cu–40 wt% Ni alloy is cooled slowly from 1300 to 1200°C. Find first-solid and last-liquid conditions; phase masses at 1270 and 1250°C; mass of Ni in the liquid at each of those two temperatures; and final solid composition.')+cu,ol(['1280°C, first α≈52 wt% Ni.','1240°C, last L≈28 wt% Ni.','1270°C: L=200×10/13='+fmt(2000/13)+' kg; α=200×3/13='+fmt(600/13)+' kg. Ni in L='+fmt(2000/13*.37)+' kg.','1250°C: L=200×5/13='+fmt(1000/13)+' kg; α=200×8/13='+fmt(1600/13)+' kg. Ni in L='+fmt(1000/13*.32)+' kg.','1200°C: single α, 40 wt% Ni, 200 kg.']),lec2+' pp. 7–14');
 const ids=new Set();
 for(const q of bank){if(ids.has(q.id)||!q.questionHtml||!q.solutionHtml||!q.source)throw Error('Bad question '+q.id);ids.add(q.id);}
-window.MATERIALS_PHASE_PRACTICE=bank;
+// Keep full internal source records for figure reuse; expose only selected practice.
+window.MATERIALS_PHASE_SOURCE=bank;
+const retainedWritten=new Set(["P02","P03","P09","P10","P23","P28","P34","P39","P44"]);
+window.MATERIALS_PHASE_PRACTICE=bank.filter(q=>q.kind==='Professor exercises'||retainedWritten.has(q.number));
 })();

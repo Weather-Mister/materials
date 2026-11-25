@@ -314,9 +314,9 @@ for (const term of ["0.002", "necking", "Poisson", "Brinell", "Knoop", "nanoinde
 // Independent Chapter 10 question-only bank; it must not affect the existing module workflow.
 vm.runInContext(read("public/phase-practice-bank.js"), sandbox, { filename: "phase-practice-bank.js" });
 const phaseBank = sandbox.window.MATERIALS_PHASE_PRACTICE;
-assert(phaseBank.length === 56, "Expected 56 phase practice questions");
+assert(phaseBank.length === 21, "Expected 21 phase practice questions");
 assert(phaseBank.filter(q => q.kind === "Professor exercises").length === 12, "Exercise 8 coverage drift");
-assert(phaseBank.filter(q => q.kind === "New practice").length === 44, "New practice count drift");
+assert(phaseBank.filter(q => q.kind === "New practice").length === 9, "New practice count drift");
 for (const q of phaseBank) {
   claimId(q.id, "phase practice");
   assert(q.questionHtml && q.solutionHtml && q.source && q.topic, q.id + ": missing content");
@@ -327,7 +327,7 @@ for (const number of ["10-22","10-23","10-26","10-28","10-30","10-45","10-46","1
 }
 vm.runInContext(read("public/phase-mcq-bank.js"), sandbox, {filename:"phase-mcq-bank.js"});
 const phaseMCQ = sandbox.window.MATERIALS_PHASE_MCQ;
-assert(phaseMCQ.length === 112, "Chapter 10 MCQ count drift");
+assert(phaseMCQ.length === 59, "Chapter 10 MCQ count drift");
 for (const q of phaseMCQ) {
   claimId(q.id, "phase MCQ");
   assert(q.type === "mcq" || Array.isArray(q.choices), q.id + ": invalid question format");
@@ -336,7 +336,7 @@ for (const q of phaseMCQ) {
   assert(q.prompt && q.explanation && q.source, q.id + ": missing content");
 }
 assert(new Set(phaseMCQ.map(q=>q.topic)).size === 10, "Chapter 10 topic coverage drift");
-assert(phaseMCQ.filter(q=>q.figureHtml).length === 25, "Chapter 10 figure coverage drift");
+assert(phaseMCQ.filter(q=>q.figureHtml).length === 10, "Chapter 10 figure coverage drift");
 const phasePage = read("public/phase-practice.html");
 const phaseUI = read("public/phase-practice.js");
 new vm.Script(phaseUI, { filename: "phase-practice.js" });
