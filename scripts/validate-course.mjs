@@ -311,6 +311,28 @@ for (const term of ["0.002", "necking", "Poisson", "Brinell", "Knoop", "nanoinde
   assert(JSON.stringify(mechanical).includes(term), "Mechanical coverage missing: " + term);
 }
 
+// Independent Chapter 10 question-only bank; it must not affect the existing module workflow.
+vm.runInContext(read("public/phase-practice-bank.js"), sandbox, { filename: "phase-practice-bank.js" });
+const phaseBank = sandbox.window.MATERIALS_PHASE_PRACTICE;
+assert(phaseBank.length === 56, "Expected 56 phase practice questions");
+assert(phaseBank.filter(q => q.kind === "Professor exercises").length === 12, "Exercise 8 coverage drift");
+assert(phaseBank.filter(q => q.kind === "New practice").length === 44, "New practice count drift");
+for (const q of phaseBank) {
+  claimId(q.id, "phase practice");
+  assert(q.questionHtml && q.solutionHtml && q.source && q.topic, q.id + ": missing content");
+  assert(!q.questionHtml.includes("NaN") && !q.solutionHtml.includes("NaN"), q.id + ": invalid calculation");
+}
+for (const number of ["10-22","10-23","10-26","10-28","10-30","10-45","10-46","10-52","10-64","10-68","10-76","10-80"]) {
+  assert(phaseBank.some(q => q.number === number), "Missing Exercise 8 question " + number);
+}
+const phasePage = read("public/phase-practice.html");
+const phaseUI = read("public/phase-practice.js");
+new vm.Script(phaseUI, { filename: "phase-practice.js" });
+assert(index.includes('href="./phase-practice.html"'), "Missing Chapter 10 navigation");
+assert(phasePage.includes('id="examQuestions"') && phasePage.includes('phase-practice-bank.js'), "Missing question bank mount");
+assert(phaseUI.includes('details class="exerciseSolution"') && !phaseUI.includes('details open'), "Phase solutions must be closed by default");
+assert(phaseUI.includes("materialsExerciseAttempt:"), "Attempt persistence missing");
+
 console.log(JSON.stringify({
   status: "PASS",
   loadedModules: loaded.map((m) => ({
@@ -322,6 +344,7 @@ console.log(JSON.stringify({
   referenceItems: course.reference.length,
   gradingTotal,
   originalExercises: exercises.length,
+  phasePracticeQuestions: phaseBank.length,
   exerciseSets: expectedCounts,
   mechanicalSlidesMapped: coveredPages.size
 }, null, 2));
