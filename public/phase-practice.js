@@ -15,6 +15,8 @@
   const sourceFilter = byId('phaseSource');
   const statusFilter = byId('phaseStatus');
   const storageNotice = byId('phaseStorage');
+  const searchFilter = byId('phaseSearch');
+  const typeFilter = byId('phaseType');
   let records = {};
   try {
     const saved = JSON.parse(localStorage.getItem(storeKey));
@@ -48,8 +50,13 @@
   }
 
   function save(q, values) {
-    records[q.id] = { ...record(q), ...values };
+    const previous = record(q);
+    records[q.id] = { ...previous, ...values };
     try {
+      const latest = JSON.parse(localStorage.getItem(storeKey) || '{}');
+      if (latest && typeof latest === 'object' && !Array.isArray(latest)) {
+        records = { ...records, ...latest, [q.id]: { ...previous, ...latest[q.id], ...values } };
+      }
       localStorage.setItem(storeKey, JSON.stringify(records));
       return true;
     } catch {
@@ -69,7 +76,10 @@
 
   function status(q) {
     const r = record(q);
-    if (q.type !== 'written' && r.selected?.length) return grade(q, r.selected) ? 'complete' : 'incorrect';
+    if (q.type !== 'written') {
+      if (r.selected?.length) return grade(q, r.selected) ? 'complete' : 'incorrect';
+      return r.draft?.length || hasWorking(r) ? 'draft' : 'unanswered';
+    }
     if (r.complete && hasWorking(r)) return 'complete';
     if (r.needsReview && hasWorking(r)) return 'incorrect';
     return hasWorking(r) ? 'draft' : 'unanswered';
@@ -157,7 +167,10 @@
   function matches(q) {
     const state = status(q);
     const choice = statusFilter.value;
-    return (homeworkMode || topicFilter.value === 'all' || q.topic === topicFilter.value) &&
+    const keyword = searchFilter.value.trim().toLowerCase();
+    const searchable = [q.label,q.title,q.prompt,q.context,q.topic,q.reference,...(q.choices||[])].filter(Boolean).join(' ').toLowerCase();
+    return (!keyword || searchable.includes(keyword)) && (typeFilter.value === 'all' || (typeFilter.value === 'objective' ? q.type !== 'written' : q.type === 'written')) &&
+      (homeworkMode || topicFilter.value === 'all' || q.topic === topicFilter.value) &&
       (homeworkMode || sourceFilter.value === 'all' || q.source === sourceFilter.value) &&
       (choice === 'all' || (choice === 'unfinished' ? state !== 'complete' : state === choice));
   }
@@ -181,6 +194,10 @@
     }).join('') : '<div class="examNoResults">No questions match these filters.</div>';
     byId('phaseResultCount').textContent = shown.length + ' of ' + unitQuestions.length + ' questions shown';
     updateProgress();
+    byId('phaseTopicJump').innerHTML = homeworkMode ? '' : groups.map(([id,title])=>{
+      const items=unitQuestions.filter(q=>q.topic===id);
+      return '<button type="button" class="phaseTopicChip'+(topicFilter.value===id?' active':'')+'" data-topic-jump="'+escape(id)+'">'+escape(title)+' <small>'+items.filter(q=>status(q)==='complete').length+'/'+items.length+'</small></button>';
+    }).join('');
     for (const svg of host.querySelectorAll('[data-sketch]')) {
       const q = questions.get(svg.closest('article').id);
       drawSketch(svg, record(q).sketch);
@@ -199,6 +216,7 @@
       for (const button of [complete, reviewButton]) button.setAttribute('aria-disabled', !hasWorking(r));
     }
     updateProgress();
+    for(const chip of byId('phaseTopicJump').querySelectorAll('[data-topic-jump]')) { const items=unitQuestions.filter(q=>q.topic===chip.dataset.topicJump); chip.querySelector('small').textContent=items.filter(q=>status(q)==='complete').length+'/'+items.length; }
     if (!review.hidden) renderReview();
   }
 
@@ -233,7 +251,7 @@
     ? 'Work through the original assignment in order. ' +
       '<a href="' + courseLink + '/files/10740663">Original PDF</a> · ' +
       '<a href="' + courseLink + '/assignments/433198">Assignment on NTU COOL</a>'
-    : escape(chapter.description);
+    : escape(chapter.description) + ' · Choose a topic or study the full chapter.';
   byId('reviewHomework').hidden = !homeworkMode;
   byId('phaseTopicLabel').hidden = homeworkMode;
   byId('phaseSourceLabel').hidden = homeworkMode;
@@ -245,10 +263,14 @@
     topicFilter.add(new Option('All topics', 'all'));
     for (const [id, title] of Object.entries(chapter.topics)) topicFilter.add(new Option(title, id));
     const requestedTopic = linkedQuestion?.topic || query.get('topic');
-    topicFilter.value = Object.hasOwn(chapter.topics, requestedTopic) ? requestedTopic : Object.keys(chapter.topics)[0];
+    topicFilter.value = Object.hasOwn(chapter.topics, requestedTopic) ? requestedTopic : 'all';
   }
 
-  for (const control of [topicFilter, sourceFilter, statusFilter]) control.addEventListener('change', render);
+  for (const control of [topicFilter, sourceFilter, statusFilter,typeFilter]) control.addEventListener('change', render);
+  searchFilter.addEventListener('input',render);
+  byId('clearPhaseFilters').addEventListener('click',()=>{ topicFilter.value=sourceFilter.value=statusFilter.value=typeFilter.value='all'; searchFilter.value=''; render(); });
+  byId('phaseTopicJump').addEventListener('click',event=>{ const chip=event.target.closest('[data-topic-jump]'); if(!chip)return; topicFilter.value=topicFilter.value===chip.dataset.topicJump?'all':chip.dataset.topicJump; render(); });
+  window.addEventListener('storage',event=>{ if(event.key!==storeKey)return; try { const latest=JSON.parse(event.newValue||'{}'); if(latest&&typeof latest==='object'&&!Array.isArray(latest)){ records=latest; if(!host.contains(document.activeElement))render(); else updateProgress(); } } catch{} });
   byId('hideExamSolutions').addEventListener('click', () => host.querySelectorAll('.exerciseSolution[open]').forEach(el => { el.open = false; }));
   byId('reviewHomework').addEventListener('click', event => {
     review.hidden = !review.hidden;
@@ -259,7 +281,8 @@
     if (event.target.closest('[data-print]')) window.print();
     const link = event.target.closest('[data-review-id]');
     if (!link) return;
-    statusFilter.value = 'all';
+    statusFilter.value = typeFilter.value = 'all';
+    searchFilter.value='';
     render();
   });
 
@@ -270,7 +293,7 @@
     if (event.target.matches('[data-working]')) {
       const working = event.target.value;
       const change = { working };
-      if (!hasWorking({ ...record(q), working })) Object.assign(change, { complete: false, needsReview: false });
+      if (working !== (record(q).working||'') && q.type==='written') Object.assign(change, { complete: false, needsReview: false });
       const stored = save(q, change);
       article.querySelector('[data-saved]').textContent = stored ? 'Saved on this device' : 'Available until you leave this page';
       refresh(q, article);
@@ -306,11 +329,12 @@
     }
     if (button.hasAttribute('data-undo')) {
       const sketch = (r.sketch || []).slice(0, -1);
-      const flags = hasWorking({ ...r, sketch }) ? {} : { complete: false, needsReview: false };
+      const flags = { complete: false, needsReview: false };
       save(q, { sketch, ...flags });
       drawSketch(article.querySelector('[data-sketch]'), sketch);
     }
     refresh(q, article);
+    if(statusFilter.value!=='all' && !matches(q) && !button.hasAttribute('data-undo')) render();
   });
 
   let drawing;
@@ -328,6 +352,17 @@
     svg.setPointerCapture(event.pointerId);
     drawSketch(svg, sketch);
   });
+  function probe(event){
+    const fig = event.target.closest('.phaseFigure');
+    const input = fig?.querySelector('[data-probe]:checked');
+    if (!input || event.target.tagName !== 'IMG') return;
+    const axes = window.MATERIALS_PHASE_FIGURES[input.dataset.probe].axes;
+    const rect = event.target.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width * axes.width - axes.left) / (axes.right - axes.left);
+    const y = (axes.bottom - (event.clientY - rect.top) / rect.height * axes.height) / (axes.bottom - axes.top);
+    fig.querySelector('output').textContent = x < 0 || x > 1 || y < 0 || y > 1 ? '' : axes.coords(x, y);
+  }
+  host.addEventListener('pointerdown',probe);
   host.addEventListener('pointermove', event => {
     if (drawing?.pointer === event.pointerId) {
       const points = drawing.sketch.at(-1);
@@ -337,21 +372,14 @@
       drawing.svg.querySelector('polyline:last-child').setAttribute('points', points.map(point => point.join(',')).join(' '));
       return;
     }
-    const fig = event.target.closest('.phaseFigure');
-    const input = fig?.querySelector('[data-probe]:checked');
-    if (!input || event.target.tagName !== 'IMG') return;
-    const axes = window.MATERIALS_PHASE_FIGURES[input.dataset.probe].axes;
-    const rect = event.target.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width * axes.width - axes.left) / (axes.right - axes.left);
-    const y = (axes.bottom - (event.clientY - rect.top) / rect.height * axes.height) / (axes.bottom - axes.top);
-    fig.querySelector('output').textContent = x < 0 || x > 1 || y < 0 || y > 1 ? '' : axes.coords(x, y);
+    probe(event);
   });
   for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
     host.addEventListener(type, event => {
       if (drawing?.pointer !== event.pointerId) return;
       const { q, svg, sketch } = drawing;
       drawing = undefined;
-      save(q, { sketch });
+      save(q, { sketch, complete:false, needsReview:false });
       refresh(q, svg.closest('article'));
     });
   }

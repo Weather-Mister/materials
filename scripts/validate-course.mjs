@@ -323,6 +323,8 @@ const phaseChapters = sandbox.window.MATERIALS_PHASE_CHAPTERS;
 const phaseFigures = sandbox.window.MATERIALS_PHASE_FIGURES;
 const phasePractice = sandbox.window.MATERIALS_PHASE_QUESTIONS;
 const phaseHomework = sandbox.window.MATERIALS_PHASE_HOMEWORK;
+assert(phasePractice.length === 46, "Chapter 10–12 focused practice coverage drift");
+assert(phasePractice.filter(q => q.type !== "written").length >= 15, "Objective practice mix regression");
 const phaseExercises = sandbox.window.MATERIALS_PHASE_EXERCISES;
 const homeworkItems = [
   "I.1", "I.2", "I.3", "I.4", "I.5", "II.1", "II.2", "II.3", "II.4", "II.5",

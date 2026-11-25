@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="./styles.css?v=8">
   <link rel="stylesheet" href="./course-content.css?v=9">
   <link rel="stylesheet" href="./exam-practice.css?v=1">
-  <link rel="stylesheet" href="./phase-study.css?v=1">
-  <script defer src="./phase-questions.js?v=1"></script>
+  <link rel="stylesheet" href="./phase-study.css?v=2">
+  <script defer src="./phase-questions.js?v=2"></script>
   <script defer src="./phase-homework.js?v=1"></script>
   <script defer src="./phase-exercises.js?v=1"></script>
-  <script defer src="./phase-practice.js?v=4"></script>
+  <script defer src="./phase-practice.js?v=5"></script>
 </head>
 <body>
 <main class="phasePage">
@@ -31,14 +31,17 @@
       <a href="?unit=12" data-unit="12">12 · Heat treatments</a>
       <a href="?unit=homework" data-unit="homework">Homework 2</a>
     </nav>
+    <div id="phaseTopicJump" class="phaseTopicJump" aria-label="Jump to topic"></div>
     <div class="examFilters phaseFilters">
       <label id="phaseTopicLabel">Topic<select id="phaseTopic"></select></label>
       <label id="phaseSourceLabel">Source<select id="phaseSource"><option value="all">All sources</option><option value="practice">New practice</option><option value="homework">Homework 2</option><option value="professor">Professor exercises</option></select></label>
-      <label>Status<select id="phaseStatus"><option value="all">All statuses</option><option value="unfinished">Unfinished</option><option value="unanswered">Unanswered</option><option value="incorrect">Incorrect / needs review</option><option value="complete">Complete</option></select></label>
+      <label>Status<select id="phaseStatus"><option value="all">All statuses</option><option value="unfinished">Unfinished</option><option value="unanswered">Unanswered</option><option value="incorrect">Incorrect / needs review</option><option value="complete">Complete</option><option value="draft">Draft saved</option></select></label>
+      <label>Question type<select id="phaseType"><option value="all">All types</option><option value="objective">Multiple choice / true-false</option><option value="written">Written / calculation</option></select></label>
+      <label>Search<input type="search" id="phaseSearch" placeholder="Concept or question number"></label>
     </div>
     <div class="examResultsBar phaseResults">
       <p id="phaseResultCount" aria-live="polite"></p>
-      <div><button type="button" id="hideExamSolutions">Hide solutions</button><button type="button" id="reviewHomework" hidden>Review saved working</button></div>
+      <div><button type="button" id="clearPhaseFilters">Clear filters</button><button type="button" id="hideExamSolutions">Hide solutions</button><button type="button" id="reviewHomework" hidden>Review saved working</button></div>
     </div>
     <p id="phaseStorage" role="status" class="phaseStorage" hidden></p>
     <div id="phaseReview" hidden></div>
