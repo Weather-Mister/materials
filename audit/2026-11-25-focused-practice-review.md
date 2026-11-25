@@ -1,0 +1,3 @@
+# Focused practice review — 2026-11-25
+
+22 homework entries and 100 points verified against the actual HW2 PDF. All 31 professor cards retained. 46 supplementary questions (16, 11, 19 by chapter); no generated professor-style variants. Replaced a redundant invariant-rule question with eutectic strengthening mechanisms. Clarified phase-rule definition, Hume–Rothery limitations, kinetics, natural aging, and martensitic growth. Scope checked against all six lecture text extracts; original Chapter 11–12 diagram-only details and scanned exercise completeness rely on the previous source audit, not a fresh independent visual comparison. Regression tests simulate DOM interactions, not a real-browser visual/pointer test.

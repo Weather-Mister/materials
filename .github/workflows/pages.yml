@@ -37,6 +37,7 @@ jobs:
           node --check public/app.js
           node --check public/problem-lab.js
           node scripts/validate-course.mjs
+          node scripts/test-phase-study.mjs
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET

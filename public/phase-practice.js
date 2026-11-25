@@ -334,7 +334,7 @@
       drawSketch(article.querySelector('[data-sketch]'), sketch);
     }
     refresh(q, article);
-    if(statusFilter.value!=='all' && !matches(q) && !button.hasAttribute('data-undo')) render();
+    // Keep the just-answered card visible for feedback until filters are refreshed.
   });
 
   let drawing;
