@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phase Equilibrium | Materials Lab Practice</title>
+<link rel="icon" href="./favicon.svg?v=1">
+<link rel="stylesheet" href="./styles.css?v=8">
+<link rel="stylesheet" href="./course-content.css?v=9">
+<link rel="stylesheet" href="./exam-practice.css?v=1">
+<style>
+.phasePage{max-width:1080px;margin:0 auto;padding:24px 20px 60px}
+.phaseTop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.phaseTop a{color:#375fa6;font-weight:700;text-decoration:none;font-size:13px}
+.phaseTop .brandTitle{font-size:24px}
+.phaseFigure{max-width:640px;margin:16px auto 22px}
+.phaseFigure svg{width:100%;height:auto;display:block;border:1px solid #d5e0ec;border-radius:12px;background:#fff}
+.phaseFigure figcaption{font-size:11px;color:#62758d;line-height:1.5;margin:8px 0;text-align:center}
+.phaseJump{color:#4368a7;font-size:12px;text-decoration:none}
+.phaseResults{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+@media(max-width:600px){.phasePage{padding:15px 9px 35px}.phaseTop{padding:0 6px}.phaseTop .brandTitle{font-size:20px}}
+</style>
+</head>
+<body>
+<main class="phasePage">
+<header class="phaseTop"><div class="brand"><div><div class="brandKicker">ENGINEERING MATERIALS</div><div class="brandTitle">MAT<span>//</span>LAB</div></div></div><a href="./index.html">← Return to course</a></header>
+<section class="examPanel" aria-label="Chapter 10 question-only practice">
+<div class="examIntro"><div><span class="examKicker">CHAPTER 10 · QUESTION-ONLY PRACTICE</span><h2>Solid solutions &amp; phase equilibrium</h2><p>Professor Exercise 8 adaptations and new exam-style problems. Work directly through each question; reveal its explained solution when ready. No lessons, prerequisites or mastery gates.</p></div><div class="examBankCount"><strong id="bankCount">—</strong><span>practice questions</span></div></div>
+<div class="examFilters"><label>Question set<select id="phaseSet"><option value="all">All questions</option><option value="Professor exercises">Professor exercises (adapted)</option><option value="New practice">New practice</option></select></label><label>Topic<select id="phaseTopic"><option value="all">All topics</option></select></label><label>Find a question<input id="phaseSearch" type="search" placeholder="Topic, exercise number, wording"></label></div>
+<div class="examResultsBar"><p id="examResultCount" aria-live="polite"></p><div class="phaseResults"><button type="button" id="hideExamSolutions">Hide all solutions</button><button type="button" id="clearFilters">Clear filters</button></div></div>
+<div id="examQuestions"></div>
+</section>
+</main>
+<script src="./phase-practice-bank.js?v=1"></script>
+<script src="./phase-practice.js?v=1"></script>
+</body></html>
