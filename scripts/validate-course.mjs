@@ -325,6 +325,18 @@ for (const q of phaseBank) {
 for (const number of ["10-22","10-23","10-26","10-28","10-30","10-45","10-46","10-52","10-64","10-68","10-76","10-80"]) {
   assert(phaseBank.some(q => q.number === number), "Missing Exercise 8 question " + number);
 }
+vm.runInContext(read("public/phase-mcq-bank.js"), sandbox, {filename:"phase-mcq-bank.js"});
+const phaseMCQ = sandbox.window.MATERIALS_PHASE_MCQ;
+assert(phaseMCQ.length === 112, "Chapter 10 MCQ count drift");
+for (const q of phaseMCQ) {
+  claimId(q.id, "phase MCQ");
+  assert(q.type === "mcq" || Array.isArray(q.choices), q.id + ": invalid question format");
+  assert(q.choices.length === 4 && new Set(q.choices).size === 4, q.id + ": invalid choices");
+  assert(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4, q.id + ": invalid answer");
+  assert(q.prompt && q.explanation && q.source, q.id + ": missing content");
+}
+assert(new Set(phaseMCQ.map(q=>q.topic)).size === 10, "Chapter 10 topic coverage drift");
+assert(phaseMCQ.filter(q=>q.figureHtml).length === 25, "Chapter 10 figure coverage drift");
 const phasePage = read("public/phase-practice.html");
 const phaseUI = read("public/phase-practice.js");
 new vm.Script(phaseUI, { filename: "phase-practice.js" });
@@ -345,6 +357,7 @@ console.log(JSON.stringify({
   gradingTotal,
   originalExercises: exercises.length,
   phasePracticeQuestions: phaseBank.length,
+  phaseMCQQuestions: phaseMCQ.length,
   exerciseSets: expectedCounts,
   mechanicalSlidesMapped: coveredPages.size
 }, null, 2));
