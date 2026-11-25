@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390">
+<rect width="680" height="390" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 72.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="72.00" y="350.00" text-anchor="middle" font-size="14">0</text>
+<path d="M 129.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="129.00" y="350.00" text-anchor="middle" font-size="14">10</text>
+<path d="M 186.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="186.00" y="350.00" text-anchor="middle" font-size="14">20</text>
+<path d="M 243.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="243.00" y="350.00" text-anchor="middle" font-size="14">30</text>
+<path d="M 300.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="300.00" y="350.00" text-anchor="middle" font-size="14">40</text>
+<path d="M 357.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="357.00" y="350.00" text-anchor="middle" font-size="14">50</text>
+<path d="M 414.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="414.00" y="350.00" text-anchor="middle" font-size="14">60</text>
+<path d="M 471.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="471.00" y="350.00" text-anchor="middle" font-size="14">70</text>
+<path d="M 528.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="528.00" y="350.00" text-anchor="middle" font-size="14">80</text>
+<path d="M 585.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="585.00" y="350.00" text-anchor="middle" font-size="14">90</text>
+<path d="M 642.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="642.00" y="350.00" text-anchor="middle" font-size="14">100</text>
+<path d="M 72 294.8888888888889 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="299.89" text-anchor="end" font-size="14">1100</text>
+<path d="M 72 261.77777777777777 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="266.78" text-anchor="end" font-size="14">1150</text>
+<path d="M 72 228.66666666666669 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="233.67" text-anchor="end" font-size="14">1200</text>
+<path d="M 72 195.55555555555557 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="200.56" text-anchor="end" font-size="14">1250</text>
+<path d="M 72 162.44444444444443 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="167.44" text-anchor="end" font-size="14">1300</text>
+<path d="M 72 129.33333333333334 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="134.33" text-anchor="end" font-size="14">1350</text>
+<path d="M 72 96.22222222222223 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="101.22" text-anchor="end" font-size="14">1400</text>
+<path d="M 72 63.11111111111114 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="68.11" text-anchor="end" font-size="14">1450</text>
+<path d="M 72 30.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="35.00" text-anchor="end" font-size="14">1500</text>
+<rect x="72" y="30" width="570" height="298" fill="none" stroke="#2b4755"/>
+<text x="357.00" y="377.00" text-anchor="middle" font-size="15">Composition (wt% Ni)</text>
+<text transform="translate(21 180) rotate(-90)" text-anchor="middle" font-size="15">Temperature (°C)</text>
+<path d="M72.00,304.82 L129.00,268.40 L186.00,235.29 L231.60,202.18 L254.40,195.56 L282.90,182.31 L300.00,175.69 L357.00,149.20 L414.00,129.33 L528.00,89.60 L642.00,59.80 L642.00,59.80 L567.90,89.60 L471.00,129.33 L414.00,155.82 L368.40,175.69 L357.00,182.31 L328.50,195.56 L300.00,202.18 L243.00,231.98 L186.00,265.09 L129.00,285.62 L72.00,304.82 Z" stroke="none" stroke-width="0" fill="#e5ece9"/>
+<path d="M72.00,304.82 L129.00,268.40 L186.00,235.29 L231.60,202.18 L254.40,195.56 L282.90,182.31 L300.00,175.69 L357.00,149.20 L414.00,129.33 L528.00,89.60 L642.00,59.80" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<path d="M72.00,304.82 L129.00,285.62 L186.00,265.09 L243.00,231.98 L300.00,202.18 L328.50,195.56 L357.00,182.31 L368.40,175.69 L414.00,155.82 L471.00,129.33 L567.90,89.60 L642.00,59.80" stroke="#408178" stroke-width="2.2" fill="none"/>
+<text x="225.90" y="102.84" text-anchor="middle" font-size="15">L</text>
+<text x="516.60" y="215.42" text-anchor="middle" font-size="15">α</text>
+<text x="448.20" y="140.59" text-anchor="middle" font-size="15">L + α</text>
+</g>
+</svg>

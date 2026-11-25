@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390">
+<rect width="680" height="390" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 72.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="72.00" y="350.00" text-anchor="middle" font-size="14">Pb</text>
+<path d="M 186.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="186.00" y="350.00" text-anchor="middle" font-size="14">20</text>
+<path d="M 300.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="300.00" y="350.00" text-anchor="middle" font-size="14">40</text>
+<path d="M 414.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="414.00" y="350.00" text-anchor="middle" font-size="14">60</text>
+<path d="M 528.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="528.00" y="350.00" text-anchor="middle" font-size="14">80</text>
+<path d="M 642.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="642.00" y="350.00" text-anchor="middle" font-size="14">Sn</text>
+<path d="M 72 328.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="333.00" text-anchor="end" font-size="14">0</text>
+<path d="M 72 253.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="258.50" text-anchor="end" font-size="14">100</text>
+<path d="M 72 191.665 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="196.66" text-anchor="end" font-size="14">183</text>
+<path d="M 72 104.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="109.50" text-anchor="end" font-size="14">300</text>
+<path d="M 72 30.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="35.00" text-anchor="end" font-size="14">400</text>
+<rect x="72" y="30" width="570" height="298" fill="none" stroke="#2b4755"/>
+<text x="357.00" y="377.00" text-anchor="middle" font-size="15">Composition (wt% Sn)</text>
+<text transform="translate(21 180) rotate(-90)" text-anchor="middle" font-size="15">Temperature (°C)</text>
+<path d="M72.00,84.38 L123.30,97.80 L174.60,111.20 L243.00,132.81 L322.80,158.14 L424.83,191.66" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<path d="M424.83,191.66 L499.50,179.75 L585.00,165.59 L642.00,155.16" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<path d="M72.00,84.38 L94.80,100.03 L117.60,111.95 L140.40,132.81 L157.50,149.20 L180.30,191.66" stroke="#408178" stroke-width="2.2" fill="none"/>
+<path d="M642.00,155.16 L636.30,167.83 L634.59,171.55 L627.75,191.66" stroke="#408178" stroke-width="2.2" fill="none"/>
+<path d="M80.55,328.00 L83.40,309.38 L94.80,260.95 L117.60,225.19 L157.50,201.35 L180.30,191.66" stroke="#408178" stroke-width="2.2" fill="none"/>
+<path d="M641.72,328.00 L641.43,309.38 L640.29,253.50 L636.30,220.72 L627.75,191.66" stroke="#408178" stroke-width="2.2" fill="none"/>
+<path d="M180.30,191.66 L627.75,191.66" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<text x="351.30" y="97.05" text-anchor="middle" font-size="15">L</text>
+<text x="203.10" y="163.35" text-anchor="middle" font-size="15">α + L</text>
+<text x="545.10" y="183.47" text-anchor="middle" font-size="13">β + L</text>
+<text x="106.20" y="175.28" text-anchor="middle" font-size="15">α</text>
+<text x="649.00" y="229.66" text-anchor="start" font-size="15">β</text>
+<text x="345.60" y="250.52" text-anchor="middle" font-size="15">α + β</text>
+</g>
+</svg>

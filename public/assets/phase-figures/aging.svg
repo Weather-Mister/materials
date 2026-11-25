@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390">
+<rect width="680" height="390" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 72.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="72.00" y="350.00" text-anchor="middle" font-size="14">0.01</text>
+<path d="M 167.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="167.00" y="350.00" text-anchor="middle" font-size="14">0.1</text>
+<path d="M 262.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="262.00" y="350.00" text-anchor="middle" font-size="14">1</text>
+<path d="M 357.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="357.00" y="350.00" text-anchor="middle" font-size="14">10</text>
+<path d="M 452.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="452.00" y="350.00" text-anchor="middle" font-size="14">100</text>
+<path d="M 547.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="547.00" y="350.00" text-anchor="middle" font-size="14">1,000</text>
+<path d="M 642.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="642.00" y="350.00" text-anchor="middle" font-size="14">10,000</text>
+<path d="M 72 328.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="333.00" text-anchor="end" font-size="14">100</text>
+<path d="M 72 253.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="258.50" text-anchor="end" font-size="14">200</text>
+<path d="M 72 179.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="184.00" text-anchor="end" font-size="14">300</text>
+<path d="M 72 104.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="109.50" text-anchor="end" font-size="14">400</text>
+<path d="M 72 30.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="35.00" text-anchor="end" font-size="14">500</text>
+<rect x="72" y="30" width="570" height="298" fill="none" stroke="#2b4755"/>
+<text x="357.00" y="377.00" text-anchor="middle" font-size="15">Aging time (h, logarithmic scale)</text>
+<text transform="translate(21 180) rotate(-90)" text-anchor="middle" font-size="15">Yield strength (MPa)</text>
+<path d="M 72 244 C 122 249 147 146 218 139 C 277 133 318 240 365 258 S 500 285 642 286" stroke="#476b87" stroke-width="2.1" fill="none"/>
+<path d="M 72 255 C 193 256 255 233 319 141 S 405 90 434 112 S 520 213 642 240" stroke="#408178" stroke-width="2.1" fill="none"/>
+<text x="203.00" y="120.00" text-anchor="middle" font-size="15">A</text>
+<text x="389.00" y="79.00" text-anchor="middle" font-size="15">B</text>
+</g>
+</svg>

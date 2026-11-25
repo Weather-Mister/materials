@@ -1,39 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Phase Equilibrium | Materials Lab Practice</title>
-<link rel="icon" href="./favicon.svg?v=1">
-<link rel="stylesheet" href="./styles.css?v=8">
-<link rel="stylesheet" href="./course-content.css?v=9">
-<link rel="stylesheet" href="./exam-practice.css?v=1">
-<style>
-.phasePage{max-width:1080px;margin:0 auto;padding:24px 20px 60px}
-.phaseTop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
-.phaseTop a{color:#375fa6;font-weight:700;text-decoration:none;font-size:13px}
-.phaseTop .brandTitle{font-size:24px}
-.phaseFigure{max-width:640px;margin:16px auto 22px}
-.phaseFigure svg{width:100%;height:auto;display:block;border:1px solid #d5e0ec;border-radius:12px;background:#fff}
-.phaseFigure figcaption{font-size:11px;color:#62758d;line-height:1.5;margin:8px 0;text-align:center}
-.phaseJump{color:#4368a7;font-size:12px;text-decoration:none}
-.phaseResults{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-@media(max-width:600px){.phasePage{padding:15px 9px 35px}.phaseTop{padding:0 6px}.phaseTop .brandTitle{font-size:20px}}
-.mcBody{padding-top:18px}.mcPrompt{font-size:15px;font-weight:650;line-height:1.65}.mcBody .choiceGrid{display:grid;grid-template-columns:1fr;gap:9px;margin:14px 0}.mcBody .choiceBtn{text-align:left;white-space:normal;line-height:1.5;padding:12px 15px;width:100%;min-height:45px;cursor:pointer}.mcBody .choiceBtn.correct{background:#e8f5ec;border-color:#7fb996;color:#1e6940}.mcBody .choiceBtn.wrong{background:#fff0ee;border-color:#d79690;color:#963a34}.mcFeedback{padding:13px 15px;margin:14px 0;background:#f3f7fc;border:1px solid #d7e4f2;border-radius:10px}.mcFeedback p{margin:4px 0 0}.phaseModeRow{display:flex;align-items:center;gap:18px;padding:18px 25px 0;flex-wrap:wrap}.phaseModeRow label{display:grid;gap:6px;font-size:11px;font-weight:700;color:#536981}.phaseModeRow select{min-width:230px;padding:10px;border:1px solid #cbd9e8;border-radius:9px;background:#fbfdff;color:#24354b;font:inherit;font-size:13px}.phaseScore{font-size:12px;color:#536981;font-weight:700}.phaseModeRow button{padding:8px 10px;border:1px solid #d4dfec;border-radius:8px;background:white;color:#4a6483;cursor:pointer;font-size:11px}@media(max-width:480px){.phaseModeRow{padding:15px 18px 0}.phaseModeRow label,.phaseModeRow select{width:100%;min-width:0}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chapters 10–12 | Materials Lab</title>
+  <link rel="icon" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css?v=8">
+  <link rel="stylesheet" href="./course-content.css?v=9">
+  <link rel="stylesheet" href="./exam-practice.css?v=1">
+  <link rel="stylesheet" href="./phase-study.css?v=1">
+  <script defer src="./phase-questions.js?v=1"></script>
+  <script defer src="./phase-homework.js?v=1"></script>
+  <script defer src="./phase-exercises.js?v=1"></script>
+  <script defer src="./phase-practice.js?v=4"></script>
 </head>
 <body>
 <main class="phasePage">
-<header class="phaseTop"><div class="brand"><div><div class="brandKicker">ENGINEERING MATERIALS</div><div class="brandTitle">MAT<span>//</span>LAB</div></div></div><a href="./index.html">← Return to course</a></header>
-<section class="examPanel" aria-label="Chapter 10 question-only practice">
-<div class="examIntro"><div><span class="examKicker">CHAPTER 10 · QUESTION-ONLY PRACTICE</span><h2>Solid solutions &amp; phase equilibrium</h2><p>Focused multiple-choice questions covering both lecture decks without repetitive variants. Select an answer for instant feedback, or switch to written practice for professor-style calculations. No lessons or prerequisites.</p></div><div class="examBankCount"><strong id="bankCount">—</strong><span>practice questions</span></div></div>
-<div class="phaseModeRow"><label>Practice mode<select id="phaseMode"><option value="mcq">Multiple choice · concepts</option><option value="written">Written exercises · calculations</option></select></label><span class="phaseScore" id="phaseScore" aria-live="polite"></span><button type="button" id="resetMCQ">Reset MCQ answers</button></div>
-<div class="examFilters"><label>Question set<select id="phaseSet"><option value="all">All questions</option><option value="Professor exercises">Professor exercises (adapted)</option><option value="New practice">New practice</option></select></label><label>Topic<select id="phaseTopic"><option value="all">All topics</option></select></label><label>Find a question<input id="phaseSearch" type="search" placeholder="Topic, exercise number, wording"></label></div>
-<div class="examResultsBar"><p id="examResultCount" aria-live="polite"></p><div class="phaseResults"><button type="button" id="hideExamSolutions">Hide all solutions</button><button type="button" id="clearFilters">Clear filters</button></div></div>
-<div id="examQuestions"></div>
-</section>
+  <header class="phaseTop">
+    <div class="brand"><div><div class="brandKicker">ENGINEERING MATERIALS</div><div class="brandTitle">MAT<span>//</span>LAB</div></div></div>
+    <a href="./index.html">Return to course</a>
+  </header>
+  <section class="examPanel" aria-labelledby="chapterTitle">
+    <div class="examIntro">
+      <div><span class="examKicker">ME2004 · EXAM PRACTICE</span><h1 id="chapterTitle">Chapters 10–12</h1><p id="chapterIntro"></p></div>
+      <div class="examBankCount"><strong id="phaseCount">0 / 0</strong><span id="phaseCountLabel">complete</span></div>
+    </div>
+    <nav class="phaseNav" aria-label="Practice units">
+      <a href="?unit=10" data-unit="10">10 · Phase equilibrium</a>
+      <a href="?unit=11" data-unit="11">11 · Eutectic diagrams</a>
+      <a href="?unit=12" data-unit="12">12 · Heat treatments</a>
+      <a href="?unit=homework" data-unit="homework">Homework 2</a>
+    </nav>
+    <div class="examFilters phaseFilters">
+      <label id="phaseTopicLabel">Topic<select id="phaseTopic"></select></label>
+      <label id="phaseSourceLabel">Source<select id="phaseSource"><option value="all">All sources</option><option value="practice">New practice</option><option value="homework">Homework 2</option><option value="professor">Professor exercises</option></select></label>
+      <label>Status<select id="phaseStatus"><option value="all">All statuses</option><option value="unfinished">Unfinished</option><option value="unanswered">Unanswered</option><option value="incorrect">Incorrect / needs review</option><option value="complete">Complete</option></select></label>
+    </div>
+    <div class="examResultsBar phaseResults">
+      <p id="phaseResultCount" aria-live="polite"></p>
+      <div><button type="button" id="hideExamSolutions">Hide solutions</button><button type="button" id="reviewHomework" hidden>Review saved working</button></div>
+    </div>
+    <p id="phaseStorage" role="status" class="phaseStorage" hidden></p>
+    <div id="phaseReview" hidden></div>
+    <div id="examQuestions"></div>
+  </section>
 </main>
-<script src="./phase-practice-bank.js?v=2"></script>
-<script src="./phase-mcq-bank.js?v=2"></script>
-<script src="./phase-practice.js?v=3"></script>
-</body></html>
+</body>
+</html>

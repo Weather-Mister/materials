@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390">
+<rect width="680" height="390" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 72.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="72.00" y="350.00" text-anchor="middle" font-size="14">0</text>
+<path d="M 167.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="167.00" y="350.00" text-anchor="middle" font-size="14">200</text>
+<path d="M 262.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="262.00" y="350.00" text-anchor="middle" font-size="14">400</text>
+<path d="M 357.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="357.00" y="350.00" text-anchor="middle" font-size="14">600</text>
+<path d="M 452.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="452.00" y="350.00" text-anchor="middle" font-size="14">800</text>
+<path d="M 547.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="547.00" y="350.00" text-anchor="middle" font-size="14">1000</text>
+<path d="M 642.0 30 V 328" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="642.00" y="350.00" text-anchor="middle" font-size="14">1200</text>
+<path d="M 72 328.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="333.00" text-anchor="end" font-size="14">0</text>
+<path d="M 72 253.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="258.50" text-anchor="end" font-size="14">0.5</text>
+<path d="M 72 179.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="184.00" text-anchor="end" font-size="14">1</text>
+<path d="M 72 104.5 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="109.50" text-anchor="end" font-size="14">1.5</text>
+<path d="M 72 30.0 H 642" stroke="#dddcd0" stroke-width="1" fill="none"/>
+<text x="63.00" y="35.00" text-anchor="end" font-size="14">2</text>
+<rect x="72" y="30" width="570" height="298" fill="none" stroke="#2b4755"/>
+<text x="357.00" y="377.00" text-anchor="middle" font-size="15">Temperature (°C)</text>
+<text transform="translate(21 180) rotate(-90)" text-anchor="middle" font-size="15">Pressure (atm)</text>
+<path d="M72 179.0 H642" stroke="#408178" stroke-width="1.4" fill="none" stroke-dasharray="7 5"/>
+<path d="M286.70,328.00 L323.75,301.18 L378.38,268.40" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<path d="M378.38,268.40 L372.67,231.15 L366.50,179.00 L357.95,104.50 L349.40,30.00" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<path d="M378.38,268.40 L423.50,235.62 L471.00,193.90 L504.25,158.14 L547.00,113.44 L606.85,30.00" stroke="#476b87" stroke-width="2.2" fill="none"/>
+<text x="214.50" y="114.93" text-anchor="middle" font-size="15">Solid</text>
+<text x="440.12" y="104.50" text-anchor="middle" font-size="15">Liquid</text>
+<text x="523.25" y="268.40" text-anchor="middle" font-size="15">Vapor</text>
+</g>
+</svg>

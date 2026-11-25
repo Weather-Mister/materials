@@ -311,39 +311,70 @@ for (const term of ["0.002", "necking", "Poisson", "Brinell", "Knoop", "nanoinde
   assert(JSON.stringify(mechanical).includes(term), "Mechanical coverage missing: " + term);
 }
 
-// Independent Chapter 10 question-only bank; it must not affect the existing module workflow.
-vm.runInContext(read("public/phase-practice-bank.js"), sandbox, { filename: "phase-practice-bank.js" });
-const phaseBank = sandbox.window.MATERIALS_PHASE_PRACTICE;
-assert(phaseBank.length === 21, "Expected 21 phase practice questions");
-assert(phaseBank.filter(q => q.kind === "Professor exercises").length === 12, "Exercise 8 coverage drift");
-assert(phaseBank.filter(q => q.kind === "New practice").length === 9, "New practice count drift");
-for (const q of phaseBank) {
-  claimId(q.id, "phase practice");
-  assert(q.questionHtml && q.solutionHtml && q.source && q.topic, q.id + ": missing content");
-  assert(!q.questionHtml.includes("NaN") && !q.solutionHtml.includes("NaN"), q.id + ": invalid calculation");
-}
-for (const number of ["10-22","10-23","10-26","10-28","10-30","10-45","10-46","10-52","10-64","10-68","10-76","10-80"]) {
-  assert(phaseBank.some(q => q.number === number), "Missing Exercise 8 question " + number);
-}
-vm.runInContext(read("public/phase-mcq-bank.js"), sandbox, {filename:"phase-mcq-bank.js"});
-const phaseMCQ = sandbox.window.MATERIALS_PHASE_MCQ;
-assert(phaseMCQ.length === 59, "Chapter 10 MCQ count drift");
-for (const q of phaseMCQ) {
-  claimId(q.id, "phase MCQ");
-  assert(q.type === "mcq" || Array.isArray(q.choices), q.id + ": invalid question format");
-  assert(q.choices.length === 4 && new Set(q.choices).size === 4, q.id + ": invalid choices");
-  assert(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4, q.id + ": invalid answer");
-  assert(q.prompt && q.explanation && q.source, q.id + ": missing content");
-}
-assert(new Set(phaseMCQ.map(q=>q.topic)).size === 10, "Chapter 10 topic coverage drift");
-assert(phaseMCQ.filter(q=>q.figureHtml).length === 10, "Chapter 10 figure coverage drift");
+// Chapters 10–12 exam preparation, distinct from the older course modules.
 const phasePage = read("public/phase-practice.html");
-const phaseUI = read("public/phase-practice.js");
-new vm.Script(phaseUI, { filename: "phase-practice.js" });
-assert(index.includes('href="./phase-practice.html"'), "Missing Chapter 10 navigation");
-assert(phasePage.includes('id="examQuestions"') && phasePage.includes('phase-practice-bank.js'), "Missing question bank mount");
-assert(phaseUI.includes('details class="exerciseSolution"') && !phaseUI.includes('details open'), "Phase solutions must be closed by default");
-assert(phaseUI.includes("materialsExerciseAttempt:"), "Attempt persistence missing");
+for (const name of ["phase-questions", "phase-homework", "phase-exercises"]) {
+  assert(phasePage.includes(name + ".js"), "Missing page mount for " + name);
+  vm.runInContext(read("public/" + name + ".js"), sandbox, { filename: name + ".js" });
+}
+new vm.Script(read("public/phase-practice.js"), { filename: "phase-practice.js" });
+assert(index.includes('href="./phase-practice.html"'), "Missing exam preparation navigation");
+const phaseChapters = sandbox.window.MATERIALS_PHASE_CHAPTERS;
+const phaseFigures = sandbox.window.MATERIALS_PHASE_FIGURES;
+const phasePractice = sandbox.window.MATERIALS_PHASE_QUESTIONS;
+const phaseHomework = sandbox.window.MATERIALS_PHASE_HOMEWORK;
+const phaseExercises = sandbox.window.MATERIALS_PHASE_EXERCISES;
+const homeworkItems = [
+  "I.1", "I.2", "I.3", "I.4", "I.5", "II.1", "II.2", "II.3", "II.4", "II.5",
+  "III.1(a)", "III.1(b)", "III.1(c)", "III.2(a)(i)", "III.2(a)(ii)", "III.2(b)(i)", "III.2(b)(ii)",
+  "IV.1(a)", "IV.1(b)", "IV.1(c)", "IV.2(a)", "IV.2(b)"
+];
+assert(phaseHomework.map(q => q.label).join("|") === homeworkItems.join("|"), "HW2 numbering or order drift");
+assert(phaseHomework.reduce((sum, q) => sum + q.points, 0) === 100, "HW2 points must total 100");
+assert(phaseHomework.every((q, i) => q.order === i + 1 && q.page >= 1 && q.page <= 4), "HW2 source placement drift");
+assert(phaseHomework.filter(q => q.type === "single").length === 5, "HW2 true/false coverage drift");
+assert(phaseHomework.filter(q => q.type === "multi" && q.choices.length === 5).length === 5, "HW2 multiple-selection coverage drift");
+assert(phaseHomework.filter(q => q.sketch).length === 4, "HW2 sketch coverage drift");
+const exerciseNumbers = {
+  8: "10-22 10-23 10-26 10-28 10-30 10-45 10-46 10-52 10-64 10-68 10-76 10-80",
+  9: "11-11 11-12 11-14 11-15 11-16 11-17 11-18 11-20 11-21 11-27 11-30 11-31",
+  10: "12-29 12-41 12-46 12-54 12-62 12-63 12-74"
+};
+for (const [set, numbers] of Object.entries(exerciseNumbers)) {
+  assert(phaseExercises.filter(q => q.set === Number(set)).map(q => q.label).join(" ") === numbers, "Missing professor problem in Exercise " + set);
+}
+const prompts = new Set();
+for (const q of [...phasePractice, ...phaseHomework, ...phaseExercises]) {
+  claimId(q.id, "phase study");
+  assert(q.title && phaseChapters[q.ch]?.topics[q.topic], q.id + ": missing chapter/topic");
+  if (q.source === "professor") {
+    assert(q.file && q.pages && q.scans.question.length && q.scans.key.length, q.id + ": incomplete source extracts");
+    for (const name of [...q.scans.question, ...q.scans.key, ...q.scans.figures]) {
+      const raw = fs.readFileSync(root + "/public/assets/phase-exercises/" + name + ".webp");
+      assert(raw.toString("ascii", 0, 4) === "RIFF" && raw.toString("ascii", 8, 12) === "WEBP", q.id + ": invalid scan " + name);
+    }
+  } else {
+    assert(q.prompt && q.solution, q.id + ": missing prompt or solution");
+    if (q.source === "practice") {
+      assert(q.reference && !prompts.has(q.prompt), q.id + ": missing lecture reference or duplicate prompt");
+      prompts.add(q.prompt);
+    }
+  }
+  if (q.type !== "written") {
+    assert(q.choices.length >= 2 && new Set(q.choices).size === q.choices.length, q.id + ": invalid choices");
+    assert(q.key.length && new Set(q.key).size === q.key.length && q.key.every(i => Number.isInteger(i) && i >= 0 && i < q.choices.length),
+      q.id + ": invalid key");
+    assert(q.type !== "single" || q.key.length === 1, q.id + ": invalid single-answer key");
+  }
+  for (const name of [q.figure, q.solutionFigure].filter(Boolean)) {
+    assert(phaseFigures[name] && fs.existsSync(root + "/public/assets/phase-figures/" + name + ".svg"), q.id + ": missing diagram " + name);
+  }
+}
+for (const [chapterNumber, chapter] of Object.entries(phaseChapters)) {
+  for (const topic of Object.keys(chapter.topics)) {
+    assert(phasePractice.some(q => q.ch === Number(chapterNumber) && q.topic === topic), "Empty practice topic " + topic);
+  }
+}
 
 console.log(JSON.stringify({
   status: "PASS",
@@ -356,8 +387,9 @@ console.log(JSON.stringify({
   referenceItems: course.reference.length,
   gradingTotal,
   originalExercises: exercises.length,
-  phasePracticeQuestions: phaseBank.length,
-  phaseMCQQuestions: phaseMCQ.length,
+  phasePracticeQuestions: phasePractice.length,
+  phaseHomeworkItems: phaseHomework.length,
+  phaseProfessorQuestions: phaseExercises.length,
   exerciseSets: expectedCounts,
   mechanicalSlidesMapped: coveredPages.size
 }, null, 2));

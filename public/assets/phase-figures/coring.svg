@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 286">
+<rect width="680" height="286" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<rect x="35" y="25" width="610" height="235" fill="#eaf1ed" stroke="#b6caca"/>
+<defs><path id="dendrite" d="M -12 -98 L 12 -98 L 19 -20 L 89 -15 L 89 10 L 23 16 L 17 88 L -14 88 L -23 19 L -88 10 L -88 -14 L -22 -20 Z"/></defs>
+<g transform="translate(292 140) rotate(-14)"><use href="#dendrite" fill="#b0cbc6" stroke="#527f7b"/><use href="#dendrite" transform="scale(.79)" fill="#8eb4b0" stroke="#527f7b"/><use href="#dendrite" transform="scale(.54)" fill="#628c91" stroke="#527f7b"/></g>
+<text x="494.00" y="95.00" text-anchor="middle" font-size="15">Residual liquid</text>
+<path d="M 424 100 L 391 121" stroke="#408178" stroke-width="1" fill="none"/>
+<text x="483.00" y="204.00" text-anchor="middle" font-size="15">Solid layers</text>
+<path d="M 441 199 L 348 163" stroke="#408178" stroke-width="1" fill="none"/>
+</g>
+</svg>

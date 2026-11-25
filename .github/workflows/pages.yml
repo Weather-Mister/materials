@@ -7,19 +7,19 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: github-pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    permissions:
+      contents: read
+      pages: write
     runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact_id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -40,7 +40,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET
-          svgs = sorted(Path("public/assets").glob("*.svg"))
+          svgs = sorted(Path("public/assets").rglob("*.svg"))
           for path in svgs:
               ET.parse(path)
               print(f"{path}: XML OK")
@@ -84,9 +84,40 @@ jobs:
           node scripts/build-image-fallbacks.mjs
           node --check public/image-fallbacks.js
       - name: Upload site
+        id: upload
         uses: actions/upload-pages-artifact@v4
         with:
           path: public
+          retention-days: 3
+
+  deploy:
+    needs: build
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Pages artifact to become visible
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_ID: ${{ needs.build.outputs.artifact-id }}
+        run: |
+          set -euo pipefail
+          for delay in 0 2 4 8 12 16; do
+            sleep "$delay"
+            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages" \
+              | jq -e --arg id "$PAGES_ARTIFACT_ID" '.artifacts[] | select((.id | tostring) == $id and .expired == false)' >/dev/null; then
+              echo "Pages artifact $PAGES_ARTIFACT_ID is visible"
+              exit 0
+            fi
+          done
+          echo "::error::The uploaded Pages artifact is still unavailable to the deploy job."
+          exit 1
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

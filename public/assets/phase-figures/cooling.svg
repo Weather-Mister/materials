@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390">
+<rect width="680" height="390" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<rect x="72" y="30" width="570" height="298" fill="none" stroke="#2b4755"/>
+<text x="357.00" y="377.00" text-anchor="middle" font-size="15">Time →</text>
+<text transform="translate(21 180) rotate(-90)" text-anchor="middle" font-size="15">Temperature</text>
+<path d="M 87 57 C 142 100 164 147 199 157 H 297 C 349 162 354 238 391 271" stroke="#476b87" stroke-width="2.1" fill="none"/>
+<path d="M 175 54 C 218 89 244 120 270 149 C 314 170 371 181 425 211 C 475 234 504 272 519 285" stroke="#408178" stroke-width="2.1" fill="none"/>
+<path d="M 283 52 C 360 112 400 134 462 157 S 565 201 610 237" stroke="#7b7471" stroke-width="2.1" fill="none"/>
+<text x="402.00" y="281.00" text-anchor="middle" font-size="15">A</text>
+<text x="534.00" y="298.00" text-anchor="middle" font-size="15">B</text>
+<text x="621.00" y="250.00" text-anchor="middle" font-size="15">C</text>
+</g>
+</svg>

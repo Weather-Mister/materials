@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 297">
+<rect width="680" height="297" fill="#fffaf0"/>
+<g font-family="system-ui, sans-serif" fill="#2b4755" stroke-linejoin="round" stroke-linecap="round">
+<defs><clipPath id="a"><circle cx="185" cy="125" r="88"/></clipPath><clipPath id="b"><circle cx="493" cy="125" r="88"/></clipPath><pattern id="p" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><rect width="12" height="12" fill="#ecf3ed"/><path d="M 0 0 V 12" stroke="#4b7e81" stroke-width="6"/></pattern><pattern id="q" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-36)"><rect width="12" height="12" fill="#ecf3ed"/><path d="M 0 0 V 12" stroke="#4b7e81" stroke-width="6"/></pattern></defs>
+<circle cx="185" cy="125" r="88" fill="url(#p)" stroke="#2b4755"/>
+<circle cx="493" cy="125" r="88" fill="url(#q)" stroke="#2b4755"/>
+<g clip-path="url(#a)">
+<path d="M 128 38 L 195 109 L 278 128 V 231 H 127 L 173 179 L 195 109 Z" stroke="#2b4755" stroke-width="1" fill="url(#q)"/>
+</g>
+<g clip-path="url(#b)">
+<path d="M 405 90 C 448 57 472 80 475 119 S 436 165 415 142 Z" stroke="#2b4755" stroke-width="1" fill="#f8f1d8"/>
+<path d="M 477 164 C 470 128 511 119 551 141 S 571 192 534 214 C 510 222 484 205 477 164 Z" stroke="#2b4755" stroke-width="1" fill="#f8f1d8"/>
+<path d="M 494 35 C 494 57 517 90 548 84 S 570 57 567 37 Z" stroke="#2b4755" stroke-width="1" fill="#f8f1d8"/>
+</g>
+<text x="185.00" y="243.00" text-anchor="middle" font-size="15">A · 61.9 wt% Sn</text>
+<text x="493.00" y="243.00" text-anchor="middle" font-size="15">B · 30.0 wt% Sn</text>
+<text x="300.00" y="72.00" text-anchor="start" font-size="13">Colony boundary</text>
+<path d="M 295 77 L 197 108" stroke="#2b4755" stroke-width="1" fill="none"/>
+<text x="589.00" y="126.00" text-anchor="start" font-size="13">Primary α</text>
+<path d="M 583 130 L 548 149" stroke="#2b4755" stroke-width="1" fill="none"/>
+<rect x="221" y="263" width="13" height="12" fill="#ecf3ed" stroke="#2b4755"/>
+<text x="242.00" y="274.00" text-anchor="start" font-size="13">α lamella</text>
+<rect x="356" y="263" width="13" height="12" fill="#4b7e81" stroke="#2b4755"/>
+<text x="377.00" y="274.00" text-anchor="start" font-size="13">β lamella</text>
+</g>
+</svg>
