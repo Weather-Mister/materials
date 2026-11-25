@@ -19,18 +19,21 @@
 .phaseJump{color:#4368a7;font-size:12px;text-decoration:none}
 .phaseResults{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 @media(max-width:600px){.phasePage{padding:15px 9px 35px}.phaseTop{padding:0 6px}.phaseTop .brandTitle{font-size:20px}}
+.mcBody{padding-top:18px}.mcPrompt{font-size:15px;font-weight:650;line-height:1.65}.mcBody .choiceGrid{display:grid;grid-template-columns:1fr;gap:9px;margin:14px 0}.mcBody .choiceBtn{text-align:left;white-space:normal;line-height:1.5;padding:12px 15px;width:100%;min-height:45px;cursor:pointer}.mcBody .choiceBtn.correct{background:#e8f5ec;border-color:#7fb996;color:#1e6940}.mcBody .choiceBtn.wrong{background:#fff0ee;border-color:#d79690;color:#963a34}.mcFeedback{padding:13px 15px;margin:14px 0;background:#f3f7fc;border:1px solid #d7e4f2;border-radius:10px}.mcFeedback p{margin:4px 0 0}.phaseModeRow{display:flex;align-items:center;gap:18px;padding:18px 25px 0;flex-wrap:wrap}.phaseModeRow label{display:grid;gap:6px;font-size:11px;font-weight:700;color:#536981}.phaseModeRow select{min-width:230px;padding:10px;border:1px solid #cbd9e8;border-radius:9px;background:#fbfdff;color:#24354b;font:inherit;font-size:13px}.phaseScore{font-size:12px;color:#536981;font-weight:700}.phaseModeRow button{padding:8px 10px;border:1px solid #d4dfec;border-radius:8px;background:white;color:#4a6483;cursor:pointer;font-size:11px}@media(max-width:480px){.phaseModeRow{padding:15px 18px 0}.phaseModeRow label,.phaseModeRow select{width:100%;min-width:0}}
 </style>
 </head>
 <body>
 <main class="phasePage">
 <header class="phaseTop"><div class="brand"><div><div class="brandKicker">ENGINEERING MATERIALS</div><div class="brandTitle">MAT<span>//</span>LAB</div></div></div><a href="./index.html">← Return to course</a></header>
 <section class="examPanel" aria-label="Chapter 10 question-only practice">
-<div class="examIntro"><div><span class="examKicker">CHAPTER 10 · QUESTION-ONLY PRACTICE</span><h2>Solid solutions &amp; phase equilibrium</h2><p>Professor Exercise 8 adaptations and new exam-style problems. Work directly through each question; reveal its explained solution when ready. No lessons, prerequisites or mastery gates.</p></div><div class="examBankCount"><strong id="bankCount">—</strong><span>practice questions</span></div></div>
+<div class="examIntro"><div><span class="examKicker">CHAPTER 10 · QUESTION-ONLY PRACTICE</span><h2>Solid solutions &amp; phase equilibrium</h2><p>Concept-first multiple-choice questions covering both lecture decks. Select an answer for instant feedback, or switch to written practice for professor-style calculations. No lessons or prerequisites.</p></div><div class="examBankCount"><strong id="bankCount">—</strong><span>practice questions</span></div></div>
+<div class="phaseModeRow"><label>Practice mode<select id="phaseMode"><option value="mcq">Multiple choice · concepts</option><option value="written">Written exercises · calculations</option></select></label><span class="phaseScore" id="phaseScore" aria-live="polite"></span><button type="button" id="resetMCQ">Reset MCQ answers</button></div>
 <div class="examFilters"><label>Question set<select id="phaseSet"><option value="all">All questions</option><option value="Professor exercises">Professor exercises (adapted)</option><option value="New practice">New practice</option></select></label><label>Topic<select id="phaseTopic"><option value="all">All topics</option></select></label><label>Find a question<input id="phaseSearch" type="search" placeholder="Topic, exercise number, wording"></label></div>
 <div class="examResultsBar"><p id="examResultCount" aria-live="polite"></p><div class="phaseResults"><button type="button" id="hideExamSolutions">Hide all solutions</button><button type="button" id="clearFilters">Clear filters</button></div></div>
 <div id="examQuestions"></div>
 </section>
 </main>
 <script src="./phase-practice-bank.js?v=1"></script>
-<script src="./phase-practice.js?v=1"></script>
+<script src="./phase-mcq-bank.js?v=1"></script>
+<script src="./phase-practice.js?v=2"></script>
 </body></html>
