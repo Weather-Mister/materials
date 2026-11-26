@@ -517,7 +517,7 @@
     "ch": 12,
     "topic": "ttt",
     "title": "Read a two-step hold on a log-time diagram",
-    "prompt": "Fully austenitized eutectoid steel is brought rapidly to 650 °C and held until some but not all austenite has transformed. It is then transferred rapidly to 400 °C, above the martensitic transformation range, and held until transformation finishes. Name the final microconstituents. How would the result differ if the first hold ended before the 650 °C start curve?",
+    "prompt": "Fully austenitized eutectoid steel is brought rapidly to 650 °C and held until some but not all austenite has transformed. It is then transferred rapidly to 400 °C and held until transformation finishes. Name the final microconstituents. How would the result differ if the first hold ended before the 650 °C start curve?",
     "solution": "The first hold forms pearlite. Remaining austenite can transform into bainite during the 400 °C hold, giving pearlite plus bainite. If the first step produces no measurable pearlite, the final product is bainitic under the stated idealized hold. Use isothermal start/finish data for holds; continuous cooling follows a different diagram.",
     "source": "practice",
     "reference": "Chapter 12 · Part 2 pp. 11–15",
@@ -583,7 +583,7 @@
     "topic": "isomorphous",
     "title": "Composition is not amount",
     "prompt": "On the Cu–Ni diagram, a horizontal line at a fixed temperature in L + α intersects the solidus at 45 wt% Ni. What does this endpoint establish?",
-    "solution": "An endpoint is a phase composition; the lever rule is a separate mass balance for phase amounts. The liquidus marks the onset of freezing on cooling; the solidus marks its completion. Their temperature difference at a given bulk composition is the freezing range. On a mole-percent axis the lever rule yields mole fractions, while on a weight-percent axis it yields mass fractions.",
+    "solution": "An endpoint is a phase composition; the lever rule is a separate mass balance for phase amounts. The liquidus marks the onset of freezing on cooling; the solidus marks its completion. Their temperature difference at a given bulk composition is the freezing range. On a mole-percent axis the lever rule yields mole fractions, while on a weight-percent axis it yields mass fractions. The lever rule is the opposite tie-line arm divided by the total tie-line length. For α on the right, its mass fraction is (C₀−C_L)/(C_α−C_L).",
     "source": "practice",
     "reference": "Chapter 10 · Part 2 pp. 4–6",
     "type": "single",
@@ -752,7 +752,7 @@
     "ch": 12,
     "topic": "ttt",
     "title": "Read an isothermal diagram",
-    "prompt": "The schematic TTT diagram shows the time for an isothermal transformation to start and finish. Austenite is transferred rapidly to 400 °C (above the martensitic transformation range) and held for 0.1 s. What does the graph indicate at the end of that hold?",
+    "prompt": "The schematic TTT diagram shows the time for an isothermal transformation to start and finish. Austenite is transferred rapidly to 400 °C and held for 0.1 s. What does the graph indicate at the end of that hold?",
     "solution": "The point lies to the left of the transformation-start curve. No appreciable bainite has formed; a longer hold is required. Between start and finish the transformation is partial; beyond finish it is complete.",
     "source": "practice",
     "reference": "Chapter 12 · Part 2 pp. 11–15",
@@ -760,7 +760,7 @@
     "choices": [
       "The hold is to the left of the transformation-start curve, so no appreciable bainite has formed.",
       "The hold is to the right of the finish curve, so the sample is fully bainitic.",
-      "The temperature is below Mₛ, so martensite forms during the hold.",
+      "The hold is between the start and finish curves, so the sample is partially bainitic.",
       "The temperature is above A₁, so pearlite forms at once."
     ],
     "key": [
