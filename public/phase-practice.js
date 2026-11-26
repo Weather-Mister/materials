@@ -4,7 +4,9 @@
   const byId = id => document.getElementById(id);
   const chapters = window.MATERIALS_PHASE_CHAPTERS;
   const homework = window.MATERIALS_PHASE_HOMEWORK;
-  const bank = [...window.MATERIALS_PHASE_QUESTIONS, ...homework, ...window.MATERIALS_PHASE_EXERCISES];
+  const unordered = [...window.MATERIALS_PHASE_QUESTIONS, ...homework, ...window.MATERIALS_PHASE_EXERCISES];
+  const sequence = new Map(window.MATERIALS_PHASE_SEQUENCE.map((id,i)=>[id,i]));
+  const bank = unordered.slice().sort((a,b)=>sequence.get(a.id)-sequence.get(b.id));
   const questions = new Map(bank.map(question => [question.id, question]));
   const storeKey = 'materialsPhaseStudy:v1';
   const sourceNames = { practice: 'Practice', homework: 'Homework 2', professor: 'Professor exercise' };

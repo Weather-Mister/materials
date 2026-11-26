@@ -108,7 +108,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-ii-1",
     "ch": 10,
-    "topic": "isomorphous",
+    "topic": "segregation",
     "source": "homework",
     "label": "II.1",
     "title": "Tie lines and solidification",
@@ -132,8 +132,8 @@ window.MATERIALS_PHASE_HOMEWORK = [
   },
   {
     "id": "hw2-ii-2",
-    "ch": 11,
-    "topic": "reactions",
+    "ch": 12,
+    "topic": "eutectoid",
     "source": "homework",
     "label": "II.2",
     "title": "Invariant reactions and intermetallic compounds",
@@ -159,7 +159,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-ii-3",
     "ch": 11,
-    "topic": "eutectic",
+    "topic": "processing",
     "source": "homework",
     "label": "II.3",
     "title": "Eutectic solidification in Pb–Sn",
@@ -213,7 +213,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-ii-5",
     "ch": 12,
-    "topic": "ttt",
+    "topic": "martensite",
     "source": "homework",
     "label": "II.5",
     "title": "Transformations in plain-carbon steel",
@@ -271,7 +271,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-iii-1-c",
     "ch": 11,
-    "topic": "eutectic",
+    "topic": "processing",
     "source": "homework",
     "label": "III.1(c)",
     "title": "Eutectic solidification in Pb–Sn",
@@ -321,7 +321,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
     "id": "hw2-iii-2-b-i",
     "sketch": true,
     "ch": 12,
-    "topic": "ttt",
+    "topic": "martensite",
     "source": "homework",
     "label": "III.2(b)(i)",
     "title": "Welding and steel transformations",
@@ -337,7 +337,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-iii-2-b-ii",
     "ch": 12,
-    "topic": "ttt",
+    "topic": "martensite",
     "source": "homework",
     "label": "III.2(b)(ii)",
     "title": "Welding and steel transformations",
@@ -352,7 +352,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-iv-1-a",
     "ch": 10,
-    "topic": "segregation",
+    "topic": "isomorphous",
     "source": "homework",
     "label": "IV.1(a)",
     "title": "Equilibrium and nonequilibrium solidification in Cu–Ni",
@@ -368,7 +368,7 @@ window.MATERIALS_PHASE_HOMEWORK = [
   {
     "id": "hw2-iv-1-b",
     "ch": 10,
-    "topic": "segregation",
+    "topic": "isomorphous",
     "source": "homework",
     "label": "IV.1(b)",
     "title": "Equilibrium and nonequilibrium solidification in Cu–Ni",

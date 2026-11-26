@@ -711,3 +711,7 @@ window.MATERIALS_PHASE_EXERCISES = [
     "keyNote": "The percent β labels in parts (b) and (d) should be percent γ₂, as shown in their reaction equations. A ductility estimate based on phase fractions is qualitative and also depends on morphology and continuity."
   }
 ];
+
+// Placement follows prerequisite order, without changing original scans.
+window.MATERIALS_PHASE_EXERCISES.find(q=>q.id==='ex-10-68').topic='freezing';
+window.MATERIALS_PHASE_EXERCISES.find(q=>q.id==='ex-11-17').topic='eutectic';
