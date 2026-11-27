@@ -28,4 +28,4 @@ function runTests(sources){
  const near=(a,b)=>Math.abs(a-b)<.015;assert(near(1200*8/13,738.46)&&near(1200*5/18,333.33),"IV.1");const primary=800*(61.9-30)/(61.9-19),e=800-primary;assert(near(primary+e*(97.5-61.9)/(97.5-19),800*(97.5-30)/(97.5-19)),"IV.2a");const pro=800*(1.10-.77)/(6.67-.77);assert(near(pro+(800-pro)*(.77-.0218)/(6.67-.0218),800*(1.10-.0218)/(6.67-.0218)),"IV.2b");
  return "PASS: rendering, grading, drafts, completion, filters, persistence, review, homework mass balances";
 }
-console.log(runTests(["phase-questions","phase-homework","phase-exercises","phase-practice"].map(name=>readFileSync(new URL("../public/"+name+".js",import.meta.url),"utf8"))));
+console.log(runTests(["phase-questions","phase-homework","phase-exercises","phase-practice"].map(name=>readFileSync(new URL("../public/"+name+".js",import.meta.url),"utf8").replace(/\r\n/g,"\n"))));

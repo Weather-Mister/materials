@@ -38,6 +38,10 @@ jobs:
           node --check public/problem-lab.js
           node scripts/validate-course.mjs
           node scripts/test-phase-study.mjs
+          node --check public/glossary-data.js
+          node --check public/glossary-core.js
+          node --check public/glossary.js
+          node scripts/test-glossary.mjs
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET

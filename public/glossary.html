@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Searchable ME2004 Chapters 10–12 glossary: phase diagrams, eutectics, strengthening, aging and steel transformations.">
+  <title>Chapters 10–12 Glossary | Materials Lab</title>
+  <link rel="icon" href="./favicon.svg">
+  <link rel="stylesheet" href="./glossary.css?v=1">
+  <script defer src="./glossary-data.js?v=1"></script>
+  <script defer src="./glossary-core.js?v=1"></script>
+  <script defer src="./glossary.js?v=1"></script>
+</head>
+<body>
+  <a class="skipLink" href="#glossaryResults">Skip to definitions</a>
+  <main class="glossaryPage">
+    <header class="glossaryTop">
+      <a class="brand" href="./index.html" aria-label="Materials Lab course homepage">MAT<span>//</span>LAB</a>
+      <nav aria-label="Course links"><a href="./index.html">Course home</a><a href="./phase-practice.html">Question bank</a></nav>
+    </header>
+    <section class="intro" aria-labelledby="glossaryTitle">
+      <p class="eyebrow">ME2004 · CHAPTERS 10–12</p>
+      <h1 id="glossaryTitle">The materials dictionary</h1>
+      <p>Short definitions for exam recall. Find a term, check its formula, and separate it from the terms it is easy to confuse.</p>
+      <div class="quickTerms" aria-label="Commonly requested terms"><a href="#unary">Unary</a><a href="#isomorphous">Isomorphous</a><a href="#invariant-reaction">Invariant reactions</a><a href="#martensite">Martensite</a></div>
+    </section>
+    <form id="glossaryFilters" class="filters" role="search" aria-label="Find a glossary term">
+      <div class="filterRow">
+        <label class="searchLabel" for="glossarySearch">Search terms, aliases, definitions or formulas<input type="search" id="glossarySearch" placeholder="Try unary, Fe3C, aging or phase fraction" autocomplete="off" aria-controls="glossaryResults"></label>
+        <label for="glossaryChapter">Chapter<select id="glossaryChapter" aria-controls="glossaryResults"><option value="all">All chapters</option><option value="10">10 · Phase equilibrium</option><option value="11">11 · Eutectics</option><option value="12">12 · Heat treatments</option></select></label>
+        <button id="glossaryClear" type="button">Clear filters</button>
+      </div>
+      <div id="glossaryAlphabet" class="alphabet" role="group" aria-label="Filter by first letter of term"></div>
+      <p class="filterHint">Chapter filters include shared concepts. A–Z uses the displayed term’s first letter. Search also understands common symbols and aliases.</p>
+    </form>
+    <div class="resultsBar"><p id="glossaryCount" role="status" aria-live="polite" aria-atomic="true"></p><a href="#sourceNotes">About the sources</a></div>
+    <section id="glossaryResults" tabindex="-1" aria-label="Glossary definitions"></section>
+    <noscript><p class="empty">Enable JavaScript to search and display the glossary. The <a href="./glossary-data.js">complete definition data</a> is also available as text.</p></noscript>
+    <details id="sourceNotes" class="sourceNotes">
+      <summary>Sources and coverage</summary>
+      <p>Prepared from the extracted text of all six ME2004 Chapter 10–12 COOL decks, re-read on 27 November 2026, plus the existing 102-question bank and archived four-page Homework 2 PDF. References name the relevant PDF page ranges; they are topic pointers, not quotations. Background explanations and formula rearrangements are study aids.</p>
+      <p>Some lecture pages contain diagrams with little extractable text. Those diagrams were not independently visually audited for this glossary. Supplementary details follow the existing source-reviewed question bank. A full visual source audit is not claimed. The live HW2 connector read was unavailable; its archived repository copy was used.</p>
+      <ul id="glossarySources"></ul>
+      <p>The five invariant reactions taught here are eutectic, peritectic, monotectic, eutectoid and peritectoid. All reaction equations are written for cooling; heating reverses them. Steel and Pb–Sn values follow the course convention; use a question’s supplied numbers when they differ.</p>
+      <p><a href="./phase-practice.html?unit=homework">Homework 2 practice</a> · <a href="#glossaryTitle">Back to top</a></p>
+    </details>
+  </main>
+</body>
+</html>
