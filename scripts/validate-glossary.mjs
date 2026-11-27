@@ -34,7 +34,7 @@ export function validate(data, bank) {
   for (const e of entries) for (const id of e.related) assert.ok(ids.has(id) && id !== e.id,`${e.id}: broken/self related term ${id}`);
   assert.equal(Object.keys(sources).length,6);
   assert.deepEqual(Object.values(sources).map(s=>s.file).sort(),['10166729','10166727','10166763','10166772','10166783','10166739'].sort());
-  for (const id of ['unary','binary','phase','component','isomorphous','eutectic','eutectoid','peritectic','peritectoid','monotectic','solidification','microsegregation','macrosegregation','age-hardening','ttt','martensite','ferrite','austenite','cementite','bainite','tempering']) assert.ok(ids.has(id),`Missing required term ${id}`);
+  for (const id of ['unary','binary','phase','component','isomorphous','congruent-melting','terminal-solid-solution','phase-labels','intensive-variable','eutectic','eutectoid','peritectic','peritectoid','monotectic','solidification','microsegregation','macrosegregation','age-hardening','ttt','martensite','ferrite','austenite','cementite','bainite','tempering']) assert.ok(ids.has(id),`Missing required term ${id}`);
   const byId = new Map(entries.map(e=>[e.id,e]));
   for (const [id,equation] of [['eutectic','L → α + β'],['peritectic','L + α → β'],['monotectic','L₁ → L₂ + α'],['eutectoid','γ → α + β'],['peritectoid','α + β → γ']]) assert.ok(byId.get(id).formula.includes(equation),`${id}: cooling direction`);
   for (const ch of [10,11,12]) assert.ok(entries.filter(e=>e.chapters.includes(ch)).length > 25);
